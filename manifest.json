@@ -1,0 +1,20 @@
+{
+  "name": "Surfline Castellón - Previsión de Olas",
+  "short_name": "Surfline CS",
+  "description": "Previsión de surf local para la costa de Castellón con física de rompientes mediterránea y webcams en directo.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090d16",
+  "theme_color": "#0ea5e9",
+  "categories": ["sports", "weather"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%23090d16'/><path d='M80 370 C 160 370, 210 240, 310 240 C 260 240, 250 270, 200 270 C 130 270, 110 320, 80 370 Z' fill='%2338bdf8'/><path d='M80 370 C 170 300, 240 160, 420 160 C 330 160, 300 220, 230 220 C 160 220, 140 310, 80 370 Z' fill='%230ea5e9'/><path d='M70 410 C 150 410, 220 370, 370 370 C 440 370, 470 390, 480 410 L 480 430 L 70 430 Z' fill='%230284c7'/><circle cx='400' cy='120' r='36' fill='%23f59e0b'/></svg>",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
