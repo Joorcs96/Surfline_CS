@@ -51,7 +51,26 @@
   <!-- HLS.js CDN para reproducción de streams m3u8 -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
+  <!-- Leaflet CSS y JS para Mapa Interactivo Oscuro -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Chart.js para Gráficas de Tendencia de Oleaje -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
+    #map { height: 380px; width: 100%; border-radius: 1.25rem; z-index: 10; }
+    .dark-tiles { filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(120%); }
+    .spot-tooltip {
+      background: #0c1322 !important;
+      border: 1px solid rgba(14, 165, 233, 0.4) !important;
+      color: white !important;
+      border-radius: 0.75rem;
+      padding: 6px 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    }
+    .leaflet-tooltip-top:before { border-top-color: #0c1322 !important; }
+
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       vertical-align: middle;
@@ -377,6 +396,90 @@
 
     </section>
 
+    <!-- ========================================== -->
+    <!-- SECCIÓN: MAPA INTERACTIVO Y TENDENCIAS CHART.JS -->
+    <!-- ========================================== -->
+    <section id="seccion-mapa-tendencias" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- 1. MAPA OSCURO LEAFLET (7 columnas) -->
+      <div class="lg:col-span-7 bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between space-y-4">
+        <div class="flex items-center justify-between border-b border-surf-800 pb-3">
+          <div>
+            <h3 class="text-lg font-black text-white flex items-center gap-2">
+              <span class="material-symbols-outlined text-sky-400">map</span>
+              <span>Localizador de Spots en Directo</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">13 rompientes monitorizadas con telemetría en tiempo real</p>
+          </div>
+
+          <button id="open-windy-radar-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-bold transition-all">
+            <span class="material-symbols-outlined text-sm">radar</span>
+            <span>Radar Animado</span>
+          </button>
+        </div>
+
+        <!-- Contenedor del mapa -->
+        <div class="relative w-full rounded-2xl overflow-hidden border border-surf-800/80 bg-surf-950 shadow-inner">
+          <div id="map"></div>
+          <div class="absolute bottom-3 left-3 z-[400] bg-surf-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-surf-800 text-[11px] text-slate-300 font-bold flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Haz clic en cualquier spot para seleccionarlo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. TENDENCIAS DE OLEAJE Y PERIODO (5 columnas) -->
+      <div class="lg:col-span-5 bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between space-y-4">
+        <div class="border-b border-surf-800 pb-3">
+          <h3 class="text-lg font-black text-white flex items-center gap-2">
+            <span class="material-symbols-outlined text-emerald-400">monitoring</span>
+            <span>Tendencia del Swell (48h)</span>
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Evolución de altura rompiente y periodo en <span id="chart-spot-name" class="text-sky-400 font-bold">Gurugú</span></p>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Gráfica 1: Altura de ola -->
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-slate-300">Altura de Ola Efectiva (m)</span>
+              <span class="text-sky-400 font-mono font-bold text-[11px]">Barras Horarias</span>
+            </div>
+            <div class="h-32 w-full bg-surf-950/70 p-2 rounded-xl border border-surf-800/80">
+              <canvas id="chartHeight"></canvas>
+            </div>
+          </div>
+
+          <!-- Gráfica 2: Periodo de ola -->
+          <div>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-slate-300">Periodo del Swell (s)</span>
+              <span class="text-emerald-400 font-mono font-bold text-[11px]">Línea Continua</span>
+            </div>
+            <div class="h-28 w-full bg-surf-950/70 p-2 rounded-xl border border-surf-800/80">
+              <canvas id="chartPeriod"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal de Telemetría IA -->
+        <div class="pt-2 border-t border-surf-800/60">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-[11px] font-mono font-bold text-slate-400 flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-xs text-sky-400">terminal</span>
+              Cerebro Físico IA (Telemetría)
+            </span>
+            <span class="text-[10px] font-mono text-emerald-400">Motor Activo</span>
+          </div>
+          <div id="aiTerminal" class="h-24 overflow-y-auto font-mono text-[10px] p-2.5 rounded-xl bg-black/80 border border-surf-800/80 text-slate-300 space-y-1">
+            <div class="text-slate-500">[INIT] Inicializando motor de física costera para el Mediterráneo...</div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
     <!-- SECCIÓN DE WEBCAMS EN DIRECTO -->
     <section id="seccion-webcams" class="bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
       
@@ -680,6 +783,24 @@
         </div>
       </form>
 
+    </div>
+  </div>
+
+  <!-- Modal: Radar Animado de Oleaje (Windy) -->
+  <div id="windy-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4">
+    <div class="bg-surf-900 border border-surf-800 rounded-3xl max-w-4xl w-full h-[85vh] flex flex-col overflow-hidden shadow-2xl relative">
+      <div class="p-4 border-b border-surf-800 flex items-center justify-between bg-surf-950/80">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-sky-400">radar</span>
+          <h3 class="text-sm font-black text-white">Radar Satelital y Oleaje Animado (Golfo de Valencia)</h3>
+        </div>
+        <button id="close-windy-modal-btn" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-surf-800 transition-colors">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+      <div class="flex-grow w-full h-full bg-surf-950">
+        <iframe id="windy-iframe" class="w-full h-full border-0" src="https://embed.windy.com/embed2.html?lat=39.98&lon=0.15&zoom=9&level=surface&overlay=waves&product=ecmwf&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1" allowfullscreen loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 

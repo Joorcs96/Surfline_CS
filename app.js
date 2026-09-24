@@ -14,6 +14,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Planetario',
+    lat: 39.98,
+    lon: 0.03,
     azimut: 26,
     thetaCrit: 45,
     sBase: 0.15,
@@ -27,6 +29,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Gurugú',
+    lat: 39.99,
+    lon: 0.04,
     azimut: 26,
     thetaCrit: 45,
     sBase: 0.15,
@@ -40,6 +44,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao / Almassora',
     label: 'Grao - Pirámides',
+    lat: 40.05,
+    lon: 0.07,
     azimut: 38,
     thetaCrit: 50,
     sBase: 0.10,
@@ -48,11 +54,28 @@ const SPOTS = [
     desc: 'Estructuras piramidales en el límite sur del Grao. Bancos estables protegidos con W/NW.'
   },
   {
+    id: 'Palaciet',
+    name: 'El Palaciet',
+    zone: 'grao',
+    zoneName: 'Benicàssim',
+    label: 'Benicàssim - El Palaciet',
+    lat: 40.05,
+    lon: 0.07,
+    azimut: 45,
+    thetaCrit: 55,
+    sBase: 0.10,
+    offshoreMin: 290,
+    offshoreMax: 340,
+    desc: 'Playa abrigada junto a la antigua vía de Benicàssim con rompiente suave para tablones.'
+  },
+  {
     id: 'Voramar',
     name: 'Voramar',
     zone: 'grao',
     zoneName: 'Benicàssim',
     label: 'Benicàssim - Voramar',
+    lat: 40.06,
+    lon: 0.08,
     azimut: 54,
     thetaCrit: 65,
     sBase: 0.05,
@@ -61,11 +84,58 @@ const SPOTS = [
     desc: 'Punta norte de Benicàssim protegida por la bahía. Aguanta temporales grandes de Levante.'
   },
   {
+    id: 'Heliopolis',
+    name: 'Heliópolis',
+    zone: 'grao',
+    zoneName: 'Benicàssim',
+    label: 'Benicàssim - Heliópolis',
+    lat: 40.03,
+    lon: 0.06,
+    azimut: 35,
+    thetaCrit: 45,
+    sBase: 0.15,
+    offshoreMin: 280,
+    offshoreMax: 330,
+    desc: 'Línea de rompiente en la zona sur de Benicàssim con buenas secciones derechas.'
+  },
+  {
+    id: 'MorroGos',
+    name: 'Morro de Gos',
+    zone: 'norte',
+    zoneName: 'Oropesa del Mar',
+    label: 'Oropesa - Morro de Gos',
+    lat: 40.098,
+    lon: 0.147,
+    azimut: 60,
+    thetaCrit: 65,
+    sBase: 0.05,
+    offshoreMin: 300,
+    offshoreMax: 350,
+    desc: 'Playa abierta de Oropesa. Recibe mar de fondo intenso con vientos del oeste.'
+  },
+  {
+    id: 'Renega',
+    name: 'La Renegà',
+    zone: 'norte',
+    zoneName: 'Oropesa del Mar',
+    label: 'Oropesa - La Renegà',
+    lat: 40.03,
+    lon: 0.09,
+    azimut: 172,
+    thetaCrit: 10,
+    sBase: 0.90,
+    offshoreMin: 260,
+    offshoreMax: 310,
+    desc: 'Calas rocosas vírgenes protegidas del viento del norte. Requiere fondo de roca.'
+  },
+  {
     id: 'Burriana',
     name: 'Burriana',
     zone: 'sur',
     zoneName: 'Burriana',
     label: 'Burriana - Arenal / Escollera',
+    lat: 39.88,
+    lon: -0.05,
     azimut: 26,
     thetaCrit: 45,
     sBase: 0.20,
@@ -79,6 +149,8 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Nules',
     label: 'Nules - Espigones',
+    lat: 39.85,
+    lon: 0.08,
     azimut: 26,
     thetaCrit: 40,
     sBase: 0.25,
@@ -92,6 +164,8 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Almenara',
     label: 'Almenara - Casablanca',
+    lat: 39.75,
+    lon: 0.05,
     azimut: 26,
     thetaCrit: 35,
     sBase: 0.30,
@@ -105,6 +179,8 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Peñíscola',
     label: 'Peñíscola - Playa Norte',
+    lat: 40.37,
+    lon: 0.40,
     azimut: 10,
     thetaCrit: 10,
     sBase: 0.80,
@@ -118,6 +194,8 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Vinaròs',
     label: 'Vinaròs - El Fortí',
+    lat: 40.47,
+    lon: 0.48,
     azimut: 10,
     thetaCrit: 10,
     sBase: 0.85,
@@ -129,19 +207,27 @@ const SPOTS = [
 
 // Mapa de configuraciones para la física exacta según MASTER_CONTEXT.md
 const SPOT_CONFIG = {
-  'Planetario':  { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
-  'Gurugu':      { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
-  'Gurugú':      { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
-  'Pirámides':   { azimut: 38,  thetaCrit: 50, sBase: 0.10, offshoreMin: 285, offshoreMax: 330 },
-  'Piramides':   { azimut: 38,  thetaCrit: 50, sBase: 0.10, offshoreMin: 285, offshoreMax: 330 },
-  'Voramar':     { azimut: 54,  thetaCrit: 65, sBase: 0.05, offshoreMin: 300, offshoreMax: 350 },
-  'Burriana':    { azimut: 26,  thetaCrit: 45, sBase: 0.20, offshoreMin: 275, offshoreMax: 315 },
-  'Nules':       { azimut: 26,  thetaCrit: 40, sBase: 0.25, offshoreMin: 275, offshoreMax: 315 },
-  'Almenara':    { azimut: 26,  thetaCrit: 35, sBase: 0.30, offshoreMin: 275, offshoreMax: 315 },
-  'Peñíscola N': { azimut: 10,  thetaCrit: 10, sBase: 0.80, offshoreMin: 260, offshoreMax: 300 },
-  'Peniscola N': { azimut: 10,  thetaCrit: 10, sBase: 0.80, offshoreMin: 260, offshoreMax: 300 },
-  'Vinaròs':     { azimut: 10,  thetaCrit: 10, sBase: 0.85, offshoreMin: 260, offshoreMax: 300 },
-  'Vinaros':     { azimut: 10,  thetaCrit: 10, sBase: 0.85, offshoreMin: 260, offshoreMax: 300 }
+  'Planetario':   { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
+  'Gurugu':       { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
+  'Gurugú':       { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
+  'Pirámides':    { azimut: 38,  thetaCrit: 50, sBase: 0.10, offshoreMin: 285, offshoreMax: 330 },
+  'Piramides':    { azimut: 38,  thetaCrit: 50, sBase: 0.10, offshoreMin: 285, offshoreMax: 330 },
+  'Palaciet':     { azimut: 45,  thetaCrit: 55, sBase: 0.10, offshoreMin: 290, offshoreMax: 340 },
+  'El Palaciet':  { azimut: 45,  thetaCrit: 55, sBase: 0.10, offshoreMin: 290, offshoreMax: 340 },
+  'Voramar':      { azimut: 54,  thetaCrit: 65, sBase: 0.05, offshoreMin: 300, offshoreMax: 350 },
+  'Heliopolis':   { azimut: 35,  thetaCrit: 45, sBase: 0.15, offshoreMin: 280, offshoreMax: 330 },
+  'Heliópolis':   { azimut: 35,  thetaCrit: 45, sBase: 0.15, offshoreMin: 280, offshoreMax: 330 },
+  'Morro de Gos': { azimut: 60,  thetaCrit: 65, sBase: 0.05, offshoreMin: 300, offshoreMax: 350 },
+  'MorroGos':     { azimut: 60,  thetaCrit: 65, sBase: 0.05, offshoreMin: 300, offshoreMax: 350 },
+  'La Renegà':    { azimut: 172, thetaCrit: 10, sBase: 0.90, offshoreMin: 260, offshoreMax: 310 },
+  'Renega':       { azimut: 172, thetaCrit: 10, sBase: 0.90, offshoreMin: 260, offshoreMax: 310 },
+  'Burriana':     { azimut: 26,  thetaCrit: 45, sBase: 0.20, offshoreMin: 275, offshoreMax: 315 },
+  'Nules':        { azimut: 26,  thetaCrit: 40, sBase: 0.25, offshoreMin: 275, offshoreMax: 315 },
+  'Almenara':     { azimut: 26,  thetaCrit: 35, sBase: 0.30, offshoreMin: 275, offshoreMax: 315 },
+  'Peñíscola N':  { azimut: 10,  thetaCrit: 10, sBase: 0.80, offshoreMin: 260, offshoreMax: 300 },
+  'Peniscola N':  { azimut: 10,  thetaCrit: 10, sBase: 0.80, offshoreMin: 260, offshoreMax: 300 },
+  'Vinaròs':      { azimut: 10,  thetaCrit: 10, sBase: 0.85, offshoreMin: 260, offshoreMax: 300 },
+  'Vinaros':      { azimut: 10,  thetaCrit: 10, sBase: 0.85, offshoreMin: 260, offshoreMax: 300 }
 };
 
 function getSpotConfig(nombre) {
@@ -804,8 +890,258 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
 }
 
 // ==========================================
-// 9. CONTROL DE SPOT SELECCIONADO Y FILTROS
+// 9. CONTROL DE SPOT SELECCIONADO, MAPA Y GRÁFICAS
 // ==========================================
+
+function logTelemetry(msg, type = 'info') {
+  const term = document.getElementById('aiTerminal');
+  if (!term) return;
+  const time = new Date().toLocaleTimeString('es-ES', { hour12: false });
+  let color = 'text-sky-400';
+  if (type === 'warn') color = 'text-amber-400';
+  else if (type === 'math') color = 'text-violet-400';
+  else if (type === 'success') color = 'text-emerald-400';
+
+  const entry = document.createElement('div');
+  entry.className = 'leading-tight';
+  entry.innerHTML = `<span class="text-slate-500 font-bold">[${time}]</span> <span class="${color}">${msg}</span>`;
+  term.appendChild(entry);
+  term.scrollTop = term.scrollHeight;
+}
+
+let leafletMap = null;
+let mapMarkers = {};
+
+function initLeafletMap() {
+  if (leafletMap) return;
+  const mapEl = document.getElementById('map');
+  if (!mapEl || !window.L) return;
+
+  const isMobile = window.innerWidth < 768;
+  leafletMap = L.map('map', {
+    zoomControl: !isMobile,
+    scrollWheelZoom: false,
+    dragging: !isMobile,
+    tap: !isMobile
+  }).setView([40.05, 0.15], 10);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    className: 'dark-tiles',
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(leafletMap);
+
+  SPOTS.forEach(spot => {
+    if (spot.lat && spot.lon) {
+      const marker = L.circleMarker([spot.lat, spot.lon], {
+        radius: spot.id === AppState.currentSpotId ? 9 : 7,
+        fillColor: spot.id === AppState.currentSpotId ? '#38bdf8' : '#0284c7',
+        color: '#ffffff',
+        weight: spot.id === AppState.currentSpotId ? 3 : 1.5,
+        fillOpacity: 0.95
+      }).addTo(leafletMap);
+
+      marker.on('click', () => {
+        selectSpot(spot.id);
+        const heroEl = document.getElementById('hero-section');
+        if (heroEl) heroEl.scrollIntoView({ behavior: 'smooth' });
+        logTelemetry(`[MAP] Spot seleccionado por mapa: ${spot.label}`, 'info');
+      });
+
+      mapMarkers[spot.id] = marker;
+    }
+  });
+
+  if (AppState.forecastData) {
+    updateMapMarkers(AppState.forecastData);
+  }
+}
+
+function updateMapHighlight(selectedSpotId) {
+  if (!leafletMap) return;
+  SPOTS.forEach(spot => {
+    const marker = mapMarkers[spot.id];
+    if (!marker) return;
+    const isSelected = spot.id === selectedSpotId;
+    marker.setStyle({
+      radius: isSelected ? 9 : 7,
+      fillColor: isSelected ? '#38bdf8' : '#0284c7',
+      color: isSelected ? '#ffffff' : 'rgba(255,255,255,0.7)',
+      weight: isSelected ? 3 : 1.5
+    });
+  });
+}
+
+function updateMapMarkers(data) {
+  if (!leafletMap || !data || !data.times || !data.times.length) return;
+
+  const nowIso = new Date().toISOString();
+  let currentIndex = 0;
+  for (let i = 0; i < data.times.length; i++) {
+    if (data.times[i] >= nowIso.slice(0, 13)) {
+      currentIndex = i;
+      break;
+    }
+  }
+
+  const h = data.marine.wave_height[currentIndex] || 0.4;
+  const p = data.marine.wave_period[currentIndex] || 4.5;
+  const sDir = data.marine.wave_direction[currentIndex] || 80;
+  const ws = data.weather.wind_speed_10m[currentIndex] || 10;
+  const wd = data.weather.wind_direction_10m[currentIndex] || 0;
+
+  SPOTS.forEach(spot => {
+    const marker = mapMarkers[spot.id];
+    if (!marker) return;
+
+    const hLocal = calcularFisica(spot.name, h, p, sDir);
+    const quality = calcularCalidad(hLocal, p, ws, wd, spot.name, 1013, 10);
+    const meta = getRatingMeta(quality);
+
+    marker.unbindTooltip();
+    marker.bindTooltip(`
+      <div class="flex flex-col gap-0.5">
+        <div class="flex items-center justify-between gap-2 text-[11px] font-black text-white">
+          <span>${spot.name}</span>
+          <span class="text-sky-400 font-mono">${hLocal.toFixed(1)}m</span>
+        </div>
+        <div class="text-[10px] text-slate-300 flex items-center justify-between gap-2">
+          <span class="${meta.color}">${meta.label}</span>
+          <span class="text-slate-400">${Math.round(ws)} km/h</span>
+        </div>
+      </div>
+    `, {
+      permanent: true,
+      direction: 'top',
+      className: 'spot-tooltip'
+    });
+  });
+}
+
+let chartHeightInstance = null;
+let chartPeriodInstance = null;
+
+function renderCharts(spotId, data) {
+  if (!window.Chart || !data || !data.times || !data.times.length) return;
+
+  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
+  const chartSpotName = document.getElementById('chart-spot-name');
+  if (chartSpotName) chartSpotName.textContent = spot.label;
+
+  const ctxH = document.getElementById('chartHeight');
+  const ctxP = document.getElementById('chartPeriod');
+  if (!ctxH || !ctxP) return;
+
+  const labels = [];
+  const heights = [];
+  const periods = [];
+
+  const nowIso = new Date().toISOString();
+  let startIndex = 0;
+  for (let i = 0; i < data.times.length; i++) {
+    if (data.times[i] >= nowIso.slice(0, 13)) {
+      startIndex = i;
+      break;
+    }
+  }
+
+  const hoursToTake = Math.min(48, data.times.length - startIndex);
+  for (let i = 0; i < hoursToTake; i += 2) {
+    const idx = startIndex + i;
+    const tStr = data.times[idx];
+    const hour = tStr ? tStr.slice(11, 16) : `${i}:00`;
+    labels.push(hour);
+
+    const h = data.marine.wave_height[idx] || 0.4;
+    const p = data.marine.wave_period[idx] || 4.5;
+    const sDir = data.marine.wave_direction[idx] || 80;
+
+    const hLocal = Number(calcularFisica(spot.name, h, p, sDir).toFixed(2));
+    heights.push(hLocal);
+    periods.push(Number(p.toFixed(1)));
+  }
+
+  if (chartHeightInstance) chartHeightInstance.destroy();
+  if (chartPeriodInstance) chartPeriodInstance.destroy();
+
+  const commonOptions = {
+    maintainAspectRatio: false,
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        backgroundColor: '#0c1322',
+        titleColor: '#ffffff',
+        bodyColor: '#38bdf8',
+        borderColor: 'rgba(56, 189, 248, 0.3)',
+        borderWidth: 1,
+        padding: 8
+      }
+    },
+    scales: {
+      y: {
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 9 } }
+      },
+      x: {
+        grid: { display: false },
+        ticks: { color: 'rgba(255,255,255,0.5)', font: { size: 9 }, maxTicksLimit: 8 }
+      }
+    }
+  };
+
+  chartHeightInstance = new Chart(ctxH.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Altura (m)',
+        data: heights,
+        backgroundColor: 'rgba(14, 165, 233, 0.75)',
+        hoverBackgroundColor: '#38bdf8',
+        borderRadius: 4
+      }]
+    },
+    options: commonOptions
+  });
+
+  chartPeriodInstance = new Chart(ctxP.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Periodo (s)',
+        data: periods,
+        borderColor: '#10b981',
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        tension: 0.4,
+        fill: true,
+        borderWidth: 2,
+        pointRadius: 0
+      }]
+    },
+    options: commonOptions
+  });
+}
+
+function initWindyRadarModal() {
+  const openBtn = document.getElementById('open-windy-radar-btn');
+  const closeBtn = document.getElementById('close-windy-modal-btn');
+  const modal = document.getElementById('windy-modal');
+
+  if (openBtn && modal) {
+    openBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      logTelemetry('[WINDY] Abierto radar interactivo de oleaje en tiempo real.', 'info');
+    });
+  }
+  if (closeBtn && modal) {
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    });
+  }
+}
 
 function selectSpot(spotId) {
   AppState.currentSpotId = spotId;
@@ -814,11 +1150,17 @@ function selectSpot(spotId) {
   const dropdown = document.getElementById('spot-selector-hourly');
   if (dropdown) dropdown.value = spotId;
 
-  // Actualizar tarjetas y tabla
+  // Actualizar tarjetas, tabla, gráficas y mapa
   if (AppState.forecastData) {
     renderSpotCards(AppState.forecastData, AppState.currentFilter);
     renderHourlyTable(AppState.forecastData, spotId, AppState.currentDayIndex);
+    renderCharts(spotId, AppState.forecastData);
+    updateMapHighlight(spotId);
   }
+
+  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
+  const cfg = getSpotConfig(spot.name);
+  logTelemetry(`[PHYSICS] Spot activo: ${spot.label} (Azimut ${cfg.azimut}°, θcrit ${cfg.thetaCrit}°, sBase ${cfg.sBase})`, 'math');
 }
 
 function setupFilterButtons() {
@@ -877,6 +1219,9 @@ function setupFilterButtons() {
       renderHero(data);
       renderSpotCards(data, AppState.currentFilter);
       renderHourlyTable(data, AppState.currentSpotId, AppState.currentDayIndex);
+      renderCharts(AppState.currentSpotId, data);
+      updateMapMarkers(data);
+      logTelemetry('[REFRESH] Datos meteorológicos actualizados manualmente.', 'info');
       setTimeout(() => {
         if (refreshIcon) refreshIcon.classList.remove('animate-spin');
       }, 600);
@@ -1318,6 +1663,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   initWebcams();
   initPWA();
   initUserSession();
+  initLeafletMap();
+  initWindyRadarModal();
 
   // 1. Carga instantánea desde caché local para evitar cualquier bloqueo en móvil
   try {
@@ -1328,7 +1675,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       renderHero(cachedData);
       renderSpotCards(cachedData, AppState.currentFilter);
       renderHourlyTable(cachedData, AppState.currentSpotId, AppState.currentDayIndex);
-      console.log('⚡ Renderizado ultra-rápido desde caché móvil completado.');
+      renderCharts(AppState.currentSpotId, cachedData);
+      updateMapMarkers(cachedData);
+      logTelemetry('⚡ Renderizado instantáneo desde memoria local completado.', 'success');
     }
   } catch (e) {
     console.warn('Caché no disponible en primer arranque');
@@ -1342,5 +1691,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHero(freshData);
   renderSpotCards(freshData, AppState.currentFilter);
   renderHourlyTable(freshData, AppState.currentSpotId, AppState.currentDayIndex);
+  renderCharts(AppState.currentSpotId, freshData);
+  updateMapMarkers(freshData);
+  logTelemetry('[NET] Previsión meteorológica Copernicus/ECMWF 96h sincronizada.', 'success');
 });
 
