@@ -377,93 +377,81 @@
 
     </section>
 
-    <!-- SECCIÓN DE WEBCAMS INCRUSTADAS -->
+    <!-- SECCIÓN DE WEBCAMS EN DIRECTO -->
     <section id="seccion-webcams" class="bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
       
       <!-- Cabecera de Webcams y Tabs de Modos -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-surf-800 pb-5">
         <div>
           <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
             <h2 class="text-xl sm:text-2xl font-black text-white">Webcams en Directo de la Costa</h2>
           </div>
-          <p class="text-xs text-slate-400 mt-0.5">Streaming de vídeo y cámaras de imagen fija con refresco continuo</p>
+          <p class="text-xs text-slate-400 mt-0.5">Vistas reales de rompientes en Voramar, Grao de Castellón, Peñíscola y Burriana</p>
         </div>
 
         <!-- Pestañas de tipo de cámara -->
         <div class="flex items-center gap-1.5 bg-surf-850 p-1.5 rounded-2xl border border-surf-700/80">
-          <button id="cam-tab-jpeg" class="cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5">
-            <span class="material-symbols-outlined text-sm">photo_camera</span>
-            <span>Cámaras JPEG</span>
+          <button id="cam-tab-live" class="cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">videocam</span>
+            <span>Cámaras HD en Directo</span>
           </button>
           <button id="cam-tab-hls" class="cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
             <span class="material-symbols-outlined text-sm">stream</span>
             <span>Stream HLS (.m3u8)</span>
           </button>
-          <button id="cam-tab-yt" class="cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
-            <span class="material-symbols-outlined text-sm">smart_display</span>
-            <span>YouTube Live</span>
+          <button id="cam-tab-portales" class="cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+            <span>Portales Oficiales</span>
           </button>
         </div>
       </div>
 
-      <!-- 1. VISTA: CÁMARAS JPEG CON RECARGA PERIÓDICA -->
-      <div id="cam-view-jpeg" class="space-y-4">
+      <!-- 1. VISTA: REPRODUCTOR HD EN DIRECTO (WINDY / LIVE FEEDS) -->
+      <div id="cam-view-live" class="space-y-4">
         
-        <!-- Barra de Control de Refresco Periódico -->
+        <!-- Barra de Control y Selector de Spot -->
         <div class="flex flex-wrap items-center justify-between gap-3 bg-surf-950/70 border border-surf-800 px-4 py-3 rounded-2xl">
           <div class="flex items-center gap-3">
-            <!-- Selector de Cámara JPEG -->
-            <label for="jpeg-cam-selector" class="sr-only">Seleccionar cámara JPEG</label>
-            <select id="jpeg-cam-selector" class="bg-surf-850 border border-surf-700 text-white rounded-xl px-3 py-1.5 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500">
-              <option value="gurugu">Playa del Gurugú (Grao de Castellón)</option>
-              <option value="voramar">Playa Voramar (Benicàssim)</option>
-              <option value="burriana">Puerto y Playa Arenal (Burriana)</option>
-              <option value="peniscola">Castillo y Playa Norte (Peñíscola)</option>
+            <label for="live-cam-selector" class="sr-only">Seleccionar cámara en directo</label>
+            <select id="live-cam-selector" class="bg-surf-850 border border-surf-700 text-white rounded-xl px-3 py-1.5 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500">
+              <option value="voramar">Benicàssim - Playa Voramar</option>
+              <option value="grao_castellon">Grao de Castellón - Gurugú / Puerto</option>
+              <option value="peniscola">Peñíscola - Castillo y Playa Norte</option>
+              <option value="burriana">Burriana - Puerto y Playa Arenal</option>
+              <option value="heliopolis">Benicàssim - Playa Heliópolis</option>
             </select>
 
-            <span class="text-xs text-slate-400 hidden sm:inline" id="jpeg-status-text">
-              Refresco automático cada 15 segundos
+            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="live-cam-status">Señal Activa</span>
             </span>
           </div>
 
-          <div class="flex items-center gap-3">
-            <!-- Contador de segundos -->
-            <div class="flex items-center gap-1.5 text-xs text-slate-300 font-mono bg-surf-850 px-3 py-1 rounded-lg border border-surf-700">
-              <span class="material-symbols-outlined text-sm text-sky-400">timer</span>
-              <span>Refresco en:</span>
-              <span id="jpeg-countdown" class="font-bold text-white w-4 text-center">15</span>s
-            </div>
-
-            <!-- Botón Forzar Refresco Manual -->
-            <button id="jpeg-manual-reload-btn" class="flex items-center gap-1 px-3 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-bold transition-all">
-              <span class="material-symbols-outlined text-sm" id="jpeg-reload-icon">autorenew</span>
-              <span>Recargar Ahora</span>
-            </button>
+          <div class="flex items-center gap-2">
+            <a id="live-cam-official-link" href="https://voramar.net" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 text-xs font-bold transition-all">
+              <span>Abrir Fuente Original</span>
+              <span class="material-symbols-outlined text-xs">open_in_new</span>
+            </a>
           </div>
         </div>
 
-        <!-- Visor de Imagen JPEG -->
-        <div class="relative w-full aspect-video sm:aspect-[21/9] bg-surf-950 rounded-2xl overflow-hidden border border-surf-800 shadow-2xl flex items-center justify-center">
+        <!-- Contenedor del Reproductor HD Responsive -->
+        <div class="relative w-full aspect-video sm:aspect-[21/9] bg-surf-950 rounded-2xl overflow-hidden border border-surf-800 shadow-2xl">
+          <iframe id="live-webcam-iframe" class="w-full h-full border-0" src="https://webcams.windy.com/webcams/public/embed/player/1545163016/day" title="Webcam en Directo Costa Castellón" allowfullscreen loading="lazy"></iframe>
           
-          <img id="jpeg-webcam-img" src="" alt="Webcam en directo de la costa de Castellón" class="w-full h-full object-cover transition-opacity duration-300" />
-          
-          <!-- Spinner de Carga de Imagen -->
-          <div id="jpeg-loader" class="hidden absolute inset-0 bg-surf-950/70 backdrop-blur-sm flex items-center justify-center">
-            <span class="material-symbols-outlined text-3xl text-sky-400 animate-spin">refresh</span>
-          </div>
-
-          <!-- Overlay de Información sobre la Imagen -->
-          <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs pointer-events-none">
-            <div class="bg-surf-950/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 text-white font-bold flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span id="jpeg-cam-title">Playa del Gurugú</span>
-            </div>
-            <div class="bg-surf-950/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/10 text-slate-300 text-[11px] font-mono">
-              Captura: <span id="jpeg-last-updated" class="text-white">--:--:--</span>
+          <div id="live-cam-loader" class="hidden absolute inset-0 bg-surf-950/80 backdrop-blur-sm flex items-center justify-center">
+            <div class="flex flex-col items-center gap-2 text-sky-400">
+              <span class="material-symbols-outlined text-3xl animate-spin">refresh</span>
+              <span class="text-xs font-bold text-slate-300">Conectando con la cámara...</span>
             </div>
           </div>
         </div>
+
+        <!-- Descripción del Spot -->
+        <p id="live-cam-desc" class="text-xs text-slate-400 italic">
+          Vistas a la bahía y rompiente de Voramar frente al hotel emblemático.
+        </p>
       </div>
 
       <!-- 2. VISTA: STREAMING HLS (.M3U8) CON HLS.JS -->
@@ -474,8 +462,8 @@
           <div class="flex items-center gap-3">
             <label for="hls-cam-selector" class="sr-only">Seleccionar stream HLS</label>
             <select id="hls-cam-selector" class="bg-surf-850 border border-surf-700 text-white rounded-xl px-3 py-1.5 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500">
-              <option value="test_med">Cámara Costa Mediterráneo (HLS Demo Live)</option>
-              <option value="mux_stream">Stream de Prueba Baja Latencia (HLS.js)</option>
+              <option value="test_med">Cámara Costa Mediterráneo (Demo HLS)</option>
+              <option value="mux_stream">Stream de Baja Latencia (HLS.js)</option>
               <option value="custom">URL de Stream .m3u8 Personalizada...</option>
             </select>
           </div>
@@ -503,37 +491,77 @@
         </div>
       </div>
 
-      <!-- 3. VISTA: YOUTUBE LIVE EMBED -->
-      <div id="cam-view-yt" class="hidden space-y-4">
-        
-        <!-- Selector de Canal YouTube -->
-        <div class="flex flex-wrap items-center justify-between gap-3 bg-surf-950/70 border border-surf-800 px-4 py-3 rounded-2xl">
-          <div class="flex items-center gap-3">
-            <label for="yt-cam-selector" class="sr-only">Seleccionar cámara YouTube</label>
-            <select id="yt-cam-selector" class="bg-surf-850 border border-surf-700 text-white rounded-xl px-3 py-1.5 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500">
-              <option value="benicassim">Voramar / Benicàssim Live Stream</option>
-              <option value="grao_castellon">Grao de Castellón / Costa Azahar</option>
-              <option value="peniscola_live">Peñíscola Castillo / Mar Mediterráneo</option>
-              <option value="custom_yt">ID de Vídeo Personalizado...</option>
-            </select>
-          </div>
+      <!-- 3. VISTA: PORTALES OFICIALES & RED DE WEBCAMS -->
+      <div id="cam-view-portales" class="hidden space-y-4">
+        <p class="text-xs text-slate-400">
+          Acceso directo a las cámaras de alta resolución en sus plataformas oficiales:
+        </p>
 
-          <span class="text-xs text-slate-400">
-            Reproducción directa mediante iframe sin costes
-          </span>
-        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Tarjeta Voramar -->
+          <a href="https://voramar.net" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-surf-950 border border-surf-800 hover:border-sky-500/50 hover:bg-surf-850 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-sky-400">Hotel Voramar</span>
+                <span class="material-symbols-outlined text-sm text-slate-500 group-hover:text-white transition-colors">open_in_new</span>
+              </div>
+              <h4 class="text-sm font-black text-white">Playa Voramar (Benicàssim)</h4>
+              <p class="text-xs text-slate-400 mt-1">Cámaras 1 y 2 en directo con vista completa al mar y oleaje.</p>
+            </div>
+            <span class="mt-4 text-[11px] font-bold text-sky-400 flex items-center gap-1">Ver en voramar.net →</span>
+          </a>
 
-        <!-- Input para ID personalizada de YouTube -->
-        <div id="yt-custom-container" class="hidden flex gap-2">
-          <input type="text" id="yt-custom-id" placeholder="Introduce el ID del vídeo (ej: live_stream_id)" class="flex-grow bg-surf-850 border border-surf-700 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
-          <button id="yt-load-custom-btn" class="px-4 py-2 rounded-xl bg-sky-500 text-slate-950 text-xs font-bold hover:bg-sky-400 transition-colors">
-            Cargar YouTube
-          </button>
-        </div>
+          <!-- Tarjeta Peñíscola SkylineWebcams -->
+          <a href="https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-surf-950 border border-surf-800 hover:border-sky-500/50 hover:bg-surf-850 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-sky-400">SkylineWebcams</span>
+                <span class="material-symbols-outlined text-sm text-slate-500 group-hover:text-white transition-colors">open_in_new</span>
+              </div>
+              <h4 class="text-sm font-black text-white">Playa Norte y Castillo (Peñíscola)</h4>
+              <p class="text-xs text-slate-400 mt-1">Retransmisión HD continua de la bahía y el oleaje de Peñíscola.</p>
+            </div>
+            <span class="mt-4 text-[11px] font-bold text-sky-400 flex items-center gap-1">Ver en SkylineWebcams →</span>
+          </a>
 
-        <!-- Contenedor del Iframe YouTube Responsive -->
-        <div class="relative w-full aspect-video bg-surf-950 rounded-2xl overflow-hidden border border-surf-800 shadow-2xl">
-          <iframe id="youtube-iframe" class="w-full h-full" src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?autoplay=0&mute=1&playsinline=1" title="Castellón Surf Webcam" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <!-- Tarjeta Benicàssim Heliópolis -->
+          <a href="https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/playa-benicassim.html" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-surf-950 border border-surf-800 hover:border-sky-500/50 hover:bg-surf-850 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-sky-400">SkylineWebcams</span>
+                <span class="material-symbols-outlined text-sm text-slate-500 group-hover:text-white transition-colors">open_in_new</span>
+              </div>
+              <h4 class="text-sm font-black text-white">Playa de Heliópolis (Benicàssim)</h4>
+              <p class="text-xs text-slate-400 mt-1">Panorámica sur de Benicàssim enfocando la línea de rompiente.</p>
+            </div>
+            <span class="mt-4 text-[11px] font-bold text-sky-400 flex items-center gap-1">Ver en SkylineWebcams →</span>
+          </a>
+
+          <!-- Tarjeta Turisme Comunitat Valenciana -->
+          <a href="https://www.comunitatvalenciana.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-surf-950 border border-surf-800 hover:border-sky-500/50 hover:bg-surf-850 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-sky-400">Turisme Comunitat Valenciana</span>
+                <span class="material-symbols-outlined text-sm text-slate-500 group-hover:text-white transition-colors">open_in_new</span>
+              </div>
+              <h4 class="text-sm font-black text-white">Red Oficial de Webcams de Castellón</h4>
+              <p class="text-xs text-slate-400 mt-1">Cámaras públicas del Arenal de Burriana, Grao y Benicàssim Vela.</p>
+            </div>
+            <span class="mt-4 text-[11px] font-bold text-sky-400 flex items-center gap-1">Ver en Turisme CV →</span>
+          </a>
+
+          <!-- Tarjeta PortCastelló -->
+          <a href="https://www.portcastello.com" target="_blank" rel="noopener noreferrer" class="p-4 rounded-2xl bg-surf-950 border border-surf-800 hover:border-sky-500/50 hover:bg-surf-850 transition-all flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold text-sky-400">PortCastelló</span>
+                <span class="material-symbols-outlined text-sm text-slate-500 group-hover:text-white transition-colors">open_in_new</span>
+              </div>
+              <h4 class="text-sm font-black text-white">Grao de Castellón / Faro Costa</h4>
+              <p class="text-xs text-slate-400 mt-1">Monitoreo marítimo del puerto y la cercanía de la playa del Gurugú.</p>
+            </div>
+            <span class="mt-4 text-[11px] font-bold text-sky-400 flex items-center gap-1">Ver en PortCastelló →</span>
+          </a>
         </div>
       </div>
 

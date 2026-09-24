@@ -1,0 +1,71 @@
+{
+  "updatedAt": "2026-09-24T23:02:16.647876+00:00",
+  "webcams": [
+    {
+      "id": "voramar",
+      "name": "Benicàssim - Playa Voramar",
+      "zone": "Benicàssim",
+      "type": "windy_embed",
+      "windyId": "1545163016",
+      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1545163016/day",
+      "directUrl": "https://www.windy.com/webcams/1545163016",
+      "officialUrl": "https://voramar.net",
+      "status": "online",
+      "description": "Vistas a la bahía y rompiente de Voramar frente al hotel emblemático.",
+      "lastChecked": "2026-09-24T23:02:16.143620+00:00"
+    },
+    {
+      "id": "grao_castellon",
+      "name": "Grao de Castellón - Gurugú / Puerto",
+      "zone": "Grao de Castellón",
+      "type": "windy_embed",
+      "windyId": "1569429452",
+      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1569429452/day",
+      "directUrl": "https://www.windy.com/webcams/1569429452",
+      "officialUrl": "https://www.portcastello.com",
+      "status": "online",
+      "description": "Faro y bocana del puerto con vistas al oleaje del Grao y playa del Gurugú.",
+      "lastChecked": "2026-09-24T23:02:16.259720+00:00"
+    },
+    {
+      "id": "peniscola",
+      "name": "Peñíscola - Castillo y Playa Norte",
+      "zone": "Costa Norte",
+      "type": "windy_embed",
+      "windyId": "1233066442",
+      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1233066442/day",
+      "directUrl": "https://www.windy.com/webcams/1233066442",
+      "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html",
+      "status": "online",
+      "description": "Panorámica de la Playa Norte de Peñíscola y la rompiente junto al tómbolo del castillo.",
+      "lastChecked": "2026-09-24T23:02:16.393751+00:00"
+    },
+    {
+      "id": "burriana",
+      "name": "Burriana - Puerto y Playa Arenal",
+      "zone": "Costa Sur",
+      "type": "windy_embed",
+      "windyId": "1566896263",
+      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1566896263/day",
+      "directUrl": "https://www.windy.com/webcams/1566896263",
+      "officialUrl": "https://www.comunitatvalenciana.com",
+      "status": "online",
+      "description": "Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.",
+      "lastChecked": "2026-09-24T23:02:16.512832+00:00"
+    },
+    {
+      "id": "heliopolis",
+      "name": "Benicàssim - Playa Heliópolis",
+      "zone": "Benicàssim",
+      "type": "windy_embed",
+      "windyId": "1545162985",
+      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1545162985/day",
+      "directUrl": "https://www.windy.com/webcams/1545162985",
+      "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/playa-benicassim.html",
+      "status": "online",
+      "description": "Paseo marítimo y rompiente sur de Benicàssim.",
+      "lastChecked": "2026-09-24T23:02:16.647876+00:00"
+    }
+  ],
+  "totalActive": 5
+}

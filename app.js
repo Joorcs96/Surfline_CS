@@ -319,9 +319,7 @@ const AppState = {
   currentSpotId: 'Gurugu',
   currentDayIndex: 0,
   currentFilter: 'all',
-  activeCamTab: 'jpeg',
-  jpegTimer: null,
-  jpegSecondsLeft: 15,
+  activeCamTab: 'live',
   hlsInstance: null
 };
 
@@ -887,25 +885,39 @@ function setupFilterButtons() {
 }
 
 // ==========================================
-// 10. GESTOR DE WEBCAMS (JPEG, HLS, YOUTUBE)
+// 10. GESTOR DE WEBCAMS EN DIRECTO Y STREAMING
 // ==========================================
 
-const JPEG_PRESETS = {
-  gurugu: {
-    title: 'Playa del Gurugú (Grao de Castellón)',
-    url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'
-  },
+const LIVE_WEBCAMS = {
   voramar: {
-    title: 'Playa Voramar (Benicàssim)',
-    url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'
+    name: 'Benicàssim - Playa Voramar',
+    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1545163016/day',
+    officialUrl: 'https://voramar.net',
+    desc: 'Vistas a la bahía y rompiente de Voramar frente al hotel emblemático.'
   },
-  burriana: {
-    title: 'Puerto y Playa Arenal (Burriana)',
-    url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1200&q=80'
+  grao_castellon: {
+    name: 'Grao de Castellón - Gurugú / Puerto',
+    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1569429452/day',
+    officialUrl: 'https://www.portcastello.com',
+    desc: 'Faro y bocana del puerto con vistas al oleaje del Grao y playa del Gurugú.'
   },
   peniscola: {
-    title: 'Castillo y Playa Norte (Peñíscola)',
-    url: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80'
+    name: 'Peñíscola - Castillo y Playa Norte',
+    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1233066442/day',
+    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html',
+    desc: 'Panorámica de la Playa Norte de Peñíscola y la rompiente junto al tómbolo del castillo.'
+  },
+  burriana: {
+    name: 'Burriana - Puerto y Playa Arenal',
+    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1566896263/day',
+    officialUrl: 'https://www.comunitatvalenciana.com',
+    desc: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.'
+  },
+  heliopolis: {
+    name: 'Benicàssim - Playa Heliópolis',
+    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1545162985/day',
+    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/playa-benicassim.html',
+    desc: 'Paseo marítimo y rompiente sur de Benicàssim.'
   }
 };
 
@@ -914,116 +926,93 @@ const HLS_PRESETS = {
   mux_stream: 'https://cph-p2p-msl.akamaized.net/hls/live/200034/test/master.m3u8'
 };
 
-const YT_PRESETS = {
-  benicassim: 'jfKfPfyJRdk',
-  grao_castellon: 'L_LUpnjgPso',
-  peniscola_live: '5qap5aO4i9A'
-};
-
 function initWebcams() {
-  // Tabs de Webcams
-  const tabJpeg = document.getElementById('cam-tab-jpeg');
+  // 1. Pestañas de Webcams (Directo / HLS / Portales)
+  const tabLive = document.getElementById('cam-tab-live');
   const tabHls = document.getElementById('cam-tab-hls');
-  const tabYt = document.getElementById('cam-tab-yt');
+  const tabPortales = document.getElementById('cam-tab-portales');
 
-  const viewJpeg = document.getElementById('cam-view-jpeg');
+  const viewLive = document.getElementById('cam-view-live');
   const viewHls = document.getElementById('cam-view-hls');
-  const viewYt = document.getElementById('cam-view-yt');
+  const viewPortales = document.getElementById('cam-view-portales');
 
   function switchCamTab(tabName) {
     AppState.activeCamTab = tabName;
 
-    // Reset styles
-    [tabJpeg, tabHls, tabYt].forEach(t => {
+    // Resetear estilos de botones y vistas
+    [tabLive, tabHls, tabPortales].forEach(t => {
       if (t) t.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-1.5';
     });
-    [viewJpeg, viewHls, viewYt].forEach(v => {
+    [viewLive, viewHls, viewPortales].forEach(v => {
       if (v) v.classList.add('hidden');
     });
 
-    if (tabName === 'jpeg') {
-      if (tabJpeg) tabJpeg.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
-      if (viewJpeg) viewJpeg.classList.remove('hidden');
+    if (tabName === 'live') {
+      if (tabLive) tabLive.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
+      if (viewLive) viewLive.classList.remove('hidden');
     } else if (tabName === 'hls') {
       if (tabHls) tabHls.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
       if (viewHls) viewHls.classList.remove('hidden');
       setupHlsPlayer();
-    } else if (tabName === 'yt') {
-      if (tabYt) tabYt.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
-      if (viewYt) viewYt.classList.remove('hidden');
+    } else if (tabName === 'portales') {
+      if (tabPortales) tabPortales.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
+      if (viewPortales) viewPortales.classList.remove('hidden');
     }
   }
 
-  if (tabJpeg) tabJpeg.addEventListener('click', () => switchCamTab('jpeg'));
+  if (tabLive) tabLive.addEventListener('click', () => switchCamTab('live'));
   if (tabHls) tabHls.addEventListener('click', () => switchCamTab('hls'));
-  if (tabYt) tabYt.addEventListener('click', () => switchCamTab('yt'));
+  if (tabPortales) tabPortales.addEventListener('click', () => switchCamTab('portales'));
 
-  // 1. Lógica JPEG con recarga periódica
-  const jpegImg = document.getElementById('jpeg-webcam-img');
-  const jpegSelector = document.getElementById('jpeg-cam-selector');
-  const jpegTitle = document.getElementById('jpeg-cam-title');
-  const jpegLastUpdated = document.getElementById('jpeg-last-updated');
-  const jpegCountdown = document.getElementById('jpeg-countdown');
-  const jpegReloadBtn = document.getElementById('jpeg-manual-reload-btn');
-  const jpegReloadIcon = document.getElementById('jpeg-reload-icon');
-  const jpegLoader = document.getElementById('jpeg-loader');
+  // 2. Control del Reproductor HD en Directo (Windy / Feeds Oficiales)
+  const liveSelector = document.getElementById('live-cam-selector');
+  const liveIframe = document.getElementById('live-webcam-iframe');
+  const liveDesc = document.getElementById('live-cam-desc');
+  const liveOfficialLink = document.getElementById('live-cam-official-link');
+  const liveStatus = document.getElementById('live-cam-status');
+  const liveLoader = document.getElementById('live-cam-loader');
 
-  function reloadJpeg() {
-    const key = (jpegSelector && jpegSelector.value) || 'gurugu';
-    const preset = JPEG_PRESETS[key] || JPEG_PRESETS.gurugu;
+  function updateLiveCam(camKey) {
+    const cam = LIVE_WEBCAMS[camKey] || LIVE_WEBCAMS.voramar;
+    if (liveLoader) liveLoader.classList.remove('hidden');
 
-    if (jpegTitle) jpegTitle.textContent = preset.title;
-    if (jpegLoader) jpegLoader.classList.remove('hidden');
-    if (jpegReloadIcon) jpegReloadIcon.classList.add('animate-spin');
+    if (liveIframe) {
+      liveIframe.src = cam.embedUrl;
+      liveIframe.onload = () => {
+        if (liveLoader) liveLoader.classList.add('hidden');
+      };
+      setTimeout(() => {
+        if (liveLoader) liveLoader.classList.add('hidden');
+      }, 2500);
+    }
+    if (liveDesc) liveDesc.textContent = cam.desc;
+    if (liveOfficialLink) liveOfficialLink.href = cam.officialUrl;
+    if (liveStatus) liveStatus.textContent = 'Señal Activa';
+  }
 
-    const cacheBuster = `&t=${Date.now()}`;
-    const newSrc = preset.url + cacheBuster;
+  if (liveSelector) {
+    liveSelector.addEventListener('change', (e) => {
+      updateLiveCam(e.target.value);
+    });
+  }
 
-    const imgTester = new Image();
-    imgTester.onload = () => {
-      if (jpegImg) jpegImg.src = newSrc;
-      if (jpegLastUpdated) {
-        jpegLastUpdated.textContent = new Date().toLocaleTimeString();
+  // Carga asíncrona de webcams.json para datos actualizados
+  fetch('webcams.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (data && Array.isArray(data.webcams)) {
+        data.webcams.forEach(item => {
+          if (LIVE_WEBCAMS[item.id]) {
+            if (item.embedUrl) LIVE_WEBCAMS[item.id].embedUrl = item.embedUrl;
+            if (item.officialUrl) LIVE_WEBCAMS[item.id].officialUrl = item.officialUrl;
+            if (item.description) LIVE_WEBCAMS[item.id].desc = item.description;
+          }
+        });
       }
-      if (jpegLoader) jpegLoader.classList.add('hidden');
-      if (jpegReloadIcon) jpegReloadIcon.classList.remove('animate-spin');
-    };
-    imgTester.onerror = () => {
-      if (jpegLoader) jpegLoader.classList.add('hidden');
-      if (jpegReloadIcon) jpegReloadIcon.classList.remove('animate-spin');
-    };
-    imgTester.src = newSrc;
+    })
+    .catch(() => {});
 
-    AppState.jpegSecondsLeft = 15;
-    if (jpegCountdown) jpegCountdown.textContent = '15';
-  }
-
-  // Timer recurrente cada segundo
-  if (AppState.jpegTimer) clearInterval(AppState.jpegTimer);
-  AppState.jpegTimer = setInterval(() => {
-    if (AppState.activeCamTab !== 'jpeg') return;
-
-    AppState.jpegSecondsLeft--;
-    if (jpegCountdown) {
-      jpegCountdown.textContent = String(Math.max(0, AppState.jpegSecondsLeft));
-    }
-
-    if (AppState.jpegSecondsLeft <= 0) {
-      reloadJpeg();
-    }
-  }, 1000);
-
-  if (jpegSelector) {
-    jpegSelector.addEventListener('change', () => reloadJpeg());
-  }
-  if (jpegReloadBtn) {
-    jpegReloadBtn.addEventListener('click', () => reloadJpeg());
-  }
-
-  // Carga inicial de imagen JPEG
-  reloadJpeg();
-
-  // 2. Lógica HLS (.m3u8) con Hls.js
+  // 3. Lógica Streaming HLS (.m3u8) con Hls.js
   const hlsVideo = document.getElementById('hls-video-player');
   const hlsSelector = document.getElementById('hls-cam-selector');
   const hlsBadge = document.getElementById('hls-status-badge');
@@ -1106,38 +1095,6 @@ function initWebcams() {
     hlsLoadCustomBtn.addEventListener('click', () => {
       const customUrl = hlsCustomUrlInput.value.trim();
       if (customUrl) loadHlsStream(customUrl);
-    });
-  }
-
-  // 3. Lógica YouTube Live Stream
-  const ytSelector = document.getElementById('yt-cam-selector');
-  const ytIframe = document.getElementById('youtube-iframe');
-  const ytCustomContainer = document.getElementById('yt-custom-container');
-  const ytCustomIdInput = document.getElementById('yt-custom-id');
-  const ytLoadCustomBtn = document.getElementById('yt-load-custom-btn');
-
-  function updateYouTubeEmbed(videoId) {
-    if (!ytIframe) return;
-    ytIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=0&mute=1&playsinline=1`;
-  }
-
-  if (ytSelector) {
-    ytSelector.addEventListener('change', (e) => {
-      const val = e.target.value;
-      if (val === 'custom_yt') {
-        if (ytCustomContainer) ytCustomContainer.classList.remove('hidden');
-      } else {
-        if (ytCustomContainer) ytCustomContainer.classList.add('hidden');
-        const videoId = YT_PRESETS[val] || 'jfKfPfyJRdk';
-        updateYouTubeEmbed(videoId);
-      }
-    });
-  }
-
-  if (ytLoadCustomBtn && ytCustomIdInput) {
-    ytLoadCustomBtn.addEventListener('click', () => {
-      const videoId = ytCustomIdInput.value.trim();
-      if (videoId) updateYouTubeEmbed(videoId);
     });
   }
 }

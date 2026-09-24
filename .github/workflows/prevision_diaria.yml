@@ -36,14 +36,19 @@ jobs:
         run: |
           python backend/actualizar_prevision.py
 
-      - name: Guardar cambios en el histórico de olas
+      - name: Actualizar y verificar estado de webcams en directo
+        run: |
+          python backend/actualizar_webcams.py
+
+      - name: Guardar cambios en histórico de olas y catálogo de webcams
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add historico_olas.csv
+          git add historico_olas.csv webcams.json
           if ! git diff --staged --quiet; then
-            git commit -m "Auto: actualización diaria de previsión e histórico [skip ci]"
+            git commit -m "Auto: actualización diaria de previsión, histórico y webcams [skip ci]"
             git push
           else
-            echo "Sin cambios pendientes en historico_olas.csv."
+            echo "Sin cambios pendientes en historico_olas.csv ni webcams.json."
           fi
+
