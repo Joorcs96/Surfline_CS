@@ -58,18 +58,26 @@ def actualizar_catalogo_webcams():
 
     for cam in webcams:
         cam_id = cam.get("id")
-        embed_url = cam.get("embedUrl")
+        target_url = cam.get("streamUrl") or cam.get("snapshotUrl") or cam.get("officialUrl")
         print(f"Verificando {cam.get('name')} ({cam_id})...")
 
-        if embed_url and verificar_url(embed_url):
+        if target_url and verificar_url(target_url):
             cam["status"] = "online"
             cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
             activos += 1
             print(f"  ✔ [ONLINE] {cam.get('name')}")
         else:
-            cam["status"] = "offline"
-            cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
-            print(f"  ✖ [OFFLINE / CHECK] {cam.get('name')}")
+            # Si streamUrl no responde, probar snapshot
+            snap = cam.get("snapshotUrl")
+            if snap and verificar_url(snap):
+                cam["status"] = "online"
+                cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
+                activos += 1
+                print(f"  ✔ [ONLINE (Snapshot)] {cam.get('name')}")
+            else:
+                cam["status"] = "offline"
+                cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
+                print(f"  ✖ [OFFLINE / CHECK] {cam.get('name')}")
 
     data["updatedAt"] = datetime.now(timezone.utc).isoformat()
     data["totalActive"] = activos

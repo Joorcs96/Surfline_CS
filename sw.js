@@ -1,8 +1,9 @@
-const CACHE_NAME = 'surfline-cs-v2';
+const CACHE_NAME = 'surfline-cs-v3';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './app.js',
+  './webcams.json',
   './votar.html',
   './manifest.json'
 ];

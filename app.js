@@ -727,13 +727,25 @@ function renderSpotCards(data, filter = 'all') {
           </p>
         </div>
 
-        <!-- Botón de Acción -->
-        <div class="mt-4 pt-3 border-t border-surf-800/80 flex items-center justify-between">
+        <!-- Botones de Acción -->
+        <div class="mt-4 pt-3 border-t border-surf-800/80 flex items-center justify-between gap-2">
+          ${(function() {
+            const hasCam = typeof WEBCAMS_CATALOG !== 'undefined' && WEBCAMS_CATALOG.some(c => c.spots && c.spots.includes(spot.id));
+            if (hasCam) {
+              return `
+                <button type="button" class="btn-spot-webcam flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold transition-all shadow-sm" data-spot-id="${spot.id}">
+                  <span class="material-symbols-outlined text-sm">videocam</span>
+                  <span>Ver Webcam</span>
+                </button>
+              `;
+            }
+            return `<span class="text-[10px] text-slate-500 italic">Previsión local</span>`;
+          })()}
+
           <span class="text-xs font-semibold text-sky-400 group-hover:text-sky-300 flex items-center gap-1">
             Ver tabla horaria
             <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
           </span>
-          <span class="material-symbols-outlined text-slate-600 group-hover:text-sky-400 transition-colors text-base">calendar_view_day</span>
         </div>
 
       </div>
@@ -752,6 +764,20 @@ function renderSpotCards(data, filter = 'all') {
         const tableSection = document.getElementById('tabla-horaria');
         if (tableSection) {
           tableSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // Asignar eventos directos a los botones de webcam en las tarjetas
+  container.querySelectorAll('.btn-spot-webcam').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const spotId = btn.getAttribute('data-spot-id');
+      if (spotId) {
+        selectSpot(spotId);
+        if (typeof selectWebcamForSpot === 'function') {
+          selectWebcamForSpot(spotId);
         }
       }
     });
@@ -1233,145 +1259,167 @@ function setupFilterButtons() {
 // 10. GESTOR DE WEBCAMS EN DIRECTO Y STREAMING
 // ==========================================
 
-const LIVE_WEBCAMS = {
-  voramar: {
-    name: 'Benicàssim - Playa Voramar',
-    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1545163016/day',
-    officialUrl: 'https://voramar.net',
-    desc: 'Vistas a la bahía y rompiente de Voramar frente al hotel emblemático.'
+const WEBCAMS_CATALOG = [
+  {
+    id: 'peniscola',
+    name: 'Peñíscola - Playa Norte y Castillo',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Penyiscola/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Penyiscola/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1',
+    description: 'Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.',
+    spots: ['PeniscolaN']
   },
-  grao_castellon: {
-    name: 'Grao de Castellón - Gurugú / Puerto',
-    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1569429452/day',
-    officialUrl: 'https://www.portcastello.com',
-    desc: 'Faro y bocana del puerto con vistas al oleaje del Grao y playa del Gurugú.'
-  },
-  peniscola: {
-    name: 'Peñíscola - Castillo y Playa Norte',
-    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1233066442/day',
-    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html',
-    desc: 'Panorámica de la Playa Norte de Peñíscola y la rompiente junto al tómbolo del castillo.'
-  },
-  burriana: {
+  {
+    id: 'burriana',
     name: 'Burriana - Puerto y Playa Arenal',
-    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1566896263/day',
-    officialUrl: 'https://www.comunitatvalenciana.com',
-    desc: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.'
+    zone: 'Costa Sur',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Burriana/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1',
+    description: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.',
+    spots: ['Burriana', 'Nules']
   },
-  heliopolis: {
+  {
+    id: 'voramar',
+    name: 'Benicàssim - Playa Voramar',
+    zone: 'Benicàssim',
+    streamType: 'mjpeg',
+    streamUrl: 'https://cam1.voramar.net:445/axis-cgi/mjpg/video.cgi',
+    snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg',
+    officialUrl: 'https://voramar.net/webcam-playa-voramar-benicassim/',
+    description: 'Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim.',
+    spots: ['Voramar', 'Palaciet']
+  },
+  {
+    id: 'oropesa',
+    name: 'Oropesa del Mar - Morro de Gos',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/OropesadelMar/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/OropesadelMar/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/orpesa-oropesa-del-mar/webcams/oropesa-del-mar-1',
+    description: 'Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.',
+    spots: ['MorroGos', 'Renega']
+  },
+  {
+    id: 'gurugu',
+    name: 'Grao de Castellón - Gurugú / Pinar',
+    zone: 'Grao de Castellón',
+    streamType: 'snapshot',
+    streamUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    officialUrl: 'https://camaramar.com/webcam-playa-del-gurugu-castellon/',
+    description: 'Línea de costa y rompiente de las playas del Gurugú y del Pinar desde el Aeroclub.',
+    spots: ['Gurugu', 'Planetario', 'Piramides']
+  },
+  {
+    id: 'vinaros',
+    name: 'Vinaròs - Playa del Fortí',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Vinaros/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Vinaros/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/vinaros/webcams/vinaros-2',
+    description: 'Paseo marítimo y rompiente urbana del Fortí en el norte de Castellón.',
+    spots: ['Vinaros']
+  },
+  {
+    id: 'alcossebre',
+    name: 'Alcossebre - Playa Romana / Cargador',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1',
+    description: 'Playa de fina arena protegida por salientes rocosos con oleaje suave.',
+    spots: ['Renega']
+  },
+  {
+    id: 'heliopolis',
     name: 'Benicàssim - Playa Heliópolis',
-    embedUrl: 'https://webcams.windy.com/webcams/public/embed/player/1545162985/day',
-    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/playa-benicassim.html',
-    desc: 'Paseo marítimo y rompiente sur de Benicàssim.'
+    zone: 'Benicàssim',
+    streamType: 'external',
+    streamUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
+    snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam2.jpg',
+    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
+    description: 'Panorámica sur de Benicàssim transmitida en SkylineWebcams.',
+    spots: ['Heliopolis']
   }
-};
+];
 
-const HLS_PRESETS = {
-  test_med: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-  mux_stream: 'https://cph-p2p-msl.akamaized.net/hls/live/200034/test/master.m3u8'
-};
+let snapshotRefreshTimer = null;
 
-function initWebcams() {
-  // 1. Pestañas de Webcams (Directo / HLS / Portales)
-  const tabLive = document.getElementById('cam-tab-live');
-  const tabHls = document.getElementById('cam-tab-hls');
-  const tabPortales = document.getElementById('cam-tab-portales');
+function selectWebcamForSpot(spotId) {
+  const cam = WEBCAMS_CATALOG.find(c => c.spots && c.spots.includes(spotId));
+  if (cam) {
+    loadWebcam(cam.id);
+  }
+  const el = document.getElementById('seccion-webcams');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
 
-  const viewLive = document.getElementById('cam-view-live');
-  const viewHls = document.getElementById('cam-view-hls');
-  const viewPortales = document.getElementById('cam-view-portales');
+function loadWebcam(camId) {
+  const cam = WEBCAMS_CATALOG.find(c => c.id === camId) || WEBCAMS_CATALOG[0];
+  if (!cam) return;
 
-  function switchCamTab(tabName) {
-    AppState.activeCamTab = tabName;
+  const selector = document.getElementById('webcam-selector');
+  if (selector && selector.value !== cam.id) selector.value = cam.id;
 
-    // Resetear estilos de botones y vistas
-    [tabLive, tabHls, tabPortales].forEach(t => {
-      if (t) t.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-400 hover:text-white transition-all flex items-center gap-1.5';
-    });
-    [viewLive, viewHls, viewPortales].forEach(v => {
-      if (v) v.classList.add('hidden');
-    });
+  const titleEl = document.getElementById('webcam-current-title');
+  const descEl = document.getElementById('webcam-current-desc');
+  const linkEl = document.getElementById('webcam-official-link');
+  const statusBadge = document.getElementById('webcam-status-text');
+  const loader = document.getElementById('webcam-loader');
+  const videoPlayer = document.getElementById('webcam-video-player');
+  const imgPlayer = document.getElementById('webcam-img-player');
+  const extOverlay = document.getElementById('webcam-external-overlay');
+  const extTitle = document.getElementById('webcam-external-title');
+  const extDesc = document.getElementById('webcam-external-desc');
+  const extBtn = document.getElementById('webcam-external-btn');
+  const spotsContainer = document.getElementById('webcam-spots-container');
 
-    if (tabName === 'live') {
-      if (tabLive) tabLive.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
-      if (viewLive) viewLive.classList.remove('hidden');
-    } else if (tabName === 'hls') {
-      if (tabHls) tabHls.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
-      if (viewHls) viewHls.classList.remove('hidden');
-      setupHlsPlayer();
-    } else if (tabName === 'portales') {
-      if (tabPortales) tabPortales.className = 'cam-tab-btn px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 transition-all flex items-center gap-1.5';
-      if (viewPortales) viewPortales.classList.remove('hidden');
+  if (titleEl) titleEl.textContent = cam.name;
+  if (descEl) descEl.textContent = cam.description;
+  if (linkEl) linkEl.href = cam.officialUrl;
+
+  if (spotsContainer) {
+    let spotsHtml = '<span class="text-[11px] font-bold text-slate-400 mr-1">Spots:</span>';
+    if (cam.spots && cam.spots.length) {
+      cam.spots.forEach(spId => {
+        const spotObj = SPOTS.find(s => s.id === spId);
+        const label = spotObj ? spotObj.name : spId;
+        spotsHtml += `<button type="button" class="btn-cam-spot px-2.5 py-1 rounded-lg bg-surf-850 hover:bg-surf-800 text-sky-400 border border-surf-700 text-xs font-bold transition-all" data-spot-id="${spId}">${label} →</button>`;
+      });
+    } else {
+      spotsHtml += '<span class="text-xs text-slate-500 italic">Costa de Castellón</span>';
     }
-  }
-
-  if (tabLive) tabLive.addEventListener('click', () => switchCamTab('live'));
-  if (tabHls) tabHls.addEventListener('click', () => switchCamTab('hls'));
-  if (tabPortales) tabPortales.addEventListener('click', () => switchCamTab('portales'));
-
-  // 2. Control del Reproductor HD en Directo (Windy / Feeds Oficiales)
-  const liveSelector = document.getElementById('live-cam-selector');
-  const liveIframe = document.getElementById('live-webcam-iframe');
-  const liveDesc = document.getElementById('live-cam-desc');
-  const liveOfficialLink = document.getElementById('live-cam-official-link');
-  const liveStatus = document.getElementById('live-cam-status');
-  const liveLoader = document.getElementById('live-cam-loader');
-
-  function updateLiveCam(camKey) {
-    const cam = LIVE_WEBCAMS[camKey] || LIVE_WEBCAMS.voramar;
-    if (liveLoader) liveLoader.classList.remove('hidden');
-
-    if (liveIframe) {
-      liveIframe.src = cam.embedUrl;
-      liveIframe.onload = () => {
-        if (liveLoader) liveLoader.classList.add('hidden');
-      };
-      setTimeout(() => {
-        if (liveLoader) liveLoader.classList.add('hidden');
-      }, 2500);
-    }
-    if (liveDesc) liveDesc.textContent = cam.desc;
-    if (liveOfficialLink) liveOfficialLink.href = cam.officialUrl;
-    if (liveStatus) liveStatus.textContent = 'Señal Activa';
-  }
-
-  if (liveSelector) {
-    liveSelector.addEventListener('change', (e) => {
-      updateLiveCam(e.target.value);
+    spotsContainer.innerHTML = spotsHtml;
+    spotsContainer.querySelectorAll('.btn-cam-spot').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sId = btn.getAttribute('data-spot-id');
+        if (sId) {
+          selectSpot(sId);
+          const tableEl = document.getElementById('tabla-horaria');
+          if (tableEl) tableEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
   }
 
-  // Carga asíncrona de webcams.json para datos actualizados
-  fetch('webcams.json')
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (data && Array.isArray(data.webcams)) {
-        data.webcams.forEach(item => {
-          if (LIVE_WEBCAMS[item.id]) {
-            if (item.embedUrl) LIVE_WEBCAMS[item.id].embedUrl = item.embedUrl;
-            if (item.officialUrl) LIVE_WEBCAMS[item.id].officialUrl = item.officialUrl;
-            if (item.description) LIVE_WEBCAMS[item.id].desc = item.description;
-          }
-        });
-      }
-    })
-    .catch(() => {});
+  if (snapshotRefreshTimer) {
+    clearInterval(snapshotRefreshTimer);
+    snapshotRefreshTimer = null;
+  }
 
-  // 3. Lógica Streaming HLS (.m3u8) con Hls.js
-  const hlsVideo = document.getElementById('hls-video-player');
-  const hlsSelector = document.getElementById('hls-cam-selector');
-  const hlsBadge = document.getElementById('hls-status-badge');
-  const hlsCustomContainer = document.getElementById('hls-custom-container');
-  const hlsCustomUrlInput = document.getElementById('hls-custom-url');
-  const hlsLoadCustomBtn = document.getElementById('hls-load-custom-btn');
-
-  function loadHlsStream(streamUrl) {
-    if (!hlsVideo) return;
-
-    if (hlsBadge) {
-      hlsBadge.className = 'px-2.5 py-1 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold flex items-center gap-1.5';
-      hlsBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span> Conectando HLS...';
-    }
+  if (cam.streamType === 'hls') {
+    if (extOverlay) extOverlay.classList.add('hidden');
+    if (imgPlayer) imgPlayer.classList.add('hidden');
+    if (videoPlayer) videoPlayer.classList.remove('hidden');
+    if (loader) loader.classList.remove('hidden');
+    if (statusBadge) statusBadge.textContent = 'Conectando HLS...';
 
     if (window.Hls && Hls.isSupported()) {
       if (AppState.hlsInstance) {
@@ -1379,69 +1427,218 @@ function initWebcams() {
       }
       const hls = new Hls({
         enableWorker: true,
-        lowLatencyMode: true
+        lowLatencyMode: true,
+        manifestLoadingTimeOut: 10000
       });
       AppState.hlsInstance = hls;
-
-      hls.loadSource(streamUrl);
-      hls.attachMedia(hlsVideo);
+      hls.loadSource(cam.streamUrl);
+      hls.attachMedia(videoPlayer);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        if (hlsBadge) {
-          hlsBadge.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold flex items-center gap-1.5';
-          hlsBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Stream Activo (HLS.js)';
-        }
-        hlsVideo.play().catch(() => {});
+        if (loader) loader.classList.add('hidden');
+        if (statusBadge) statusBadge.textContent = 'Stream HD Activo';
+        videoPlayer.play().catch(() => {});
       });
 
       hls.on(Hls.Events.ERROR, (event, data) => {
         if (data.fatal) {
-          if (hlsBadge) {
-            hlsBadge.className = 'px-2.5 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 font-bold flex items-center gap-1.5';
-            hlsBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-rose-500"></span> Error de stream';
+          if (loader) loader.classList.add('hidden');
+          if (statusBadge) statusBadge.textContent = 'Reintentando...';
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              hls.startLoad();
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              hls.recoverMediaError();
+              break;
+            default:
+              hls.destroy();
+              break;
           }
         }
       });
-    } else if (hlsVideo.canPlayType('application/vnd.apple.mpegurl')) {
-      // Soporte nativo de HLS (Safari en iOS / macOS)
-      hlsVideo.src = streamUrl;
-      hlsVideo.addEventListener('loadedmetadata', () => {
-        if (hlsBadge) {
-          hlsBadge.className = 'px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold flex items-center gap-1.5';
-          hlsBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span> En Directo (Nativo)';
-        }
-        hlsVideo.play().catch(() => {});
+    } else if (videoPlayer && videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+      videoPlayer.src = cam.streamUrl;
+      videoPlayer.addEventListener('loadedmetadata', () => {
+        if (loader) loader.classList.add('hidden');
+        if (statusBadge) statusBadge.textContent = 'En Directo (iOS)';
+        videoPlayer.play().catch(() => {});
       });
-    } else {
-      if (hlsBadge) {
-        hlsBadge.className = 'px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold flex items-center gap-1.5';
-        hlsBadge.textContent = 'HLS no soportado por este navegador';
+    }
+  } else if (cam.streamType === 'mjpeg') {
+    if (AppState.hlsInstance) {
+      AppState.hlsInstance.destroy();
+      AppState.hlsInstance = null;
+    }
+    if (videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.classList.add('hidden');
+    }
+    if (extOverlay) extOverlay.classList.add('hidden');
+    if (imgPlayer) {
+      imgPlayer.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
+      imgPlayer.src = cam.streamUrl;
+      imgPlayer.onload = () => {
+        if (loader) loader.classList.add('hidden');
+        if (statusBadge) statusBadge.textContent = 'Cámara en Vivo';
+      };
+      imgPlayer.onerror = () => {
+        imgPlayer.src = cam.snapshotUrl;
+        if (loader) loader.classList.add('hidden');
+        if (statusBadge) statusBadge.textContent = 'Imagen en Vivo';
+      };
+    }
+  } else if (cam.streamType === 'snapshot') {
+    if (AppState.hlsInstance) {
+      AppState.hlsInstance.destroy();
+      AppState.hlsInstance = null;
+    }
+    if (videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.classList.add('hidden');
+    }
+    if (extOverlay) extOverlay.classList.add('hidden');
+    if (imgPlayer) {
+      imgPlayer.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
+      const reloadSnap = () => {
+        imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+      };
+      reloadSnap();
+      imgPlayer.onload = () => {
+        if (loader) loader.classList.add('hidden');
+        if (statusBadge) statusBadge.textContent = 'Foto en Directo';
+      };
+      snapshotRefreshTimer = setInterval(reloadSnap, 15000);
+    }
+  } else if (cam.streamType === 'external') {
+    if (AppState.hlsInstance) {
+      AppState.hlsInstance.destroy();
+      AppState.hlsInstance = null;
+    }
+    if (videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.classList.add('hidden');
+    }
+    if (loader) loader.classList.add('hidden');
+    if (imgPlayer) {
+      imgPlayer.classList.remove('hidden');
+      imgPlayer.src = cam.snapshotUrl;
+    }
+    if (extOverlay) {
+      extOverlay.classList.remove('hidden');
+      if (extTitle) extTitle.textContent = cam.name;
+      if (extDesc) extDesc.textContent = cam.description;
+      if (extBtn) extBtn.href = cam.officialUrl;
+    }
+    if (statusBadge) statusBadge.textContent = 'Portal Externo';
+  }
+}
+
+function renderWebcamGrid() {
+  const container = document.getElementById('webcam-grid');
+  if (!container) return;
+
+  let html = '';
+  WEBCAMS_CATALOG.forEach(cam => {
+    const isStream = cam.streamType === 'hls' || cam.streamType === 'mjpeg';
+    html += `
+      <div class="webcam-card bg-surf-950/80 border border-surf-800 hover:border-sky-500/50 rounded-2xl overflow-hidden shadow-lg transition-all group flex flex-col justify-between">
+        <div>
+          <!-- Thumbnail / Preview -->
+          <div class="relative aspect-video bg-surf-900 overflow-hidden cursor-pointer btn-play-cam" data-cam-id="${cam.id}">
+            <img src="${cam.snapshotUrl}" alt="${cam.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/640x360/0c1322/38bdf8?text=${encodeURIComponent(cam.name)}'" />
+            <div class="absolute inset-0 bg-gradient-to-t from-surf-950 via-transparent to-transparent opacity-80"></div>
+            
+            <div class="absolute top-2.5 left-2.5 flex items-center gap-1 px-2 py-0.5 rounded-md bg-surf-950/80 backdrop-blur-sm border border-surf-800 text-[10px] font-bold text-slate-300">
+              <span class="w-1.5 h-1.5 rounded-full ${isStream ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}"></span>
+              <span>${isStream ? 'DIRECTO' : 'ACTUALIZADA'}</span>
+            </div>
+
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-surf-950/40 backdrop-blur-[2px]">
+              <span class="p-3 rounded-full bg-sky-500 text-slate-950 shadow-xl shadow-sky-500/30 flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl font-bold">play_arrow</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Datos de la cámara -->
+          <div class="p-4 space-y-1">
+            <span class="text-[10px] font-black uppercase tracking-wider text-sky-400">${cam.zone}</span>
+            <h4 class="text-sm font-bold text-white leading-tight group-hover:text-sky-300 transition-colors">${cam.name}</h4>
+            <p class="text-[11px] text-slate-400 line-clamp-2 mt-1">${cam.description}</p>
+          </div>
+        </div>
+
+        <!-- Acciones -->
+        <div class="px-4 pb-4 pt-2 border-t border-surf-800/80 flex items-center justify-between gap-2">
+          <button type="button" class="btn-play-cam flex items-center gap-1 text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors" data-cam-id="${cam.id}">
+            <span class="material-symbols-outlined text-base">play_circle</span>
+            <span>Ver arriba</span>
+          </button>
+          <a href="${cam.officialUrl}" target="_blank" rel="noopener noreferrer" title="Abrir fuente externa" class="p-1.5 rounded-lg bg-surf-850 hover:bg-surf-800 text-slate-400 hover:text-white border border-surf-700 transition-colors">
+            <span class="material-symbols-outlined text-xs">open_in_new</span>
+          </a>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  container.querySelectorAll('.btn-play-cam').forEach(el => {
+    el.addEventListener('click', () => {
+      const camId = el.getAttribute('data-cam-id');
+      if (camId) {
+        loadWebcam(camId);
+        const section = document.getElementById('seccion-webcams');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
       }
-    }
-  }
+    });
+  });
+}
 
-  function setupHlsPlayer() {
-    if (!hlsSelector) return;
-    const selected = hlsSelector.value;
-    if (selected === 'custom') {
-      if (hlsCustomContainer) hlsCustomContainer.classList.remove('hidden');
-    } else {
-      if (hlsCustomContainer) hlsCustomContainer.classList.add('hidden');
-      const url = HLS_PRESETS[selected] || HLS_PRESETS.test_med;
-      loadHlsStream(url);
-    }
-  }
-
-  if (hlsSelector) {
-    hlsSelector.addEventListener('change', () => setupHlsPlayer());
-  }
-
-  if (hlsLoadCustomBtn && hlsCustomUrlInput) {
-    hlsLoadCustomBtn.addEventListener('click', () => {
-      const customUrl = hlsCustomUrlInput.value.trim();
-      if (customUrl) loadHlsStream(customUrl);
+function initWebcams() {
+  const selector = document.getElementById('webcam-selector');
+  if (selector) {
+    selector.addEventListener('change', (e) => {
+      loadWebcam(e.target.value);
     });
   }
+
+  const refreshBtn = document.getElementById('webcam-refresh-btn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      if (selector) loadWebcam(selector.value);
+    });
+  }
+
+  // Cargar catálogo actualizado desde webcams.json
+  fetch('webcams.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (data && Array.isArray(data.webcams) && data.webcams.length) {
+        data.webcams.forEach(item => {
+          const match = WEBCAMS_CATALOG.find(c => c.id === item.id);
+          if (match) {
+            Object.assign(match, item);
+          } else {
+            WEBCAMS_CATALOG.push(item);
+          }
+        });
+      }
+      renderWebcamGrid();
+      const onlineBadge = document.getElementById('webcams-online-count');
+      if (onlineBadge) onlineBadge.textContent = `${WEBCAMS_CATALOG.length} Cámaras en Directo`;
+    })
+    .catch(() => {
+      renderWebcamGrid();
+    });
+
+  // Render inicial del grid y carga de la primera cámara
+  renderWebcamGrid();
+  loadWebcam('peniscola');
 }
 
 // ==========================================

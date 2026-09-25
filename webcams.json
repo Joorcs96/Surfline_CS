@@ -1,71 +1,133 @@
 {
-  "updatedAt": "2026-09-24T23:02:16.647876+00:00",
+  "updatedAt": "2026-09-25T06:22:29.927735+00:00",
   "webcams": [
     {
-      "id": "voramar",
-      "name": "Benicàssim - Playa Voramar",
-      "zone": "Benicàssim",
-      "type": "windy_embed",
-      "windyId": "1545163016",
-      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1545163016/day",
-      "directUrl": "https://www.windy.com/webcams/1545163016",
-      "officialUrl": "https://voramar.net",
-      "status": "online",
-      "description": "Vistas a la bahía y rompiente de Voramar frente al hotel emblemático.",
-      "lastChecked": "2026-09-24T23:02:16.143620+00:00"
-    },
-    {
-      "id": "grao_castellon",
-      "name": "Grao de Castellón - Gurugú / Puerto",
-      "zone": "Grao de Castellón",
-      "type": "windy_embed",
-      "windyId": "1569429452",
-      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1569429452/day",
-      "directUrl": "https://www.windy.com/webcams/1569429452",
-      "officialUrl": "https://www.portcastello.com",
-      "status": "online",
-      "description": "Faro y bocana del puerto con vistas al oleaje del Grao y playa del Gurugú.",
-      "lastChecked": "2026-09-24T23:02:16.259720+00:00"
-    },
-    {
       "id": "peniscola",
-      "name": "Peñíscola - Castillo y Playa Norte",
+      "name": "Peñíscola - Playa Norte y Castillo",
       "zone": "Costa Norte",
-      "type": "windy_embed",
-      "windyId": "1233066442",
-      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1233066442/day",
-      "directUrl": "https://www.windy.com/webcams/1233066442",
-      "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html",
+      "streamType": "hls",
+      "streamUrl": "https://streaming.comunitatvalenciana.com/webcam/Penyiscola/playlist.m3u8",
+      "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Penyiscola/webcam_mini.png",
+      "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1",
+      "altOfficialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html",
       "status": "online",
-      "description": "Panorámica de la Playa Norte de Peñíscola y la rompiente junto al tómbolo del castillo.",
-      "lastChecked": "2026-09-24T23:02:16.393751+00:00"
+      "description": "Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.",
+      "spots": [
+        "PeniscolaN"
+      ],
+      "lastChecked": "2026-09-25T06:22:27.551864+00:00"
     },
     {
       "id": "burriana",
       "name": "Burriana - Puerto y Playa Arenal",
       "zone": "Costa Sur",
-      "type": "windy_embed",
-      "windyId": "1566896263",
-      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1566896263/day",
-      "directUrl": "https://www.windy.com/webcams/1566896263",
-      "officialUrl": "https://www.comunitatvalenciana.com",
+      "streamType": "hls",
+      "streamUrl": "https://streaming.comunitatvalenciana.com/webcam/Burriana/playlist.m3u8",
+      "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png",
+      "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1",
       "status": "online",
       "description": "Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.",
-      "lastChecked": "2026-09-24T23:02:16.512832+00:00"
+      "spots": [
+        "Burriana",
+        "Nules"
+      ],
+      "lastChecked": "2026-09-25T06:22:27.761986+00:00"
+    },
+    {
+      "id": "voramar",
+      "name": "Benicàssim - Playa Voramar",
+      "zone": "Benicàssim",
+      "streamType": "mjpeg",
+      "streamUrl": "https://cam1.voramar.net:445/axis-cgi/mjpg/video.cgi",
+      "snapshotUrl": "https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg",
+      "officialUrl": "https://voramar.net/webcam-playa-voramar-benicassim/",
+      "status": "online",
+      "description": "Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim.",
+      "spots": [
+        "Voramar",
+        "Palaciet"
+      ],
+      "lastChecked": "2026-09-25T06:22:28.633503+00:00"
+    },
+    {
+      "id": "oropesa",
+      "name": "Oropesa del Mar - Morro de Gos",
+      "zone": "Costa Norte",
+      "streamType": "hls",
+      "streamUrl": "https://streaming.comunitatvalenciana.com/webcam/OropesadelMar/playlist.m3u8",
+      "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/OropesadelMar/webcam_mini.png",
+      "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/orpesa-oropesa-del-mar/webcams/oropesa-del-mar-1",
+      "status": "online",
+      "description": "Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.",
+      "spots": [
+        "MorroGos",
+        "Renega"
+      ],
+      "lastChecked": "2026-09-25T06:22:28.940271+00:00"
+    },
+    {
+      "id": "gurugu",
+      "name": "Grao de Castellón - Gurugú / Pinar",
+      "zone": "Grao de Castellón",
+      "streamType": "snapshot",
+      "streamUrl": "https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg",
+      "snapshotUrl": "https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg",
+      "officialUrl": "https://camaramar.com/webcam-playa-del-gurugu-castellon/",
+      "altOfficialUrl": "https://www.aeroclubcastellon.com/webcam/",
+      "status": "online",
+      "description": "Línea de costa y rompiente de las playas del Gurugú y del Pinar desde el Aeroclub.",
+      "spots": [
+        "Gurugu",
+        "Planetario",
+        "Piramides"
+      ],
+      "lastChecked": "2026-09-25T06:22:29.060702+00:00"
+    },
+    {
+      "id": "vinaros",
+      "name": "Vinaròs - Playa del Fortí",
+      "zone": "Costa Norte",
+      "streamType": "hls",
+      "streamUrl": "https://streaming.comunitatvalenciana.com/webcam/Vinaros/playlist.m3u8",
+      "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Vinaros/webcam_mini.png",
+      "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/vinaros/webcams/vinaros-2",
+      "status": "online",
+      "description": "Paseo marítimo y rompiente urbana del Fortí en el norte de Castellón.",
+      "spots": [
+        "Vinaros"
+      ],
+      "lastChecked": "2026-09-25T06:22:29.281350+00:00"
+    },
+    {
+      "id": "alcossebre",
+      "name": "Alcossebre - Playa Romana / Cargador",
+      "zone": "Costa Norte",
+      "streamType": "hls",
+      "streamUrl": "https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8",
+      "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png",
+      "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1",
+      "status": "online",
+      "description": "Playa de fina arena protegida por salientes rocosos con oleaje suave.",
+      "spots": [
+        "Renega"
+      ],
+      "lastChecked": "2026-09-25T06:22:29.734575+00:00"
     },
     {
       "id": "heliopolis",
       "name": "Benicàssim - Playa Heliópolis",
       "zone": "Benicàssim",
-      "type": "windy_embed",
-      "windyId": "1545162985",
-      "embedUrl": "https://webcams.windy.com/webcams/public/embed/player/1545162985/day",
-      "directUrl": "https://www.windy.com/webcams/1545162985",
-      "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/playa-benicassim.html",
+      "streamType": "external",
+      "streamUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html",
+      "snapshotUrl": "https://voramar.net/wp-content/uploads/2022/04/Webcam2.jpg",
+      "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html",
       "status": "online",
-      "description": "Paseo marítimo y rompiente sur de Benicàssim.",
-      "lastChecked": "2026-09-24T23:02:16.647876+00:00"
+      "description": "Panorámica sur de Benicàssim transmitida en SkylineWebcams.",
+      "spots": [
+        "Heliopolis"
+      ],
+      "lastChecked": "2026-09-25T06:22:29.927735+00:00"
     }
   ],
-  "totalActive": 5
+  "totalActive": 8
 }
