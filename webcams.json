@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T23:02:16.647876+00:00",
+  "updatedAt": "2026-09-25T06:23:10.882032+00:00",
   "webcams": [
     {
       "id": "voramar",
@@ -12,7 +12,7 @@
       "officialUrl": "https://voramar.net",
       "status": "online",
       "description": "Vistas a la bahía y rompiente de Voramar frente al hotel emblemático.",
-      "lastChecked": "2026-09-24T23:02:16.143620+00:00"
+      "lastChecked": "2026-09-25T06:23:10.545087+00:00"
     },
     {
       "id": "grao_castellon",
@@ -25,7 +25,7 @@
       "officialUrl": "https://www.portcastello.com",
       "status": "online",
       "description": "Faro y bocana del puerto con vistas al oleaje del Grao y playa del Gurugú.",
-      "lastChecked": "2026-09-24T23:02:16.259720+00:00"
+      "lastChecked": "2026-09-25T06:23:10.594661+00:00"
     },
     {
       "id": "peniscola",
@@ -38,7 +38,7 @@
       "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html",
       "status": "online",
       "description": "Panorámica de la Playa Norte de Peñíscola y la rompiente junto al tómbolo del castillo.",
-      "lastChecked": "2026-09-24T23:02:16.393751+00:00"
+      "lastChecked": "2026-09-25T06:23:10.675468+00:00"
     },
     {
       "id": "burriana",
@@ -51,7 +51,7 @@
       "officialUrl": "https://www.comunitatvalenciana.com",
       "status": "online",
       "description": "Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.",
-      "lastChecked": "2026-09-24T23:02:16.512832+00:00"
+      "lastChecked": "2026-09-25T06:23:10.826967+00:00"
     },
     {
       "id": "heliopolis",
@@ -64,7 +64,7 @@
       "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/playa-benicassim.html",
       "status": "online",
       "description": "Paseo marítimo y rompiente sur de Benicàssim.",
-      "lastChecked": "2026-09-24T23:02:16.647876+00:00"
+      "lastChecked": "2026-09-25T06:23:10.882017+00:00"
     }
   ],
   "totalActive": 5
