@@ -1261,26 +1261,28 @@ function setupFilterButtons() {
 
 const WEBCAMS_CATALOG = [
   {
-    id: 'peniscola',
-    name: 'Peñíscola - Playa Norte y Castillo',
-    zone: 'Costa Norte',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Penyiscola/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Penyiscola/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1',
-    description: 'Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.',
-    spots: ['PeniscolaN']
+    id: 'planetario',
+    name: 'Grao de Castellón - Planetario / Surfers Castellón',
+    zone: 'Grao de Castellón',
+    streamType: 'surfers',
+    streamUrl: 'https://www.surferscastellon.com/live-webcam/',
+    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    officialUrl: 'https://www.surferscastellon.com/live-webcam/',
+    altOfficialUrl: 'https://www.surferscastellon.com/webcam/',
+    description: 'Cámara principal de la rompiente del Planetario en el Grao de Castellón, ubicada frente a las instalaciones del club Surfers Castellón.',
+    spots: ['Planetario']
   },
   {
-    id: 'burriana',
-    name: 'Burriana - Puerto y Playa Arenal',
-    zone: 'Costa Sur',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Burriana/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1',
-    description: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.',
-    spots: ['Burriana', 'Nules']
+    id: 'gurugu',
+    name: 'Grao de Castellón - Playa del Gurugú / Pinar',
+    zone: 'Grao de Castellón',
+    streamType: 'snapshot',
+    streamUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    officialUrl: 'https://camaramar.com/webcam-playa-del-gurugu-castellon/',
+    altOfficialUrl: 'https://www.aeroclubcastellon.com/webcam/',
+    description: 'Línea de costa y rompiente de las playas del Gurugú y del Pinar desde el Aeroclub.',
+    spots: ['Gurugu']
   },
   {
     id: 'voramar',
@@ -1291,7 +1293,30 @@ const WEBCAMS_CATALOG = [
     snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg',
     officialUrl: 'https://voramar.net/webcam-playa-voramar-benicassim/',
     description: 'Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim.',
-    spots: ['Voramar', 'Palaciet']
+    spots: ['Voramar']
+  },
+  {
+    id: 'burriana',
+    name: 'Burriana - Puerto y Playa Arenal',
+    zone: 'Costa Sur',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Burriana/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1',
+    description: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.',
+    spots: ['Burriana']
+  },
+  {
+    id: 'peniscola',
+    name: 'Peñíscola - Playa Norte y Castillo',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Penyiscola/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Penyiscola/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1',
+    altOfficialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html',
+    description: 'Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.',
+    spots: ['Peniscola N']
   },
   {
     id: 'oropesa',
@@ -1302,18 +1327,7 @@ const WEBCAMS_CATALOG = [
     snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/OropesadelMar/webcam_mini.png',
     officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/orpesa-oropesa-del-mar/webcams/oropesa-del-mar-1',
     description: 'Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.',
-    spots: ['MorroGos', 'Renega']
-  },
-  {
-    id: 'gurugu',
-    name: 'Grao de Castellón - Gurugú / Pinar',
-    zone: 'Grao de Castellón',
-    streamType: 'snapshot',
-    streamUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
-    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
-    officialUrl: 'https://camaramar.com/webcam-playa-del-gurugu-castellon/',
-    description: 'Línea de costa y rompiente de las playas del Gurugú y del Pinar desde el Aeroclub.',
-    spots: ['Gurugu', 'Planetario', 'Piramides']
+    spots: ['MorroGos']
   },
   {
     id: 'vinaros',
@@ -1327,17 +1341,6 @@ const WEBCAMS_CATALOG = [
     spots: ['Vinaros']
   },
   {
-    id: 'alcossebre',
-    name: 'Alcossebre - Playa Romana / Cargador',
-    zone: 'Costa Norte',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1',
-    description: 'Playa de fina arena protegida por salientes rocosos con oleaje suave.',
-    spots: ['Renega']
-  },
-  {
     id: 'heliopolis',
     name: 'Benicàssim - Playa Heliópolis',
     zone: 'Benicàssim',
@@ -1347,6 +1350,17 @@ const WEBCAMS_CATALOG = [
     officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
     description: 'Panorámica sur de Benicàssim transmitida en SkylineWebcams.',
     spots: ['Heliopolis']
+  },
+  {
+    id: 'alcossebre',
+    name: 'Alcossebre - Playa Romana / Cargador',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1',
+    description: 'Playa de fina arena protegida por salientes rocosos con oleaje suave.',
+    spots: []
   }
 ];
 
@@ -1379,6 +1393,10 @@ function loadWebcam(camId) {
   const extTitle = document.getElementById('webcam-external-title');
   const extDesc = document.getElementById('webcam-external-desc');
   const extBtn = document.getElementById('webcam-external-btn');
+  const surfersOverlay = document.getElementById('webcam-surfers-overlay');
+  const surfersIframe = document.getElementById('webcam-surfers-iframe');
+  const surfersToggleBtn = document.getElementById('webcam-surfers-toggle-embed');
+  const surfersToggleText = document.getElementById('webcam-surfers-toggle-text');
   const spotsContainer = document.getElementById('webcam-spots-container');
 
   if (titleEl) titleEl.textContent = cam.name;
@@ -1414,7 +1432,56 @@ function loadWebcam(camId) {
     snapshotRefreshTimer = null;
   }
 
-  if (cam.streamType === 'hls') {
+  // Ocultar iframe de Surfers por defecto al cambiar de cámara
+  if (surfersIframe) {
+    surfersIframe.classList.add('hidden');
+    surfersIframe.src = 'about:blank';
+  }
+  if (surfersToggleText) {
+    surfersToggleText.textContent = 'Incrustar Visor Club';
+  }
+
+  if (cam.streamType === 'surfers') {
+    if (AppState.hlsInstance) {
+      AppState.hlsInstance.destroy();
+      AppState.hlsInstance = null;
+    }
+    if (videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.classList.add('hidden');
+    }
+    if (extOverlay) extOverlay.classList.add('hidden');
+    if (loader) loader.classList.add('hidden');
+    if (imgPlayer) {
+      imgPlayer.classList.remove('hidden');
+      const reloadSnap = () => {
+        imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+      };
+      reloadSnap();
+      snapshotRefreshTimer = setInterval(reloadSnap, 15000);
+    }
+    if (surfersOverlay) {
+      surfersOverlay.classList.remove('hidden');
+      if (surfersToggleBtn && !surfersToggleBtn.dataset.bound) {
+        surfersToggleBtn.dataset.bound = 'true';
+        surfersToggleBtn.addEventListener('click', () => {
+          if (!surfersIframe) return;
+          const isHidden = surfersIframe.classList.contains('hidden');
+          if (isHidden) {
+            surfersIframe.src = 'https://surferscastellon.com/live-webcam/';
+            surfersIframe.classList.remove('hidden');
+            if (surfersToggleText) surfersToggleText.textContent = 'Cerrar Visor Club';
+          } else {
+            surfersIframe.classList.add('hidden');
+            surfersIframe.src = 'about:blank';
+            if (surfersToggleText) surfersToggleText.textContent = 'Incrustar Visor Club';
+          }
+        });
+      }
+    }
+    if (statusBadge) statusBadge.textContent = 'Club Surfers CS';
+  } else if (cam.streamType === 'hls') {
+    if (surfersOverlay) surfersOverlay.classList.add('hidden');
     if (extOverlay) extOverlay.classList.add('hidden');
     if (imgPlayer) imgPlayer.classList.add('hidden');
     if (videoPlayer) videoPlayer.classList.remove('hidden');
@@ -1474,6 +1541,7 @@ function loadWebcam(camId) {
       videoPlayer.pause();
       videoPlayer.classList.add('hidden');
     }
+    if (surfersOverlay) surfersOverlay.classList.add('hidden');
     if (extOverlay) extOverlay.classList.add('hidden');
     if (imgPlayer) {
       imgPlayer.classList.remove('hidden');
@@ -1498,6 +1566,7 @@ function loadWebcam(camId) {
       videoPlayer.pause();
       videoPlayer.classList.add('hidden');
     }
+    if (surfersOverlay) surfersOverlay.classList.add('hidden');
     if (extOverlay) extOverlay.classList.add('hidden');
     if (imgPlayer) {
       imgPlayer.classList.remove('hidden');
@@ -1522,6 +1591,7 @@ function loadWebcam(camId) {
       videoPlayer.classList.add('hidden');
     }
     if (loader) loader.classList.add('hidden');
+    if (surfersOverlay) surfersOverlay.classList.add('hidden');
     if (imgPlayer) {
       imgPlayer.classList.remove('hidden');
       imgPlayer.src = cam.snapshotUrl;
@@ -1630,15 +1700,15 @@ function initWebcams() {
       }
       renderWebcamGrid();
       const onlineBadge = document.getElementById('webcams-online-count');
-      if (onlineBadge) onlineBadge.textContent = `${WEBCAMS_CATALOG.length} Cámaras en Directo`;
+      if (onlineBadge) onlineBadge.textContent = `${WEBCAMS_CATALOG.length} Cámaras de Costa`;
     })
     .catch(() => {
       renderWebcamGrid();
     });
 
-  // Render inicial del grid y carga de la primera cámara
+  // Render inicial del grid y carga de la primera cámara (Planetario por defecto)
   renderWebcamGrid();
-  loadWebcam('peniscola');
+  loadWebcam('planetario');
 }
 
 // ==========================================

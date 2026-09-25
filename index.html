@@ -503,7 +503,7 @@
         <div class="flex items-center gap-2">
           <span class="px-3 py-1.5 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span id="webcams-online-count">8 Cámaras en Directo</span>
+            <span id="webcams-online-count">9 Cámaras de Costa</span>
           </span>
         </div>
       </div>
@@ -517,14 +517,15 @@
             <label for="webcam-selector" class="sr-only">Seleccionar cámara en directo</label>
             <div class="relative">
               <select id="webcam-selector" class="bg-surf-850 border border-surf-700 text-white rounded-xl pl-3 pr-8 py-2 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer">
-                <option value="peniscola">Peñíscola - Playa Norte y Castillo (HD)</option>
-                <option value="burriana">Burriana - Puerto y Playa Arenal (HD)</option>
+                <option value="planetario" selected>Grao de Castellón - Planetario (Surfers Castellón)</option>
+                <option value="gurugu">Grao de Castellón - Playa del Gurugú</option>
                 <option value="voramar">Benicàssim - Playa Voramar (Cámara Axis)</option>
+                <option value="burriana">Burriana - Puerto y Playa Arenal (HD)</option>
+                <option value="peniscola">Peñíscola - Playa Norte y Castillo (HD)</option>
                 <option value="oropesa">Oropesa del Mar - Morro de Gos (HD)</option>
-                <option value="gurugu">Grao de Castellón - Gurugú / Aeroclub</option>
                 <option value="vinaros">Vinaròs - Playa del Fortí (HD)</option>
-                <option value="alcossebre">Alcossebre - Playa Romana (HD)</option>
                 <option value="heliopolis">Benicàssim - Playa Heliópolis</option>
+                <option value="alcossebre">Alcossebre - Playa Romana (HD)</option>
               </select>
               <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm">expand_more</span>
             </div>
@@ -540,14 +541,14 @@
               <span class="material-symbols-outlined text-sm">sync</span>
               <span class="hidden sm:inline">Recargar</span>
             </button>
-            <a id="webcam-official-link" href="https://www.comunitatvalenciana.com" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 text-xs font-bold transition-all">
+            <a id="webcam-official-link" href="https://surferscastellon.com/live-webcam/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 text-xs font-bold transition-all">
               <span>Fuente Oficial</span>
               <span class="material-symbols-outlined text-xs">open_in_new</span>
             </a>
           </div>
         </div>
 
-        <!-- Contenedor del Reproductor Responsive (Video / Imagen / External) -->
+        <!-- Contenedor del Reproductor Responsive (Video / Imagen / External / Surfers) -->
         <div class="relative w-full aspect-video sm:aspect-[21/9] bg-slate-950 rounded-2xl overflow-hidden border border-surf-800 shadow-2xl flex items-center justify-center">
           
           <!-- Reproductor de Video HLS -->
@@ -575,13 +576,43 @@
             </a>
           </div>
 
+          <!-- Overlay / Panel Especial para Surfers Castellón (Planetario) -->
+          <div id="webcam-surfers-overlay" class="hidden absolute inset-0 bg-surf-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10 space-y-3">
+            <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+              <span class="material-symbols-outlined text-2xl">surfing</span>
+            </div>
+            <div>
+              <h4 class="text-base sm:text-lg font-black text-white">Webcam Club Surfers Castellón · Planetario</h4>
+              <p class="text-xs text-slate-300 max-w-lg mt-1">Cámara oficial situada frente a la rompiente del Planetario y las instalaciones del club.</p>
+              <div class="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-lg bg-surf-900 border border-surf-800 text-[11px] text-slate-300">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Usuario verificado: <strong class="text-emerald-400">mr.alcachofino@gmail.com</strong></span>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+              <a id="webcam-surfers-live-btn" href="https://surferscastellon.com/live-webcam/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/20">
+                <span>Acceder en Surfers Castellón</span>
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
+              <button id="webcam-surfers-toggle-embed" type="button" class="px-3.5 py-2 rounded-xl bg-surf-850 hover:bg-surf-800 text-white font-bold text-xs border border-surf-700 transition-colors flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">tv</span>
+                <span id="webcam-surfers-toggle-text">Incrustar Visor Club</span>
+              </button>
+              <a href="https://surferscastellon.com/wp-login.php?action=lostpassword" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-surf-900 hover:bg-surf-800 text-slate-400 hover:text-white font-semibold text-xs border border-surf-800 transition-colors flex items-center gap-1">
+                <span>Restablecer Clave</span>
+                <span class="material-symbols-outlined text-xs">vpn_key</span>
+              </a>
+            </div>
+            <iframe id="webcam-surfers-iframe" class="hidden w-full h-full absolute inset-0 rounded-2xl border-0 bg-surf-950" allow="autoplay; fullscreen" loading="lazy"></iframe>
+          </div>
+
         </div>
 
         <!-- Info y Spots Asociados -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-surf-950/60 border border-surf-800/80">
           <div>
-            <h4 id="webcam-current-title" class="text-sm font-black text-white">Peñíscola - Playa Norte y Castillo</h4>
-            <p id="webcam-current-desc" class="text-xs text-slate-400 mt-0.5">Rompiente de Playa Norte con fondo de arena y vistas al Castillo del Papa Luna.</p>
+            <h4 id="webcam-current-title" class="text-sm font-black text-white">Grao de Castellón - Planetario / Surfers Castellón</h4>
+            <p id="webcam-current-desc" class="text-xs text-slate-400 mt-0.5">Cámara principal de la rompiente del Planetario en el Grao de Castellón, ubicada frente a las instalaciones del club Surfers Castellón.</p>
           </div>
           <div id="webcam-spots-container" class="flex flex-wrap items-center gap-1.5">
             <!-- Spots asociados se insertan dinámicamente -->
