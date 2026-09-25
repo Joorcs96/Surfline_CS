@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T06:40:47.739480+00:00",
+  "updatedAt": "2026-09-25T08:21:02.377716+00:00",
   "webcams": [
     {
       "id": "planetario",
@@ -15,7 +15,7 @@
       "spots": [
         "Planetario"
       ],
-      "lastChecked": "2026-09-25T06:40:45.786728+00:00"
+      "lastChecked": "2026-09-25T08:21:00.318042+00:00"
     },
     {
       "id": "gurugu",
@@ -31,7 +31,7 @@
       "spots": [
         "Gurugu"
       ],
-      "lastChecked": "2026-09-25T06:40:45.930961+00:00"
+      "lastChecked": "2026-09-25T08:21:00.442283+00:00"
     },
     {
       "id": "voramar",
@@ -46,7 +46,7 @@
       "spots": [
         "Voramar"
       ],
-      "lastChecked": "2026-09-25T06:40:46.555233+00:00"
+      "lastChecked": "2026-09-25T08:21:01.140134+00:00"
     },
     {
       "id": "burriana",
@@ -61,7 +61,7 @@
       "spots": [
         "Burriana"
       ],
-      "lastChecked": "2026-09-25T06:40:46.776214+00:00"
+      "lastChecked": "2026-09-25T08:21:01.345347+00:00"
     },
     {
       "id": "peniscola",
@@ -77,7 +77,7 @@
       "spots": [
         "Peniscola N"
       ],
-      "lastChecked": "2026-09-25T06:40:47.014666+00:00"
+      "lastChecked": "2026-09-25T08:21:01.642120+00:00"
     },
     {
       "id": "oropesa",
@@ -92,7 +92,7 @@
       "spots": [
         "MorroGos"
       ],
-      "lastChecked": "2026-09-25T06:40:47.234504+00:00"
+      "lastChecked": "2026-09-25T08:21:01.757866+00:00"
     },
     {
       "id": "vinaros",
@@ -107,7 +107,7 @@
       "spots": [
         "Vinaros"
       ],
-      "lastChecked": "2026-09-25T06:40:47.431034+00:00"
+      "lastChecked": "2026-09-25T08:21:01.960840+00:00"
     },
     {
       "id": "heliopolis",
@@ -122,7 +122,7 @@
       "spots": [
         "Heliopolis"
       ],
-      "lastChecked": "2026-09-25T06:40:47.635974+00:00"
+      "lastChecked": "2026-09-25T08:21:02.161135+00:00"
     },
     {
       "id": "alcossebre",
@@ -135,7 +135,7 @@
       "status": "online",
       "description": "Playa de fina arena protegida por salientes rocosos con oleaje suave.",
       "spots": [],
-      "lastChecked": "2026-09-25T06:40:47.739480+00:00"
+      "lastChecked": "2026-09-25T08:21:02.377716+00:00"
     }
   ],
   "totalActive": 9

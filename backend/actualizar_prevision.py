@@ -316,30 +316,30 @@ def formatear_alerta_whatsapp(
     max_altura = float(ranking[0]["altura_m"]) if ranking else 0.0
 
     lineas = [
-        f"🌊 *SURFLINE CASTELLON* | Previsión {fecha_filtro}",
+        f"*SURFLINE CASTELLON* | Previsión {fecha_filtro}",
         "------------------------------------",
     ]
 
     if max_calidad >= 3 or max_altura >= 0.6:
-        lineas.append("🏄 *ALERTA DE SURF: ¡Hay olas hoy en la costa!*")
+        lineas.append("*ALERTA DE SURF: Buenas condiciones hoy en la costa.*")
     elif max_calidad >= 2 or max_altura >= 0.35:
-        lineas.append("🏄 Condiciones justas / orillero practicable.")
+        lineas.append("Condiciones justas / orillero practicable.")
     else:
-        lineas.append("🏄 Condiciones suaves / mar plato.")
+        lineas.append("Condiciones suaves / mar plato.")
 
     lineas.append("")
-    lineas.append("🏆 *Mejores condiciones por spot:*")
+    lineas.append("*Mejores condiciones por spot:*")
 
     # Mostrar hasta los 5 mejores spots
     for r in ranking[:5]:
-        estrellas = "★" * int(r["calidad_0_5"]) + "☆" * (5 - int(r["calidad_0_5"]))
+        score_txt = f"{r['calidad_0_5']}/5"
         lineas.append(
-            f"• *{r['spot']}* ({r['hora']}): {r['altura_m']}m | {r['periodo_s']}s | "
-            f"Viento {r['viento_kmh']} km/h | {estrellas} ({r['calidad_0_5']}/5)"
+            f"- *{r['spot']}* ({r['hora']}): {r['altura_m']}m | {r['periodo_s']}s | "
+            f"Viento {r['viento_kmh']} km/h | Calidad {score_txt}"
         )
 
     lineas.append("")
-    lineas.append("💡 Valora tu sesion hoy para entrenar la IA: https://surfline-cs.netlify.app/votar")
+    lineas.append("Valora tu sesion hoy para entrenar el modelo: https://surfline-cs.netlify.app/votar")
 
     return "\n".join(lineas)
 

@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Surfline Castellón | Previsión de Olas y Webcams en Directo</title>
-  <meta name="description" content="Previsión de surf local para los spots de Castellón (Planetario, Gurugú, Pirámides, Voramar, Burriana, Nules, Almenara, Peñíscola, Vinaròs) con física de rompientes mediterránea y webcams en directo.">
+  <title>Surfline Castellón | Previsión de Olas y Webcams por Spot</title>
+  <meta name="description" content="Plataforma profesional de previsión de surf para los 13 spots de la costa de Castellón. Física de rompientes mediterránea, telemetría marina y webcams en directo integradas en cada spot.">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#090d16">
+  <meta name="theme-color" content="#070b12">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Surfline CS">
 
   <!-- Favicon inline SVG -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23090d16'/><path d='M15 70 Q 35 40 60 50 Q 80 40 90 70 Z' fill='%230ea5e9'/><circle cx='75' cy='25' r='8' fill='%23f59e0b'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070b12'/><path d='M15 70 Q 35 40 60 50 Q 80 40 90 70 Z' fill='%230ea5e9'/><circle cx='75' cy='25' r='8' fill='%2306b6d4'/></svg>">
 
   <!-- Google Material Symbols Outlined -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -48,10 +48,10 @@
     }
   </script>
 
-  <!-- HLS.js CDN para reproducción de streams m3u8 -->
+  <!-- HLS.js CDN para reproducción de streams de vídeo costeros -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-  <!-- Leaflet CSS y JS para Mapa Interactivo Oscuro -->
+  <!-- Leaflet CSS y JS para Mapa Náutico Oscuro -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -79,7 +79,6 @@
     .material-symbols-fill {
       font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
     }
-    /* Estilos para scrollbars elegantes */
     ::-webkit-scrollbar {
       height: 6px;
       width: 6px;
@@ -98,11 +97,11 @@
 </head>
 <body class="bg-surf-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500 selection:text-white">
 
-  <!-- Barra de Navegación Principal -->
+  <!-- Barra de Navegación Principal Estilo Surfline -->
   <header class="sticky top-0 z-50 bg-surf-900/95 backdrop-blur-md border-b border-surf-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
       
-      <!-- Logo y Marca -->
+      <!-- Logotipo e Identidad Técnica -->
       <a href="index.html" class="flex items-center gap-2.5 group shrink-0">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-cyan-500 flex items-center justify-center text-slate-950 shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
           <span class="material-symbols-outlined text-2xl font-black">tsunami</span>
@@ -114,47 +113,47 @@
           </div>
           <span class="text-[10px] text-slate-400 font-medium flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Costa Azahar Local Forecast
+            Costa Azahar · 13 Rompientes Locales
           </span>
         </div>
       </a>
 
-      <!-- Accesos Rápidos de Navegación -->
+      <!-- Navegación Rápida -->
       <nav class="hidden md:flex items-center gap-1 bg-surf-850/80 border border-surf-700/60 rounded-xl p-1 text-xs font-semibold">
+        <a href="#spot-spotlight" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-surf-800 transition-colors flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-sm">videocam</span>
+          Spot Activo
+        </a>
         <a href="#spots-section" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-surf-800 transition-colors flex items-center gap-1.5">
           <span class="material-symbols-outlined text-sm">dashboard</span>
-          Spots
+          Todos los Spots
         </a>
         <a href="#tabla-horaria" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-surf-800 transition-colors flex items-center gap-1.5">
           <span class="material-symbols-outlined text-sm">calendar_month</span>
           Tabla Horaria
         </a>
-        <a href="#seccion-webcams" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-surf-800 transition-colors flex items-center gap-1.5">
-          <span class="material-symbols-outlined text-sm">videocam</span>
-          Webcams
+        <a href="#seccion-mapa-tendencias" class="px-3 py-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-surf-800 transition-colors flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-sm">map</span>
+          Mapa & Swell
         </a>
       </nav>
 
-      <!-- Botones de Acción -->
+      <!-- Botones de Acción de Cabecera -->
       <div class="flex items-center gap-2">
-        <!-- Botón Instalar PWA (oculto hasta evento) -->
         <button id="pwa-install-btn" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-xs font-bold transition-all">
           <span class="material-symbols-outlined text-sm">install_mobile</span>
           <span class="hidden sm:inline">Instalar App</span>
         </button>
 
-        <!-- Botón Refrescar Datos -->
         <button id="refresh-data-btn" title="Actualizar datos Open-Meteo" class="p-2 rounded-lg bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 transition-colors">
           <span class="material-symbols-outlined text-base" id="refresh-icon">refresh</span>
         </button>
 
-        <!-- Botón Sesión de Usuario / Perfil -->
         <button id="user-session-btn" title="Sesión de Surfista" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 text-xs font-medium transition-colors">
           <span class="material-symbols-outlined text-base text-sky-400" id="user-session-icon">account_circle</span>
           <span id="user-session-label" class="hidden sm:inline">Entrar</span>
         </button>
 
-        <!-- Botón Reportar Feedback (/votar) -->
         <a href="votar.html" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-400 hover:to-cyan-400 text-slate-950 font-black text-xs shadow-md shadow-sky-500/20 transition-all">
           <span class="material-symbols-outlined text-sm">rate_review</span>
           <span>Reportar</span>
@@ -166,40 +165,35 @@
   <!-- Banner de Estado de Red / Offline -->
   <div id="offline-banner" class="hidden bg-amber-500/20 border-b border-amber-500/40 text-amber-200 text-xs px-4 py-1.5 text-center font-medium">
     <span class="material-symbols-outlined text-sm mr-1">wifi_off</span>
-    Modo sin conexión. Mostrando datos cacheados de la costa de Castellón.
+    Modo sin conexión. Mostrando telemetría y datos cacheados del litoral de Castellón.
   </div>
 
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-10">
 
-    <!-- HERO: Resumen General del Mediterráneo en Castellón -->
+    <!-- 1. RESUMEN REGIONAL: BOYA DE CASTELLÓN -->
     <section class="bg-gradient-to-br from-surf-900 via-surf-850 to-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
-      <!-- Glow de fondo decorativo -->
       <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        
-        <!-- Info Principal -->
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-sky-500/15 text-sky-400 border border-sky-500/30">
               <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
               Boya Castellón (39.98° N, 0.05° E)
             </span>
-            <span id="hero-timestamp" class="text-xs text-slate-400 font-medium">Actualizando...</span>
+            <span id="hero-timestamp" class="text-xs text-slate-400 font-medium">Actualizando telemetría...</span>
           </div>
 
           <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight">
             Parte de Olas & Viento en Castellón
           </h1>
           <p class="text-sm text-slate-300 max-w-2xl leading-relaxed">
-            Algoritmo de cálculo costero con azimut, sombra de espigones y refracción sobre 9 rompientes locales.
+            Previsión física calculada en tiempo real según azimut de costa, sombra de espigones y refracción sobre 13 rompientes.
           </p>
         </div>
 
-        <!-- Tarjeta de Condición General de Alta Mar -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0 bg-surf-950/60 p-4 rounded-2xl border border-surf-800/80 backdrop-blur-sm">
-          
-          <!-- Swell Altura -->
+        <!-- Telemetría Marina de Alta Mar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 shrink-0 bg-surf-950/70 p-4 rounded-2xl border border-surf-800/80 backdrop-blur-sm">
           <div class="flex flex-col">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
               <span class="material-symbols-outlined text-xs text-sky-400">waves</span> Swell Mar
@@ -208,7 +202,6 @@
             <span class="text-[10px] text-slate-400">Mar abierto</span>
           </div>
 
-          <!-- Período -->
           <div class="flex flex-col">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
               <span class="material-symbols-outlined text-xs text-cyan-400">timer</span> Período
@@ -217,7 +210,6 @@
             <span class="text-[10px] text-slate-400">Segundos (P)</span>
           </div>
 
-          <!-- Swell Dirección -->
           <div class="flex flex-col">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
               <span class="material-symbols-outlined text-xs text-emerald-400">explore</span> Dirección
@@ -229,7 +221,6 @@
             <span id="hero-swell-deg" class="text-[10px] text-slate-400">--°</span>
           </div>
 
-          <!-- Viento General -->
           <div class="flex flex-col">
             <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
               <span class="material-symbols-outlined text-xs text-amber-400">air</span> Viento
@@ -240,106 +231,300 @@
             </div>
             <span id="hero-wind-desc" class="text-[10px] text-slate-400">Ráfagas --</span>
           </div>
-
         </div>
-
       </div>
 
-      <!-- Destacado del Día -->
+      <!-- Barra de Estado Inferior -->
       <div class="mt-5 pt-4 border-t border-surf-800/80 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-amber-400 material-symbols-fill text-base">stars</span>
+          <span class="material-symbols-outlined text-sky-400 material-symbols-fill text-base">recommend</span>
           <span class="text-slate-300 font-medium">Spot recomendado ahora:</span>
           <span id="hero-best-spot" class="font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">Calculando...</span>
         </div>
-        <div class="flex flex-wrap items-center gap-3">
-          <a href="#seccion-webcams" class="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 font-bold transition-all shadow-sm">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="material-symbols-outlined text-sm">videocam</span>
-            <span>Ver Webcams en Directo</span>
-          </a>
-          <div class="hidden sm:flex items-center gap-3 text-slate-400">
-            <span class="flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Offshore (Terral)
-            </span>
-            <span class="flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-amber-500"></span> Cross (Cruzado)
-            </span>
-            <span class="flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span> Onshore (Chopi)
-            </span>
-          </div>
+        <div class="flex items-center gap-4 text-slate-400">
+          <span class="flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Offshore (Terral)
+          </span>
+          <span class="flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span> Cross (Cruzado)
+          </span>
+          <span class="flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span> Onshore (Chopi)
+          </span>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN SPOTS DE CASTELLÓN -->
+    <!-- 2. SPOT SPOTLIGHT: CENTRO DE MANDO CON WEBCAM INTEGRADA EN EL SPOT SELECCIONADO -->
+    <section id="spot-spotlight" class="bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6">
+      
+      <!-- Cabecera del Spot Spotlight y Selector Rápido de Spot -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surf-800 pb-5">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-[11px] font-black uppercase tracking-wider text-emerald-400">Ficha de Rompiente en Directo</span>
+          </div>
+          <div class="flex flex-wrap items-baseline gap-2.5 mt-1">
+            <h2 id="spotlight-spot-name" class="text-2xl sm:text-3xl font-black text-white">Grao - Planetario</h2>
+            <span id="spotlight-spot-zone" class="text-xs font-bold text-slate-400 bg-surf-850 px-2.5 py-0.5 rounded-lg border border-surf-700">Grao de Castellón</span>
+          </div>
+        </div>
+
+        <!-- Selector de Spot Activo -->
+        <div class="flex items-center gap-3">
+          <label for="spotlight-spot-select" class="text-xs font-bold text-slate-400 hidden sm:inline">Cambiar spot:</label>
+          <div class="relative min-w-[220px]">
+            <select id="spotlight-spot-select" class="w-full bg-surf-850 border border-surf-700 text-white rounded-xl px-3.5 py-2 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer">
+              <!-- Se rellena dinámicamente con los 13 spots -->
+            </select>
+            <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm">expand_more</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuadrícula Principal: Cámara en Directo (7 cols) + Reporte Técnico Físico (5 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- COLUMNA IZQUIERDA: REPRODUCTOR INTEGRADO DE LA WEBCAM DEL SPOT (7 columnas) -->
+        <div class="lg:col-span-7 flex flex-col space-y-3">
+          
+          <div id="spotlight-player-container" class="relative w-full aspect-video bg-black rounded-2xl overflow-hidden border border-surf-800 shadow-2xl group flex items-center justify-center">
+            
+            <!-- Vídeo HLS para transmisiones en streaming directo -->
+            <video id="spotlight-video" playsinline muted controls class="w-full h-full object-cover hidden"></video>
+
+            <!-- Imagen para snapshots auto-refrescables y cámaras mjpeg -->
+            <img id="spotlight-img" class="w-full h-full object-cover hidden" alt="Webcam de la rompiente" />
+
+            <!-- Spinner de sincronización -->
+            <div id="spotlight-loader" class="hidden absolute inset-0 bg-surf-950/80 backdrop-blur-sm flex items-center justify-center z-10">
+              <div class="flex flex-col items-center gap-2 text-sky-400">
+                <span class="material-symbols-outlined text-3xl animate-spin">refresh</span>
+                <span class="text-xs font-bold text-slate-200">Sincronizando señal de costa...</span>
+              </div>
+            </div>
+
+            <!-- Overlay de información superior izquierda: Indicador EN DIRECTO -->
+            <div class="absolute top-3 left-3 z-20 flex items-center gap-2">
+              <span id="spotlight-live-pill" class="px-2.5 py-1 rounded-lg bg-surf-950/90 backdrop-blur-md border border-surf-700 text-white text-[10px] font-black tracking-wider uppercase flex items-center gap-1.5 shadow-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="spotlight-live-label">EN DIRECTO</span>
+              </span>
+              <span id="spotlight-cam-title-badge" class="hidden sm:inline-block px-2.5 py-1 rounded-lg bg-surf-950/90 backdrop-blur-md border border-surf-700 text-slate-300 text-[10px] font-bold">
+                Cámara de rompiente
+              </span>
+            </div>
+
+            <!-- Controles superiores derecha: Recargar, Pantalla Completa y Enlace Oficial -->
+            <div class="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+              <button id="spotlight-refresh-cam-btn" title="Refrescar imagen" class="p-2 rounded-xl bg-surf-950/85 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 backdrop-blur-md transition-colors flex items-center">
+                <span class="material-symbols-outlined text-sm">sync</span>
+              </button>
+              <button id="spotlight-fullscreen-cam-btn" title="Pantalla completa" class="p-2 rounded-xl bg-surf-950/85 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 backdrop-blur-md transition-colors flex items-center">
+                <span class="material-symbols-outlined text-sm">fullscreen</span>
+              </button>
+              <a id="spotlight-external-cam-btn" href="#" target="_blank" rel="noopener noreferrer" title="Abrir fuente oficial externa" class="p-2 rounded-xl bg-surf-950/85 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 backdrop-blur-md transition-colors flex items-center">
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+              </a>
+            </div>
+
+            <!-- Overlay Surfers Castellón / Grao (para Planetario) -->
+            <div id="spotlight-surfers-overlay" class="hidden absolute inset-0 bg-surf-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10 space-y-3">
+              <div class="w-12 h-12 rounded-full bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400">
+                <span class="material-symbols-outlined text-2xl">surfing</span>
+              </div>
+              <div>
+                <h4 class="text-base font-black text-white">Webcam Club Surfers Castellón · Planetario</h4>
+                <p class="text-xs text-slate-300 max-w-md mt-1">Cámara situada frente a la rompiente del Planetario y las instalaciones del club.</p>
+              </div>
+              <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+                <a href="https://www.surferscastellon.com/live-webcam/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-black text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-sky-500/20">
+                  <span>Acceder en Surfers Castellón</span>
+                  <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </a>
+                <button id="spotlight-surfers-toggle-btn" type="button" class="px-3.5 py-2 rounded-xl bg-surf-850 hover:bg-surf-800 text-white font-bold text-xs border border-surf-700 transition-colors flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-sm">tv</span>
+                  <span id="spotlight-surfers-toggle-text">Incrustar Visor Club</span>
+                </button>
+              </div>
+              <iframe id="spotlight-surfers-iframe" class="hidden w-full h-full absolute inset-0 rounded-2xl border-0 bg-surf-950" allow="autoplay; fullscreen" loading="lazy"></iframe>
+            </div>
+
+          </div>
+
+          <!-- Pie del Reproductor: Estado o Indicación de Cámara de Referencia -->
+          <div id="spotlight-cam-footnote" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-xl bg-surf-950/60 border border-surf-800/80 text-xs text-slate-400">
+            <span id="spotlight-cam-desc" class="font-medium text-slate-300">Cámara oficial en directo del litoral de Castellón.</span>
+            <span id="spotlight-cam-type-badge" class="shrink-0 text-[11px] font-bold text-emerald-400 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              Cámara directa del spot
+            </span>
+          </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: REPORTE TÉCNICO SURFLINE DEL SPOT ACTIVO (5 columnas) -->
+        <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+          
+          <!-- Altura Rompiente y Calidad Surfline -->
+          <div class="p-4 rounded-2xl bg-surf-950/80 border border-surf-800 space-y-3">
+            
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Altura en Rompiente</span>
+                <div class="flex items-baseline gap-1.5 mt-0.5">
+                  <span id="spotlight-height-val" class="text-3xl sm:text-4xl font-black text-white">--</span>
+                  <span class="text-lg font-bold text-slate-400">m</span>
+                  <span id="spotlight-height-range" class="text-xs text-slate-500 font-semibold ml-1">(-- - -- m)</span>
+                </div>
+              </div>
+
+              <!-- Escala Corporal Surfline -->
+              <div class="flex flex-col items-end">
+                <span id="spotlight-height-body" class="px-2.5 py-1 rounded-lg bg-sky-500/15 border border-sky-500/30 text-sky-300 text-xs font-black uppercase tracking-wider">
+                  Cintura a Pecho
+                </span>
+                <span class="text-[10px] text-slate-400 mt-1">Escala corporal</span>
+              </div>
+            </div>
+
+            <!-- Calidad Surfline y Estrellas -->
+            <div class="pt-3 border-t border-surf-800/80 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2">
+                <span id="spotlight-spot-rating-pill" class="text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-lg border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">
+                  Regular a Bueno
+                </span>
+              </div>
+              <div id="spotlight-spot-stars" class="flex items-center gap-0.5">
+                <!-- Estrellas generadas con Google Material Symbols (sin emojis) -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Métricas de Viento y Swell -->
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            
+            <!-- Viento Local -->
+            <div class="p-3.5 rounded-xl bg-surf-950/60 border border-surf-800 space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Viento Local</span>
+              <div class="flex items-center gap-2">
+                <span id="spotlight-wind-arrow" class="material-symbols-outlined text-amber-400 text-xl transition-transform duration-500 inline-block">navigation</span>
+                <div>
+                  <div id="spotlight-wind-speed" class="text-sm font-black text-white">-- km/h</div>
+                  <div id="spotlight-wind-dir" class="text-[10px] text-slate-400">--°</div>
+                </div>
+              </div>
+              <div class="pt-1">
+                <span id="spotlight-wind-badge" class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30">
+                  Terral (Offshore)
+                </span>
+                <span id="spotlight-wind-range" class="text-[10px] text-slate-500 block mt-1">Terral: 275°-315°</span>
+              </div>
+            </div>
+
+            <!-- Swell Dominante -->
+            <div class="p-3.5 rounded-xl bg-surf-950/60 border border-surf-800 space-y-1.5">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Swell Dominante</span>
+              <div class="flex items-center gap-2">
+                <span id="spotlight-swell-arrow" class="material-symbols-outlined text-sky-400 text-xl transition-transform duration-500 inline-block">navigation</span>
+                <div>
+                  <div id="spotlight-swell-h" class="text-sm font-black text-white">-- m</div>
+                  <div id="spotlight-swell-dir" class="text-[10px] text-slate-400">--° E</div>
+                </div>
+              </div>
+              <div class="pt-1">
+                <span id="spotlight-swell-p" class="text-xs font-bold text-cyan-300 block">-- s periodo</span>
+                <span class="text-[10px] text-slate-500 block mt-0.5">Mar de fondo</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Ficha Geográfica y Física del Spot -->
+          <div class="p-3.5 rounded-xl bg-surf-950/60 border border-surf-800 space-y-2 text-xs">
+            <div class="grid grid-cols-3 gap-2 text-center border-b border-surf-800/80 pb-2">
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold">Orientación</span>
+                <span id="spotlight-spot-orient" class="font-bold text-white mt-0.5 block">26° NNE</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold">Fondo</span>
+                <span id="spotlight-spot-bottom" class="font-bold text-white mt-0.5 block">Arena</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase font-bold">Mejor Marea</span>
+                <span id="spotlight-spot-best-tide" class="font-bold text-white mt-0.5 block">Media / Subiendo</span>
+              </div>
+            </div>
+            <p id="spotlight-spot-desc" class="text-[11px] text-slate-300 leading-relaxed pt-1">
+              Fondo de arena frente al planetario del Grao. Funciona con oleaje de Levante y Gregal.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 3. COMPARATIVA REGIONAL: TODOS LOS 13 SPOTS CON WEBCAM INTEGRADA EN CADA TARJETA -->
     <section id="spots-section" class="space-y-4">
       
-      <!-- Encabezado y Filtros de Zona -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <span class="material-symbols-outlined text-sky-400">location_on</span>
-            Spots de Surf de Castellón
+            <span class="material-symbols-outlined text-sky-400">dashboard</span>
+            Todos los Spots de Castellón
           </h2>
-          <p class="text-xs text-slate-400">Selecciona o haz clic en un spot para ver el desglose horario completo</p>
+          <p class="text-xs text-slate-400">13 rompientes con física local y previsualización de webcam en directo</p>
         </div>
 
-        <!-- Filtro por Zonas -->
+        <!-- Filtros por Zona -->
         <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0" id="filter-container">
           <button data-filter="all" class="spot-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-500 text-slate-950 shadow-md shadow-sky-500/20 transition-colors">
-            Todos (9)
+            Todos (13)
           </button>
           <button data-filter="grao" class="spot-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surf-900 hover:bg-surf-800 text-slate-300 border border-surf-800 transition-colors">
-            Grao / Benicàssim
+            Grao / Benicàssim (6)
           </button>
           <button data-filter="sur" class="spot-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surf-900 hover:bg-surf-800 text-slate-300 border border-surf-800 transition-colors">
-            Costera Sur
+            Costera Sur (3)
           </button>
           <button data-filter="norte" class="spot-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surf-900 hover:bg-surf-800 text-slate-300 border border-surf-800 transition-colors">
-            Costera Norte
+            Costera Norte (4)
           </button>
         </div>
       </div>
 
       <!-- Cuadrícula de Tarjetas de Spots (Renderizado dinámico en app.js) -->
       <div id="spots-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- Plantillas generadas por app.js -->
         <div class="col-span-full py-12 text-center text-slate-500">
           <span class="material-symbols-outlined text-4xl animate-spin text-sky-400 mb-2">progress_activity</span>
-          <p class="text-sm">Cargando condiciones de los 9 spots de Castellón...</p>
+          <p class="text-sm">Cargando condiciones y webcams de los 13 spots...</p>
         </div>
       </div>
     </section>
 
-    <!-- TABLA HORARIA DE CONDICIONES DETALLADA -->
+    <!-- 4. TABLA HORARIA DE CONDICIONES DETALLADA -->
     <section id="tabla-horaria" class="bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
       
-      <!-- Controles de la tabla: Selector de Spot y Selector de Día -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surf-800 pb-5">
         <div>
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
             <span class="material-symbols-outlined text-sky-400">calendar_clock</span>
             Tabla Horaria de Condiciones
           </h2>
-          <p class="text-xs text-slate-400">Previsión hora a hora calculada por la física local de cada playa</p>
+          <p class="text-xs text-slate-400">Desglose hora a hora calculado mediante el modelo de física costera</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3">
-          <!-- Selector de Spot -->
+          <!-- Selector de Spot para la tabla -->
           <div class="relative min-w-[200px]">
             <label for="spot-selector-hourly" class="sr-only">Seleccionar Spot</label>
             <select id="spot-selector-hourly" class="w-full bg-surf-850 border border-surf-700 text-white rounded-xl px-4 py-2.5 pr-8 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500">
-              <option value="Planetario">Grao - Planetario</option>
-              <option value="Gurugu">Grao - Gurugú</option>
-              <option value="Piramides">Grao - Pirámides</option>
-              <option value="Voramar">Benicàssim - Voramar</option>
-              <option value="Burriana">Burriana - Arenal / Escollera</option>
-              <option value="Nules">Nules - Espigones</option>
-              <option value="Almenara">Almenara - Casablanca</option>
-              <option value="Peniscola N">Peñíscola - Playa Norte</option>
-              <option value="Vinaros">Vinaròs - El Fortí</option>
+              <!-- Opciones dinámicas -->
             </select>
             <span class="material-symbols-outlined absolute right-2.5 top-2.5 text-slate-400 pointer-events-none text-base">expand_more</span>
           </div>
@@ -362,7 +547,7 @@
         </div>
       </div>
 
-      <!-- Contenedor Responsive de la Tabla -->
+      <!-- Tabla Responsive -->
       <div class="overflow-x-auto rounded-2xl border border-surf-800 bg-surf-950/60">
         <table class="w-full text-left border-collapse text-xs sm:text-sm">
           <thead>
@@ -370,15 +555,16 @@
               <th class="py-3 px-4">Hora</th>
               <th class="py-3 px-4">Calidad</th>
               <th class="py-3 px-4">Ola Spot (m)</th>
+              <th class="py-3 px-4">Escala Corporal</th>
               <th class="py-3 px-4">Período (s)</th>
               <th class="py-3 px-4">Swell Alta Mar</th>
-              <th class="py-3 px-4">Viento</th>
-              <th class="py-3 px-4">Condición</th>
+              <th class="py-3 px-4">Viento Local</th>
+              <th class="py-3 px-4">Estado</th>
             </tr>
           </thead>
           <tbody id="hourly-table-body" class="divide-y divide-surf-800/60 font-medium">
             <tr>
-              <td colspan="7" class="py-8 text-center text-slate-500">
+              <td colspan="8" class="py-8 text-center text-slate-500">
                 Seleccionando datos horarios...
               </td>
             </tr>
@@ -386,29 +572,28 @@
         </table>
       </div>
 
-      <!-- Leyenda de Calidad Surfline -->
+      <!-- Leyenda de Calidad Surfline (Sin Emojis) -->
       <div class="p-4 rounded-xl bg-surf-850/60 border border-surf-800 text-xs flex flex-wrap items-center justify-between gap-3 text-slate-400">
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-3">
           <span class="font-bold text-white uppercase tracking-wider text-[11px]">Escala Surfline:</span>
-          <span class="inline-flex items-center gap-1 text-slate-400"><span class="w-2.5 h-2.5 rounded bg-slate-600"></span> 0★ Plato</span>
-          <span class="inline-flex items-center gap-1 text-sky-400"><span class="w-2.5 h-2.5 rounded bg-sky-600"></span> 1-2★ Pobre</span>
-          <span class="inline-flex items-center gap-1 text-teal-400"><span class="w-2.5 h-2.5 rounded bg-teal-500"></span> 3★ Aceptable</span>
-          <span class="inline-flex items-center gap-1 text-emerald-400"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span> 4★ Muy Bueno</span>
-          <span class="inline-flex items-center gap-1 text-violet-400"><span class="w-2.5 h-2.5 rounded bg-violet-500"></span> 5★ Épico</span>
+          <span class="inline-flex items-center gap-1.5 text-slate-400"><span class="w-2.5 h-2.5 rounded bg-slate-600"></span> 0 Estrellas · Plato</span>
+          <span class="inline-flex items-center gap-1.5 text-rose-400"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> 1 Estrella · Muy Pobre</span>
+          <span class="inline-flex items-center gap-1.5 text-orange-400"><span class="w-2.5 h-2.5 rounded bg-orange-500"></span> 2 Estrellas · Pobre</span>
+          <span class="inline-flex items-center gap-1.5 text-amber-400"><span class="w-2.5 h-2.5 rounded bg-amber-500"></span> 3 Estrellas · Regular</span>
+          <span class="inline-flex items-center gap-1.5 text-emerald-400"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span> 4 Estrellas · Muy Bueno</span>
+          <span class="inline-flex items-center gap-1.5 text-sky-400"><span class="w-2.5 h-2.5 rounded bg-sky-500"></span> 5 Estrellas · Épico</span>
         </div>
         <p class="text-[11px] text-slate-500 italic">
-          Cálculo dinámico basado en altura efectiva, período cuadrático, azimut del spot y viento offshore.
+          Cálculo dinámico basado en altura efectiva, período cuadrático, azimut y viento offshore.
         </p>
       </div>
 
     </section>
 
-    <!-- ========================================== -->
-    <!-- SECCIÓN: MAPA INTERACTIVO Y TENDENCIAS CHART.JS -->
-    <!-- ========================================== -->
+    <!-- 5. MAPA INTERACTIVO NÁUTICO Y TENDENCIAS CHART.JS -->
     <section id="seccion-mapa-tendencias" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
-      <!-- 1. MAPA OSCURO LEAFLET (7 columnas) -->
+      <!-- Mapa Oscuro Leaflet (7 columnas) -->
       <div class="lg:col-span-7 bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between space-y-4">
         <div class="flex items-center justify-between border-b border-surf-800 pb-3">
           <div>
@@ -425,28 +610,26 @@
           </button>
         </div>
 
-        <!-- Contenedor del mapa -->
         <div class="relative w-full rounded-2xl overflow-hidden border border-surf-800/80 bg-surf-950 shadow-inner">
           <div id="map"></div>
           <div class="absolute bottom-3 left-3 z-[400] bg-surf-950/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-surf-800 text-[11px] text-slate-300 font-bold flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>Haz clic en cualquier spot para seleccionarlo</span>
+            <span>Haz clic en cualquier spot para ver su cámara y desglose</span>
           </div>
         </div>
       </div>
 
-      <!-- 2. TENDENCIAS DE OLEAJE Y PERIODO (5 columnas) -->
+      <!-- Tendencias de Oleaje y Período (5 columnas) -->
       <div class="lg:col-span-5 bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-6 shadow-xl flex flex-col justify-between space-y-4">
         <div class="border-b border-surf-800 pb-3">
           <h3 class="text-lg font-black text-white flex items-center gap-2">
             <span class="material-symbols-outlined text-emerald-400">monitoring</span>
             <span>Tendencia del Swell (48h)</span>
           </h3>
-          <p class="text-xs text-slate-400 mt-0.5">Evolución de altura rompiente y periodo en <span id="chart-spot-name" class="text-sky-400 font-bold">Gurugú</span></p>
+          <p class="text-xs text-slate-400 mt-0.5">Evolución de altura rompiente y período en <span id="chart-spot-name" class="text-sky-400 font-bold">Gurugú</span></p>
         </div>
 
         <div class="space-y-4">
-          <!-- Gráfica 1: Altura de ola -->
           <div>
             <div class="flex items-center justify-between text-xs mb-1">
               <span class="font-bold text-slate-300">Altura de Ola Efectiva (m)</span>
@@ -457,10 +640,9 @@
             </div>
           </div>
 
-          <!-- Gráfica 2: Periodo de ola -->
           <div>
             <div class="flex items-center justify-between text-xs mb-1">
-              <span class="font-bold text-slate-300">Periodo del Swell (s)</span>
+              <span class="font-bold text-slate-300">Período del Swell (s)</span>
               <span class="text-emerald-400 font-mono font-bold text-[11px]">Línea Continua</span>
             </div>
             <div class="h-28 w-full bg-surf-950/70 p-2 rounded-xl border border-surf-800/80">
@@ -469,7 +651,7 @@
           </div>
         </div>
 
-        <!-- Terminal de Telemetría IA -->
+        <!-- Terminal de Telemetría Marina -->
         <div class="pt-2 border-t border-surf-800/60">
           <div class="flex items-center justify-between mb-1.5">
             <span class="text-[11px] font-mono font-bold text-slate-400 flex items-center gap-1.5">
@@ -479,7 +661,7 @@
             <span class="text-[10px] font-mono text-emerald-400">Motor Activo</span>
           </div>
           <div id="aiTerminal" class="h-24 overflow-y-auto font-mono text-[10px] p-2.5 rounded-xl bg-black/80 border border-surf-800/80 text-slate-300 space-y-1">
-            <div class="text-slate-500">[INIT] Inicializando motor de física costera para el Mediterráneo...</div>
+            <div class="text-slate-500">[INIT] Inicializando motor de física costera para el litoral de Castellón...</div>
           </div>
         </div>
 
@@ -487,167 +669,16 @@
 
     </section>
 
-    <!-- SECCIÓN DE WEBCAMS EN DIRECTO -->
-    <section id="seccion-webcams" class="bg-surf-900 border border-surf-800 rounded-3xl p-5 sm:p-7 shadow-xl space-y-6">
-      
-      <!-- Cabecera de Webcams -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-surf-800 pb-5">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <h2 class="text-xl sm:text-2xl font-black text-white">Webcams en Directo de la Costa</h2>
-          </div>
-          <p class="text-xs text-slate-400 mt-0.5">Transmisiones oficiales en vivo (HLS y MJPEG) para comprobar el estado real de rompientes</p>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <span class="px-3 py-1.5 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span id="webcams-online-count">9 Cámaras de Costa</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- REPRODUCTOR PRINCIPAL EN DIRECTO -->
-      <div class="space-y-4">
-        
-        <!-- Barra de Control y Selector de Cámara -->
-        <div class="flex flex-wrap items-center justify-between gap-3 bg-surf-950/70 border border-surf-800 px-4 py-3 rounded-2xl">
-          <div class="flex items-center gap-3">
-            <label for="webcam-selector" class="sr-only">Seleccionar cámara en directo</label>
-            <div class="relative">
-              <select id="webcam-selector" class="bg-surf-850 border border-surf-700 text-white rounded-xl pl-3 pr-8 py-2 text-xs font-bold appearance-none focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer">
-                <option value="planetario" selected>Grao de Castellón - Planetario (Surfers Castellón)</option>
-                <option value="gurugu">Grao de Castellón - Playa del Gurugú</option>
-                <option value="voramar">Benicàssim - Playa Voramar (Cámara Axis)</option>
-                <option value="burriana">Burriana - Puerto y Playa Arenal (HD)</option>
-                <option value="peniscola">Peñíscola - Playa Norte y Castillo (HD)</option>
-                <option value="oropesa">Oropesa del Mar - Morro de Gos (HD)</option>
-                <option value="vinaros">Vinaròs - Playa del Fortí (HD)</option>
-                <option value="heliopolis">Benicàssim - Playa Heliópolis</option>
-                <option value="alcossebre">Alcossebre - Playa Romana (HD)</option>
-              </select>
-              <span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-sm">expand_more</span>
-            </div>
-
-            <span id="webcam-live-badge" class="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span id="webcam-status-text">Señal Activa</span>
-            </span>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <button id="webcam-refresh-btn" title="Recargar señal" class="p-2 rounded-xl bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 text-xs font-bold transition-all flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">sync</span>
-              <span class="hidden sm:inline">Recargar</span>
-            </button>
-            <a id="webcam-official-link" href="https://surferscastellon.com/live-webcam/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surf-850 hover:bg-surf-800 text-slate-300 hover:text-white border border-surf-700 text-xs font-bold transition-all">
-              <span>Fuente Oficial</span>
-              <span class="material-symbols-outlined text-xs">open_in_new</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Contenedor del Reproductor Responsive (Video / Imagen / External / Surfers) -->
-        <div class="relative w-full aspect-video sm:aspect-[21/9] bg-slate-950 rounded-2xl overflow-hidden border border-surf-800 shadow-2xl flex items-center justify-center">
-          
-          <!-- Reproductor de Video HLS -->
-          <video id="webcam-video-player" playsinline muted controls class="w-full h-full object-cover"></video>
-
-          <!-- Reproductor de Imagen / MJPEG -->
-          <img id="webcam-img-player" class="hidden w-full h-full object-contain bg-black" alt="Webcam en directo" />
-
-          <!-- Overlay de Carga -->
-          <div id="webcam-loader" class="hidden absolute inset-0 bg-surf-950/85 backdrop-blur-sm flex items-center justify-center z-10">
-            <div class="flex flex-col items-center gap-2 text-sky-400">
-              <span class="material-symbols-outlined text-3xl animate-spin">refresh</span>
-              <span class="text-xs font-bold text-slate-200">Sincronizando stream en directo...</span>
-            </div>
-          </div>
-
-          <!-- Overlay para Cámaras Externas (SkylineWebcams con protección) -->
-          <div id="webcam-external-overlay" class="hidden absolute inset-0 bg-surf-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10 space-y-3">
-            <span class="material-symbols-outlined text-4xl text-sky-400">videocam</span>
-            <h4 id="webcam-external-title" class="text-base font-black text-white">Transmisión SkylineWebcams</h4>
-            <p id="webcam-external-desc" class="text-xs text-slate-400 max-w-md">Esta cámara emite en directo con reproductor protegido en SkylineWebcams.</p>
-            <a id="webcam-external-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-black text-xs transition-colors flex items-center gap-1.5 shadow-lg shadow-sky-500/20">
-              <span>Abrir Transmisión en Directo</span>
-              <span class="material-symbols-outlined text-sm">open_in_new</span>
-            </a>
-          </div>
-
-          <!-- Overlay / Panel Especial para Surfers Castellón (Planetario) -->
-          <div id="webcam-surfers-overlay" class="hidden absolute inset-0 bg-surf-950/90 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10 space-y-3">
-            <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-              <span class="material-symbols-outlined text-2xl">surfing</span>
-            </div>
-            <div>
-              <h4 class="text-base sm:text-lg font-black text-white">Webcam Club Surfers Castellón · Planetario</h4>
-              <p class="text-xs text-slate-300 max-w-lg mt-1">Cámara oficial situada frente a la rompiente del Planetario y las instalaciones del club.</p>
-              <div class="inline-flex items-center gap-2 mt-2 px-3 py-1 rounded-lg bg-surf-900 border border-surf-800 text-[11px] text-slate-300">
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>Usuario verificado: <strong class="text-emerald-400">mr.alcachofino@gmail.com</strong></span>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center justify-center gap-2.5 pt-1">
-              <a id="webcam-surfers-live-btn" href="https://surferscastellon.com/live-webcam/" target="_blank" rel="noopener noreferrer" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/20">
-                <span>Acceder en Surfers Castellón</span>
-                <span class="material-symbols-outlined text-sm">open_in_new</span>
-              </a>
-              <button id="webcam-surfers-toggle-embed" type="button" class="px-3.5 py-2 rounded-xl bg-surf-850 hover:bg-surf-800 text-white font-bold text-xs border border-surf-700 transition-colors flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-sm">tv</span>
-                <span id="webcam-surfers-toggle-text">Incrustar Visor Club</span>
-              </button>
-              <a href="https://surferscastellon.com/wp-login.php?action=lostpassword" target="_blank" rel="noopener noreferrer" class="px-3 py-2 rounded-xl bg-surf-900 hover:bg-surf-800 text-slate-400 hover:text-white font-semibold text-xs border border-surf-800 transition-colors flex items-center gap-1">
-                <span>Restablecer Clave</span>
-                <span class="material-symbols-outlined text-xs">vpn_key</span>
-              </a>
-            </div>
-            <iframe id="webcam-surfers-iframe" class="hidden w-full h-full absolute inset-0 rounded-2xl border-0 bg-surf-950" allow="autoplay; fullscreen" loading="lazy"></iframe>
-          </div>
-
-        </div>
-
-        <!-- Info y Spots Asociados -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-surf-950/60 border border-surf-800/80">
-          <div>
-            <h4 id="webcam-current-title" class="text-sm font-black text-white">Grao de Castellón - Planetario / Surfers Castellón</h4>
-            <p id="webcam-current-desc" class="text-xs text-slate-400 mt-0.5">Cámara principal de la rompiente del Planetario en el Grao de Castellón, ubicada frente a las instalaciones del club Surfers Castellón.</p>
-          </div>
-          <div id="webcam-spots-container" class="flex flex-wrap items-center gap-1.5">
-            <!-- Spots asociados se insertan dinámicamente -->
-          </div>
-        </div>
-
-      </div>
-
-      <!-- MURO MULTI-WEBCAMS (GALERÍA DE TODAS LAS CÁMARAS) -->
-      <div class="space-y-4 pt-4 border-t border-surf-800">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-sky-400 text-base">grid_view</span>
-            <h3 class="text-base font-black text-white">Muro de Webcams de la Provincia</h3>
-          </div>
-          <span class="text-[11px] text-slate-400">Pulsa cualquier cámara para verla arriba</span>
-        </div>
-
-        <div id="webcam-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Renderizado dinámico desde webcams.json -->
-        </div>
-      </div>
-
-    </section>
-
-    <!-- CALL TO ACTION: FEEDBACK / VOTAR -->
+    <!-- 6. LLAMADA A LA ACCIÓN: FEEDBACK / REPORTAR SESIÓN -->
     <section class="bg-gradient-to-r from-surf-900 to-surf-850 border border-surf-800 rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
       <div class="space-y-2 text-center md:text-left">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-violet-500/10 text-violet-300 border border-violet-500/30">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-300 border border-sky-500/30">
           <span class="material-symbols-outlined text-sm">psychology</span>
-          Entrenamiento AI para el Mediterráneo
+          Calibración Humana del Modelo Predictivo
         </div>
         <h3 class="text-xl sm:text-2xl font-black text-white">¿Has entrado al agua hoy en Castellón?</h3>
         <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
-          Valora las condiciones reales en 10 segundos: "Épico", "Normal" o "Plato". Tu reporte humano calibra el modelo predictivo de Machine Learning.
+          Valora las condiciones reales en 10 segundos: "Épico", "Bueno", "Normal" o "Plato". Tu reporte calibra el algoritmo de predicción para toda la comunidad.
         </p>
       </div>
 
@@ -666,7 +697,7 @@
         <span class="material-symbols-outlined text-sky-400">tsunami</span>
         <span class="font-bold text-slate-300">SURFLINE CASTELLÓN</span>
         <span>·</span>
-        <span>100% Serverless en Netlify Starter</span>
+        <span>100% Serverless · Coste 0 EUR</span>
       </div>
 
       <div class="flex flex-wrap items-center gap-4 text-slate-400">
@@ -674,7 +705,7 @@
         <span>·</span>
         <span>Open-Meteo Marine API</span>
         <span>·</span>
-        <span>Física Costera 9 Spots</span>
+        <span>Física Costera 13 Spots</span>
       </div>
     </div>
   </footer>
@@ -683,12 +714,10 @@
   <div id="user-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
     <div class="bg-surf-900 border border-surf-800 rounded-3xl max-w-md w-full p-6 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
       
-      <!-- Cerrar Modal -->
       <button id="close-user-modal-btn" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-xl hover:bg-surf-800 transition-colors">
         <span class="material-symbols-outlined text-lg">close</span>
       </button>
 
-      <!-- Encabezado Modal -->
       <div class="flex items-center gap-3 mb-5">
         <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500/20 to-cyan-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400">
           <span class="material-symbols-outlined text-2xl">surfing</span>
@@ -699,7 +728,6 @@
         </div>
       </div>
 
-      <!-- Vista Estado Conectado -->
       <div id="user-logged-view" class="hidden space-y-4">
         <div class="p-4 rounded-2xl bg-surf-950/70 border border-surf-800 space-y-2">
           <div class="flex items-center justify-between">
@@ -724,29 +752,28 @@
         </div>
       </div>
 
-      <!-- Formulario Inicio de Sesión -->
       <form id="user-login-form" class="space-y-4">
         <div>
           <label for="login-alias" class="block text-xs font-bold text-slate-300 mb-1.5">
             Nombre / Alias de Surfista
           </label>
-          <input type="text" id="login-alias" required placeholder="Ej: mr.alcachofino" class="w-full bg-surf-950 border border-surf-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm" />
+          <input type="text" id="login-alias" required placeholder="Ej: jordi_surf" class="w-full bg-surf-950 border border-surf-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm" />
         </div>
 
         <div>
           <label for="login-email" class="block text-xs font-bold text-slate-300 mb-1.5">
             Correo Electrónico (opcional)
           </label>
-          <input type="email" id="login-email" placeholder="Ej: mr.alcachofino@gmail.com" class="w-full bg-surf-950 border border-surf-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm" />
+          <input type="email" id="login-email" placeholder="Ej: jordi@ejemplo.com" class="w-full bg-surf-950 border border-surf-700 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500 text-sm" />
         </div>
 
         <div class="pt-2">
           <button type="submit" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-500 hover:from-sky-400 hover:to-cyan-400 text-slate-950 font-black text-sm shadow-lg shadow-sky-500/20 flex items-center justify-center gap-2 transition-all">
             <span class="material-symbols-outlined text-base">login</span>
-            <span>Iniciar Sesión en el Móvil</span>
+            <span>Iniciar Sesión en el Dispositivo</span>
           </button>
           <p class="text-center text-[10px] text-slate-500 mt-2">
-            Sesión guardada en tu dispositivo. No requiere servidores ni contraseñas externas.
+            Sesión guardada localmente en tu dispositivo sin contraseñas externas.
           </p>
         </div>
       </form>

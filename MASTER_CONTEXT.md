@@ -1,4 +1,4 @@
-# 🌊 MASTER CONTEXT: SURF FORECAST AI LOCAL
+# MASTER CONTEXT: SURF FORECAST AI LOCAL
 
 ## 1. OBJETIVO Y RESTRICCIONES (INMUTABLE)
 *   **Misión:** Construir una plataforma de previsión de surf local para Castellón (estilo Surfline) con alertas automáticas y cámaras en directo.

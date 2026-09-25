@@ -65,7 +65,7 @@ def actualizar_catalogo_webcams():
             cam["status"] = "online"
             cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
             activos += 1
-            print(f"  ✔ [ONLINE] {cam.get('name')}")
+            print(f"  [OK] {cam.get('name')}")
         else:
             # Si streamUrl no responde, probar snapshot
             snap = cam.get("snapshotUrl")
@@ -73,11 +73,11 @@ def actualizar_catalogo_webcams():
                 cam["status"] = "online"
                 cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
                 activos += 1
-                print(f"  ✔ [ONLINE (Snapshot)] {cam.get('name')}")
+                print(f"  [OK (Snapshot)] {cam.get('name')}")
             else:
                 cam["status"] = "offline"
                 cam["lastChecked"] = datetime.now(timezone.utc).isoformat()
-                print(f"  ✖ [OFFLINE / CHECK] {cam.get('name')}")
+                print(f"  [OFFLINE / CHECK] {cam.get('name')}")
 
     data["updatedAt"] = datetime.now(timezone.utc).isoformat()
     data["totalActive"] = activos
@@ -85,7 +85,7 @@ def actualizar_catalogo_webcams():
     with open(WEBCAMS_JSON_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    print(f"\n✔ Catálogo webcams.json actualizado con éxito: {activos}/{len(webcams)} online.")
+    print(f"\n[OK] Catálogo webcams.json actualizado con éxito: {activos}/{len(webcams)} online.")
 
 
 if __name__ == "__main__":
