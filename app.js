@@ -1,10 +1,11 @@
 /**
- * SURFLINE CASTELLÓN - Motor de Previsión Costera y Dashboard PWA
- * Basado en las especificaciones de MASTER_CONTEXT.md
+ * SURFLINE CASTELLÓN - Motor de Previsión Costera y Dashboard Náutico PWA
+ * Basado en las especificaciones de MASTER_CONTEXT.md y estándares de Surfline
+ * Cero emojis · Webcams integradas por spot · Física costera de 13 rompientes
  */
 
 // ==========================================
-// 1. CONFIGURACIÓN FÍSICA DE LOS SPOTS
+// 1. CONFIGURACIÓN FÍSICA Y GEOGRÁFICA DE LOS 13 SPOTS
 // ==========================================
 
 const SPOTS = [
@@ -21,11 +22,15 @@ const SPOTS = [
     sBase: 0.15,
     offshoreMin: 275,
     offshoreMax: 315,
-    desc: 'Fondo de arena frente al planetario del Grao. Funciona con oleaje de Levante y Gregal.'
+    webcamId: 'planetario',
+    webcamType: 'direct',
+    bottom: 'Arena',
+    bestTide: 'Media marea subiendo',
+    desc: 'Fondo de arena frente al planetario del Grao. Rompiente clásica con oleaje de Levante y Gregal.'
   },
   {
     id: 'Gurugu',
-    name: 'Gurugu',
+    name: 'Gurugú',
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Gurugú',
@@ -36,7 +41,11 @@ const SPOTS = [
     sBase: 0.15,
     offshoreMin: 275,
     offshoreMax: 315,
-    desc: 'Playa abierta con picos variables. Muy expuesta, ideal con vientos terrales flojos.'
+    webcamId: 'gurugu',
+    webcamType: 'direct',
+    bottom: 'Arena',
+    bestTide: 'Todas las mareas',
+    desc: 'Playa abierta con picos variables. Muy expuesta y consistente, ideal con vientos terrales flojos.'
   },
   {
     id: 'Piramides',
@@ -51,7 +60,12 @@ const SPOTS = [
     sBase: 0.10,
     offshoreMin: 285,
     offshoreMax: 330,
-    desc: 'Estructuras piramidales en el límite sur del Grao. Bancos estables protegidos con W/NW.'
+    webcamId: 'planetario',
+    webcamType: 'reference',
+    referenceDist: '2 km al norte',
+    bottom: 'Arena y bloques sumergidos',
+    bestTide: 'Baja a media',
+    desc: 'Estructuras piramidales en el límite sur del Grao. Bancos estables protegidos con W y NW.'
   },
   {
     id: 'Palaciet',
@@ -66,7 +80,12 @@ const SPOTS = [
     sBase: 0.10,
     offshoreMin: 290,
     offshoreMax: 340,
-    desc: 'Playa abrigada junto a la antigua vía de Benicàssim con rompiente suave para tablones.'
+    webcamId: 'voramar',
+    webcamType: 'reference',
+    referenceDist: '1.5 km al norte',
+    bottom: 'Arena fina',
+    bestTide: 'Media marea',
+    desc: 'Playa abrigada junto a la antigua vía de Benicàssim con rompiente suave ideal para tablones.'
   },
   {
     id: 'Voramar',
@@ -81,7 +100,11 @@ const SPOTS = [
     sBase: 0.05,
     offshoreMin: 300,
     offshoreMax: 350,
-    desc: 'Punta norte de Benicàssim protegida por la bahía. Aguanta temporales grandes de Levante.'
+    webcamId: 'voramar',
+    webcamType: 'direct',
+    bottom: 'Arena y puntal rocoso',
+    bestTide: 'Media a alta',
+    desc: 'Punta norte de Benicàssim protegida por la bahía. Aguanta temporales grandes y vientos fuertes de Levante.'
   },
   {
     id: 'Heliopolis',
@@ -96,7 +119,11 @@ const SPOTS = [
     sBase: 0.15,
     offshoreMin: 280,
     offshoreMax: 330,
-    desc: 'Línea de rompiente en la zona sur de Benicàssim con buenas secciones derechas.'
+    webcamId: 'heliopolis',
+    webcamType: 'direct',
+    bottom: 'Arena',
+    bestTide: 'Media marea',
+    desc: 'Línea de rompiente en la zona sur de Benicàssim con buenas secciones de derechas.'
   },
   {
     id: 'MorroGos',
@@ -111,7 +138,11 @@ const SPOTS = [
     sBase: 0.05,
     offshoreMin: 300,
     offshoreMax: 350,
-    desc: 'Playa abierta de Oropesa. Recibe mar de fondo intenso con vientos del oeste.'
+    webcamId: 'oropesa',
+    webcamType: 'direct',
+    bottom: 'Arena y resalte rocoso',
+    bestTide: 'Media marea subiendo',
+    desc: 'Playa abierta de Oropesa. Recibe mar de fondo intenso con vientos del oeste y noroeste.'
   },
   {
     id: 'Renega',
@@ -126,7 +157,12 @@ const SPOTS = [
     sBase: 0.90,
     offshoreMin: 260,
     offshoreMax: 310,
-    desc: 'Calas rocosas vírgenes protegidas del viento del norte. Requiere fondo de roca.'
+    webcamId: 'oropesa',
+    webcamType: 'reference',
+    referenceDist: '3 km al norte',
+    bottom: 'Roca y lajas planas',
+    bestTide: 'Alta marea',
+    desc: 'Calas rocosas vírgenes protegidas del viento del norte. Requiere oleaje potente del Este.'
   },
   {
     id: 'Burriana',
@@ -141,7 +177,11 @@ const SPOTS = [
     sBase: 0.20,
     offshoreMin: 275,
     offshoreMax: 315,
-    desc: 'Rompiente clásica junto a la escollera del puerto. Derecha larga sobre fondo de arena.'
+    webcamId: 'burriana',
+    webcamType: 'direct',
+    bottom: 'Arena junto a escollera',
+    bestTide: 'Todas las mareas',
+    desc: 'Rompiente clásica junto a la escollera del puerto. Derecha larga y consistente sobre fondo de arena.'
   },
   {
     id: 'Nules',
@@ -156,7 +196,12 @@ const SPOTS = [
     sBase: 0.25,
     offshoreMin: 275,
     offshoreMax: 315,
-    desc: 'Zona de espigones cortos con picos rápidos de derecha e izquierda.'
+    webcamId: 'burriana',
+    webcamType: 'reference',
+    referenceDist: '5 km al norte',
+    bottom: 'Grava y arena entre espigones',
+    bestTide: 'Media marea',
+    desc: 'Zona de espigones cortos con picos rápidos de derecha e izquierda en temporales invernales.'
   },
   {
     id: 'Almenara',
@@ -171,7 +216,12 @@ const SPOTS = [
     sBase: 0.30,
     offshoreMin: 275,
     offshoreMax: 315,
-    desc: 'Orillera contundente en playa mixta de grava y arena. Picos rápidos y tuberos.'
+    webcamId: 'burriana',
+    webcamType: 'reference',
+    referenceDist: '12 km al norte',
+    bottom: 'Guijarros y arena gruesa',
+    bestTide: 'Media marea',
+    desc: 'Orillera contundente en playa mixta de grava y arena. Picos muy rápidos, huecos y tuberos.'
   },
   {
     id: 'Peniscola N',
@@ -186,7 +236,11 @@ const SPOTS = [
     sBase: 0.80,
     offshoreMin: 260,
     offshoreMax: 300,
-    desc: 'Bahía natural protegida por el peñón templario. Funciona con swells fuertes del Este.'
+    webcamId: 'peniscola',
+    webcamType: 'direct',
+    bottom: 'Arena protegida',
+    bestTide: 'Media a alta',
+    desc: 'Bahía natural protegida por el peñón templario. Funciona con swells fuertes del Este y Gregal.'
   },
   {
     id: 'Vinaros',
@@ -201,11 +255,15 @@ const SPOTS = [
     sBase: 0.85,
     offshoreMin: 260,
     offshoreMax: 300,
-    desc: 'Playa urbana con rompientes definidas cerca del espigón del puerto.'
+    webcamId: 'vinaros',
+    webcamType: 'direct',
+    bottom: 'Arena y escollera urbana',
+    bestTide: 'Media marea',
+    desc: 'Playa urbana con rompientes definidas cerca del dique del puerto comercial.'
   }
 ];
 
-// Mapa de configuraciones para la física exacta según MASTER_CONTEXT.md
+// Configuración de azimut y parámetros para la física según MASTER_CONTEXT.md
 const SPOT_CONFIG = {
   'Planetario':   { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
   'Gurugu':       { azimut: 26,  thetaCrit: 45, sBase: 0.15, offshoreMin: 275, offshoreMax: 315 },
@@ -231,6 +289,7 @@ const SPOT_CONFIG = {
 };
 
 function getSpotConfig(nombre) {
+  if (!nombre) return { azimut: 26, thetaCrit: 40, sBase: 0.20, offshoreMin: 275, offshoreMax: 315 };
   const keys = Object.keys(SPOT_CONFIG);
   for (let i = 0; i < keys.length; i++) {
     if (nombre.indexOf(keys[i]) !== -1) return SPOT_CONFIG[keys[i]];
@@ -238,10 +297,113 @@ function getSpotConfig(nombre) {
   return { azimut: 26, thetaCrit: 40, sBase: 0.20, offshoreMin: 275, offshoreMax: 315 };
 }
 
-/**
- * Cálculo físico de la altura de ola efectiva en un spot
- * Exactamente como se describe en MASTER_CONTEXT.md
- */
+// ==========================================
+// 2. CATÁLOGO DE WEBCAMS COSTERAS
+// ==========================================
+
+const WEBCAMS_CATALOG = [
+  {
+    id: 'planetario',
+    name: 'Grao de Castellón - Planetario / Surfers CS',
+    zone: 'Grao de Castellón',
+    // La web de Surfers Castellón redirige (301) a una página web, no emite HLS/MJPEG embebible.
+    // La foto aeroclubcastellon.com/...webcam-aeroclub-cs.jpg es una imagen estática de 2016: descartada.
+    streamType: 'link_only',
+    streamUrl: null,
+    snapshotUrl: null,
+    officialUrl: 'https://www.surferscastellon.com/live-webcam/',
+    description: 'Cámara del club Surfers Castellón frente a la rompiente del Planetario. Accede al enlace oficial para verla.'
+  },
+  {
+    id: 'gurugu',
+    name: 'Grao de Castellón - Playa del Gurugú / Pinar',
+    zone: 'Grao de Castellón',
+    // aeroclubcastellon.com/wp-content/.../webcam-aeroclub-cs.jpg es una foto estática de 2016: descartada.
+    streamType: 'link_only',
+    streamUrl: null,
+    snapshotUrl: null,
+    officialUrl: 'https://camaramar.com/webcam-playa-del-gurugu-castellon/',
+    description: 'Panorámica de la rompiente del Gurugú. Sin stream en directo embebible verificado; accede al enlace oficial.'
+  },
+  {
+    id: 'voramar',
+    name: 'Benicàssim - Playa Voramar',
+    zone: 'Benicàssim',
+    // MJPEG en puerto 445 con CORS OK, pero el puerto puede estar bloqueado en redes móviles.
+    // Tras 8 s de timeout, se muestra el snapshot estático + botón oficial.
+    streamType: 'mjpeg',
+    streamUrl: 'https://cam1.voramar.net:445/axis-cgi/mjpg/video.cgi',
+    snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg',
+    officialUrl: 'https://voramar.net/webcam-playa-voramar-benicassim/',
+    description: 'Cámara MJPEG del Hotel Voramar (puerto 445). Puede estar bloqueado en redes móviles; si no carga, accede al enlace oficial.'
+  },
+  {
+    id: 'burriana',
+    name: 'Burriana - Puerto y Playa Arenal',
+    zone: 'Costa Sur',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Burriana/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1',
+    description: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.'
+  },
+  {
+    id: 'peniscola',
+    name: 'Peñíscola - Playa Norte y Castillo',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Penyiscola/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Penyiscola/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1',
+    description: 'Rompiente de Playa Norte con fondo de arena y vistas al Castillo del Papa Luna.'
+  },
+  {
+    id: 'oropesa',
+    name: 'Oropesa del Mar - Morro de Gos',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/OropesadelMar/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/OropesadelMar/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/orpesa-oropesa-del-mar/webcams/oropesa-del-mar-1',
+    description: 'Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.'
+  },
+  {
+    id: 'vinaros',
+    name: 'Vinaròs - Playa del Fortí',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Vinaros/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Vinaros/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/vinaros/webcams/vinaros-2',
+    description: 'Paseo marítimo y rompiente urbana del Fortí en el norte de Castellón.'
+  },
+  {
+    id: 'heliopolis',
+    name: 'Benicàssim - Playa Heliópolis',
+    zone: 'Benicàssim',
+    // skylinewebcams.com devuelve X-Frame-Options: SAMEORIGIN → no se puede incrustar.
+    streamType: 'link_only',
+    streamUrl: null,
+    snapshotUrl: null,
+    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
+    description: 'Panorámica sur de Benicàssim en SkylineWebcams. La web no permite incrustar su visor; accede al enlace oficial.'
+  },
+  {
+    id: 'alcossebre',
+    name: 'Alcossebre - Playa Romana / Cargador',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1',
+    description: 'Playa de fina arena protegida por salientes rocosos con oleaje suave.'
+  }
+];
+
+// ==========================================
+// 3. FÍSICA COSTERA Y ALGORITMOS DE CALIDAD
+// ==========================================
+
 function calcularFisica(nombre, h, periodo, dirSwell) {
   h = Number(h) || 0;
   periodo = Number(periodo) || 0;
@@ -267,10 +429,6 @@ function calcularFisica(nombre, h, periodo, dirSwell) {
   return Math.round(h * sf * amplificador * exposicion * 100) / 100;
 }
 
-/**
- * Algoritmo de calidad pre-IA (0 a 5 estrellas)
- * Exactamente como se describe en MASTER_CONTEXT.md
- */
 function calcularCalidad(h, p, ws, wd, nombre, presion, visib) {
   h = Number(h) || 0;
   p = Number(p) || 0;
@@ -313,49 +471,85 @@ function calcularCalidad(h, p, ws, wd, nombre, presion, visib) {
 }
 
 // ==========================================
-// 2. HELPERS DE DIRECCIÓN, VIENTO Y FORMATO
+// 4. HELPERS ESTILO SURFLINE (ANATÓMICO, ESTRELLAS MATERIAL Y VIENTO)
 // ==========================================
 
-function getWindCondition(wd, ws, spotName) {
-  const cfg = getSpotConfig(spotName);
-  const isOffshore = (cfg.offshoreMin < cfg.offshoreMax)
-    ? (wd >= cfg.offshoreMin && wd <= cfg.offshoreMax)
-    : (wd >= cfg.offshoreMin || wd <= cfg.offshoreMax);
+function getAnatomicalHeight(h) {
+  if (h < 0.2) return 'Plato / Calma';
+  if (h < 0.4) return 'Tobillo a Rodilla';
+  if (h < 0.7) return 'Rodilla a Cintura';
+  if (h < 1.1) return 'Cintura a Pecho';
+  if (h < 1.5) return 'Pecho a Cabeza';
+  if (h < 2.0) return 'Cabeza a Por Encima';
+  return 'Muy Por Encima';
+}
 
-  // Normal a la costa aproximada (+-45 grados del este directo)
-  const normalCosta = cfg.azimut + 90;
-  let diffNormal = Math.abs(wd - normalCosta);
-  if (diffNormal > 180) diffNormal = 360 - diffNormal;
-  const isOnshore = diffNormal <= 45;
-
-  if (isOffshore) {
-    return {
-      type: 'offshore',
-      label: 'OFFSHORE',
-      bgClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-      dotClass: 'bg-emerald-400',
-      icon: 'air',
-      desc: 'Terral limpio'
-    };
-  } else if (isOnshore) {
-    return {
-      type: 'onshore',
-      label: 'ONSHORE',
-      bgClass: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
-      dotClass: 'bg-rose-500',
-      icon: 'waves',
-      desc: 'Mar picado / Chopi'
-    };
-  } else {
-    return {
-      type: 'cross',
-      label: 'CROSS-SHORE',
-      bgClass: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-      dotClass: 'bg-amber-400',
-      icon: 'swap_horiz',
-      desc: 'Viento cruzado'
-    };
+function getRatingMeta(score) {
+  const s = Math.max(0, Math.min(5, Math.round(score)));
+  switch (s) {
+    case 5:
+      return {
+        label: 'Épico',
+        badgeClass: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
+        starColor: 'text-sky-400',
+        barColor: '#0ea5e9',
+        desc: 'Temporal clásico del Mediterráneo, series ordenadas y tubos'
+      };
+    case 4:
+      return {
+        label: 'Muy Bueno',
+        badgeClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+        starColor: 'text-emerald-400',
+        barColor: '#10b981',
+        desc: 'Líneas limpias con viento terral y series consistentes'
+      };
+    case 3:
+      return {
+        label: 'Regular a Bueno',
+        badgeClass: 'bg-teal-500/20 text-teal-300 border-teal-500/40',
+        starColor: 'text-teal-400',
+        barColor: '#14b8a6',
+        desc: 'Rompiente definida y periodos aprovechables'
+      };
+    case 2:
+      return {
+        label: 'Pobre a Regular',
+        badgeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
+        starColor: 'text-amber-400',
+        barColor: '#f59e0b',
+        desc: 'Olas pequeñas para tablón o viento cruzado'
+      };
+    case 1:
+      return {
+        label: 'Muy Pobre',
+        badgeClass: 'bg-rose-500/20 text-rose-300 border-rose-500/40',
+        starColor: 'text-rose-400',
+        barColor: '#ef4444',
+        desc: 'Orillero escaso o mar de viento picado'
+      };
+    case 0:
+    default:
+      return {
+        label: 'Plato',
+        badgeClass: 'bg-slate-700/60 text-slate-300 border-slate-600',
+        starColor: 'text-slate-500',
+        barColor: '#64748b',
+        desc: 'Sin rompiente surfeable'
+      };
   }
+}
+
+function renderStarsHTML(score, starColor = 'text-sky-400') {
+  const rounded = Math.min(5, Math.max(0, Math.round(score)));
+  let stars = '';
+  for (let i = 1; i <= 5; i++) {
+    if (i <= rounded) {
+      stars += `<span class="material-symbols-outlined text-sm ${starColor} material-symbols-fill inline-block">star</span>`;
+    } else {
+      stars += `<span class="material-symbols-outlined text-sm text-slate-700 inline-block">star</span>`;
+    }
+  }
+  return `<span class="inline-flex items-center gap-0.5" title="${score.toFixed(1)} de 5 estrellas">${stars}</span>`;
 }
 
 function degreesToCompass(deg) {
@@ -364,53 +558,62 @@ function degreesToCompass(deg) {
   return arr[(val % 16)];
 }
 
-function getRatingMeta(stars) {
-  stars = Math.max(0, Math.min(5, Math.round(stars)));
-  switch (stars) {
-    case 5:
-      return { label: 'ÉPICO', badgeClass: 'bg-violet-500/25 text-violet-300 border-violet-400/40', starColor: 'text-violet-400' };
-    case 4:
-      return { label: 'MUY BUENO', badgeClass: 'bg-emerald-500/25 text-emerald-300 border-emerald-400/40', starColor: 'text-emerald-400' };
-    case 3:
-      return { label: 'ACEPTABLE', badgeClass: 'bg-teal-500/25 text-teal-300 border-teal-400/40', starColor: 'text-teal-400' };
-    case 2:
-      return { label: 'REGULAR', badgeClass: 'bg-sky-500/20 text-sky-300 border-sky-400/30', starColor: 'text-sky-400' };
-    case 1:
-      return { label: 'POBRE', badgeClass: 'bg-slate-700/50 text-slate-300 border-slate-600', starColor: 'text-slate-400' };
-    default:
-      return { label: 'PLATO', badgeClass: 'bg-slate-800 text-slate-400 border-slate-700', starColor: 'text-slate-600' };
-  }
-}
+function getWindCondition(wd, ws, spotName) {
+  const cfg = getSpotConfig(spotName);
+  const isOffshore = (cfg.offshoreMin < cfg.offshoreMax)
+    ? (wd >= cfg.offshoreMin && wd <= cfg.offshoreMax)
+    : (wd >= cfg.offshoreMin || wd <= cfg.offshoreMax);
 
-function renderStarsHTML(stars, starColor = 'text-amber-400') {
-  stars = Math.max(0, Math.min(5, Math.round(stars)));
-  let html = '<div class="flex items-center gap-0.5 ' + starColor + '">';
-  for (let i = 1; i <= 5; i++) {
-    if (i <= stars) {
-      html += '<span class="material-symbols-outlined text-sm material-symbols-fill">star</span>';
-    } else {
-      html += '<span class="material-symbols-outlined text-sm text-slate-700">star</span>';
-    }
+  const normalCosta = cfg.azimut + 90;
+  let diffNormal = Math.abs(wd - normalCosta);
+  if (diffNormal > 180) diffNormal = 360 - diffNormal;
+  const isOnshore = diffNormal <= 45;
+
+  if (isOffshore) {
+    return {
+      type: 'offshore',
+      label: 'Terral (Offshore)',
+      bgClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+      dotClass: 'bg-emerald-400',
+      icon: 'air',
+      desc: 'Terral limpio'
+    };
+  } else if (isOnshore) {
+    return {
+      type: 'onshore',
+      label: 'Chopi (Onshore)',
+      bgClass: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
+      dotClass: 'bg-rose-400',
+      icon: 'waves',
+      desc: 'Mar picado'
+    };
+  } else {
+    return {
+      type: 'cross',
+      label: 'Cruzado (Cross-shore)',
+      bgClass: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+      dotClass: 'bg-amber-400',
+      icon: 'swap_horiz',
+      desc: 'Viento cruzado'
+    };
   }
-  html += '</div>';
-  return html;
 }
 
 // ==========================================
-// 3. ESTADO GLOBAL DE LA APLICACIÓN
+// 5. ESTADO GLOBAL DE LA APLICACIÓN
 // ==========================================
 
 const AppState = {
   forecastData: null,
-  currentSpotId: 'Gurugu',
+  currentSpotId: 'Planetario',
   currentDayIndex: 0,
   currentFilter: 'all',
-  activeCamTab: 'live',
-  hlsInstance: null
+  hlsInstance: null,
+  snapshotRefreshTimer: null
 };
 
 // ==========================================
-// 4. GENERADOR DE DATOS DE RESPALDO (OFFLINE)
+// 6. GENERADOR DE DATOS DE RESPALDO (OFFLINE)
 // ==========================================
 
 function generateFallbackForecastData() {
@@ -426,20 +629,17 @@ function generateFallbackForecastData() {
   const now = new Date();
   now.setMinutes(0, 0, 0);
 
-  // Generar 96 horas (4 días) de previsión realista mediterránea
   for (let i = 0; i < 96; i++) {
     const t = new Date(now.getTime() + i * 3600000);
     times.push(t.toISOString());
 
-    // Patrón de marejada mediterránea con oleaje del ENE (70°) y terral matutino (290°)
     const hour = t.getHours();
     const isMorning = hour >= 6 && hour <= 11;
-    const baseH = 0.8 + 0.4 * Math.sin((i / 24) * Math.PI); // Swell de 0.6m a 1.2m
+    const baseH = 0.8 + 0.4 * Math.sin((i / 24) * Math.PI);
     wave_height.push(Math.max(0.2, Math.round(baseH * 100) / 100));
     wave_period.push(Math.round((6.5 + 1.2 * Math.sin(i / 15)) * 10) / 10);
-    wave_direction.push(72); // ENE dominante en otoño/invierno
+    wave_direction.push(72);
 
-    // Viento: terral WNW (290°) matinal, brisa marina SE (130°) tarde
     if (isMorning) {
       wind_direction_10m.push(290);
       wind_speed_10m.push(9.5);
@@ -454,29 +654,15 @@ function generateFallbackForecastData() {
 
   return {
     times,
-    marine: {
-      wave_height,
-      wave_period,
-      wave_direction
-    },
-    weather: {
-      wind_speed_10m,
-      wind_direction_10m,
-      wind_gusts_10m,
-      surface_pressure
-    }
+    marine: { wave_height, wave_period, wave_direction },
+    weather: { wind_speed_10m, wind_direction_10m, wind_gusts_10m, surface_pressure }
   };
 }
-
-// ==========================================
-// 5. OBTENCIÓN DE DATOS (OPEN-METEO API)
-// ==========================================
 
 async function fetchOpenMeteoData() {
   const marineUrl = 'https://marine-api.open-meteo.com/v1/marine?latitude=39.98&longitude=0.05&hourly=wave_height,wave_period,wave_direction&timezone=auto';
   const weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=39.98&longitude=-0.05&hourly=wind_speed_10m,wind_direction_10m,wind_gusts_10m,surface_pressure&timezone=auto';
 
-  // Timeout de 4 segundos para evitar que la app se quede colgada en conexiones móviles lentas
   const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
   const timeoutId = controller ? setTimeout(() => controller.abort(), 4000) : null;
 
@@ -502,41 +688,28 @@ async function fetchOpenMeteoData() {
       fetchedAt: new Date().toISOString()
     };
 
-    // Guardar en localStorage para caché persistente
     try {
       localStorage.setItem('surfline_cs_cache', JSON.stringify(result));
-    } catch (e) {
-      console.warn('No se pudo guardar en localStorage', e);
-    }
+    } catch (e) {}
 
     return result;
   } catch (error) {
     if (timeoutId) clearTimeout(timeoutId);
-    console.warn('Aviso: Conexión lenta o error en Open-Meteo. Usando caché local o fallback inmediato.', error);
-    
-    // Intentar recuperar de localStorage
     try {
       const cached = localStorage.getItem('surfline_cs_cache');
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        console.log('Cargados datos desde caché local de la última sesión.');
-        return parsed;
-      }
+      if (cached) return JSON.parse(cached);
     } catch (e) {}
-
-    // Fallback sintético instantáneo
     return generateFallbackForecastData();
   }
 }
 
 // ==========================================
-// 6. RENDERIZADO DEL HERO Y CONDICIONES GLOBALES
+// 7. RENDERIZADO DEL RESUMEN REGIONAL DE BOYA
 // ==========================================
 
-function renderHero(data) {
+function renderRegionalHero(data) {
   if (!data || !data.times || !data.times.length) return;
 
-  // Tomar el índice correspondiente a la hora actual
   const nowIso = new Date().toISOString();
   let currentIndex = 0;
   for (let i = 0; i < data.times.length; i++) {
@@ -553,7 +726,6 @@ function renderHero(data) {
   const wd = data.weather.wind_direction_10m[currentIndex] || 0;
   const gusts = data.weather.wind_gusts_10m[currentIndex] || 0;
 
-  // Actualizar valores en el DOM
   const swellHeightEl = document.getElementById('hero-swell-height');
   const swellPeriodEl = document.getElementById('hero-swell-period');
   const swellDirEl = document.getElementById('hero-swell-dir');
@@ -580,7 +752,6 @@ function renderHero(data) {
     timestampEl.textContent = `Actualizado ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
   }
 
-  // Calcular cuál es el spot recomendado ahora mismo
   let bestSpot = SPOTS[0];
   let maxScore = -1;
 
@@ -601,7 +772,394 @@ function renderHero(data) {
 }
 
 // ==========================================
-// 7. RENDERIZADO DE LAS TARJETAS DE SPOTS
+// 8. SPOT SPOTLIGHT: WEBCAM INTEGRADA + REPORTE TÉCNICO EN DIRECTO
+// ==========================================
+
+function initSpotlightSelector() {
+  const select = document.getElementById('spotlight-spot-select');
+  if (!select) return;
+
+  if (select.children.length === 0) {
+    let optionsHtml = '';
+    SPOTS.forEach(spot => {
+      optionsHtml += `<option value="${spot.id}">${spot.label}</option>`;
+    });
+    select.innerHTML = optionsHtml;
+
+    select.addEventListener('change', (e) => {
+      selectSpot(e.target.value);
+    });
+  }
+
+  select.value = AppState.currentSpotId;
+}
+
+/**
+ * Muestra un toast o actualiza el badge de pie con enlace a la cámara oficial
+ * cuando el stream falla o no está disponible.
+ */
+function showOfficialLink(cam) {
+  const footnote = document.getElementById('spotlight-cam-footnote');
+  const descEl = document.getElementById('spotlight-cam-desc');
+  if (descEl) {
+    descEl.innerHTML = `${cam.description} <a href="${cam.officialUrl}" target="_blank" rel="noopener" class="underline text-sky-400 hover:text-sky-300">Abrir cámara oficial</a>`;
+  }
+}
+
+function loadSpotWebcam(spotId) {
+  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
+  const cam = WEBCAMS_CATALOG.find(c => c.id === spot.webcamId) || WEBCAMS_CATALOG[0];
+
+  const videoPlayer = document.getElementById('spotlight-video');
+  const imgPlayer = document.getElementById('spotlight-img');
+  const loader = document.getElementById('spotlight-loader');
+  const liveLabel = document.getElementById('spotlight-live-label');
+  const livePill = document.getElementById('spotlight-live-pill');
+  const camTitleBadge = document.getElementById('spotlight-cam-title-badge');
+  const camDescEl = document.getElementById('spotlight-cam-desc');
+  const camTypeBadge = document.getElementById('spotlight-cam-type-badge');
+  const extBtn = document.getElementById('spotlight-external-cam-btn');
+  const surfersOverlay = document.getElementById('spotlight-surfers-overlay');
+  const surfersIframe = document.getElementById('spotlight-surfers-iframe');
+  const surfersToggleBtn = document.getElementById('spotlight-surfers-toggle-btn');
+  const surfersToggleText = document.getElementById('spotlight-surfers-toggle-text');
+
+  if (camTitleBadge) camTitleBadge.textContent = cam.name;
+  if (camDescEl) camDescEl.textContent = cam.description;
+  if (extBtn) extBtn.href = cam.officialUrl;
+
+  // Actualizar etiqueta de estado de cámara (honesta según streamType real)
+  if (camTypeBadge) {
+    if (cam.streamType === 'link_only') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Solo enlace oficial`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-slate-400 flex items-center gap-1';
+    } else if (cam.streamType === 'hls' && spot.webcamType === 'direct') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Stream HLS en directo`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-emerald-400 flex items-center gap-1';
+    } else if (cam.streamType === 'mjpeg') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> MJPEG (puerto 445)`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-sky-400 flex items-center gap-1';
+    } else if (spot.webcamType === 'direct') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Cámara directa del spot`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-emerald-400 flex items-center gap-1';
+    } else {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Ref: ${cam.name.split('-')[0].trim()} (${spot.referenceDist || 'cercano'})`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-amber-400 flex items-center gap-1';
+    }
+  }
+
+  // Limpiar temporizadores y streams previos
+  if (AppState.snapshotRefreshTimer) {
+    clearInterval(AppState.snapshotRefreshTimer);
+    AppState.snapshotRefreshTimer = null;
+  }
+  if (AppState.hlsInstance) {
+    AppState.hlsInstance.destroy();
+    AppState.hlsInstance = null;
+  }
+  if (videoPlayer) {
+    videoPlayer.pause();
+    videoPlayer.classList.add('hidden');
+    // Limpiar listeners de error previos
+    videoPlayer.onerror = null;
+  }
+  if (imgPlayer) {
+    imgPlayer.classList.add('hidden');
+    imgPlayer.onerror = null;
+    imgPlayer.onload = null;
+  }
+  if (livePill) {
+    livePill.classList.remove('opacity-50');
+  }
+  if (surfersOverlay) {
+    surfersOverlay.classList.add('hidden');
+  }
+  if (surfersIframe) {
+    surfersIframe.classList.add('hidden');
+    surfersIframe.src = 'about:blank';
+  }
+  if (surfersToggleText) {
+    surfersToggleText.textContent = 'Incrustar Visor Club';
+  }
+
+  // Configuración de controles una sola vez
+  const fullscreenBtn = document.getElementById('spotlight-fullscreen-cam-btn');
+  if (fullscreenBtn && !fullscreenBtn.dataset.bound) {
+    fullscreenBtn.dataset.bound = 'true';
+    fullscreenBtn.addEventListener('click', () => {
+      const container = document.getElementById('spotlight-player-container');
+      if (!document.fullscreenElement) {
+        if (container.requestFullscreen) container.requestFullscreen();
+        else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    });
+  }
+
+  const refreshBtn = document.getElementById('spotlight-refresh-cam-btn');
+  if (refreshBtn && !refreshBtn.dataset.bound) {
+    refreshBtn.dataset.bound = 'true';
+    refreshBtn.addEventListener('click', () => {
+      loadSpotWebcam(AppState.currentSpotId);
+      showToast('Cámara de rompiente sincronizada', 'info');
+    });
+  }
+
+  // Caso 1: Streaming HLS en directo (Burriana, Peñíscola, Oropesa, Vinaròs, Alcossebre)
+  if (cam.streamType === 'hls') {
+    if (videoPlayer) {
+      videoPlayer.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
+      if (liveLabel) liveLabel.textContent = 'CONECTANDO...';
+
+      // iOS Safari: soporta HLS nativo (canPlayType devuelve truthy)
+      if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+        videoPlayer.src = cam.streamUrl;
+
+        // iOS necesita el evento 'canplay' para que play() no falle
+        const onCanPlay = () => {
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
+          videoPlayer.play().catch(() => {});
+          videoPlayer.removeEventListener('canplay', onCanPlay);
+        };
+        videoPlayer.addEventListener('canplay', onCanPlay);
+
+        // Listener 'error' además de onerror (más robusto en Safari)
+        const onError = () => {
+          videoPlayer.classList.add('hidden');
+          if (imgPlayer) {
+            imgPlayer.classList.remove('hidden');
+            imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+          }
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+          if (livePill) livePill.classList.add('opacity-50');
+          showOfficialLink(cam);
+        };
+        videoPlayer.addEventListener('error', onError);
+        videoPlayer.onerror = onError;
+
+      } else if (window.Hls && Hls.isSupported()) {
+        // Resto de navegadores: usar hls.js
+        const hls = new Hls({
+          enableWorker: true,
+          lowLatencyMode: false,   // Los streams de CV no son LL-HLS
+          manifestLoadingTimeOut: 8000,
+          manifestLoadingMaxRetry: 2
+        });
+        AppState.hlsInstance = hls;
+        hls.loadSource(cam.streamUrl);
+        hls.attachMedia(videoPlayer);
+
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
+          videoPlayer.play().catch(() => {});
+        });
+
+        hls.on(Hls.Events.ERROR, (event, data) => {
+          if (data.fatal) {
+            console.warn('[HLS] Error fatal de stream. Conmutando a snapshot:', data);
+            hls.destroy();
+            AppState.hlsInstance = null;
+            videoPlayer.classList.add('hidden');
+            if (imgPlayer) {
+              imgPlayer.classList.remove('hidden');
+              imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+            }
+            if (loader) loader.classList.add('hidden');
+            if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+            if (livePill) livePill.classList.add('opacity-50');
+            showOfficialLink(cam);
+          }
+        });
+      }
+    }
+  }
+
+  // Caso 2: MJPEG (Voramar) con timeout de 8 s y fallback a snapshot + enlace oficial
+  else if (cam.streamType === 'mjpeg') {
+    if (imgPlayer) {
+      imgPlayer.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
+      if (liveLabel) liveLabel.textContent = 'CONECTANDO...';
+
+      let mjpegLoaded = false;
+      const mjpegTimeout = setTimeout(() => {
+        if (!mjpegLoaded) {
+          // Puerto 445 bloqueado o timeout: pasar a snapshot + enlace oficial
+          imgPlayer.src = cam.snapshotUrl ? `${cam.snapshotUrl}?t=${Date.now()}` : '';
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+          if (livePill) livePill.classList.add('opacity-50');
+          showOfficialLink(cam);
+        }
+      }, 8000);
+
+      imgPlayer.onload = () => {
+        mjpegLoaded = true;
+        clearTimeout(mjpegTimeout);
+        if (loader) loader.classList.add('hidden');
+        if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
+      };
+      imgPlayer.onerror = () => {
+        clearTimeout(mjpegTimeout);
+        imgPlayer.src = cam.snapshotUrl ? `${cam.snapshotUrl}?t=${Date.now()}` : '';
+        if (loader) loader.classList.add('hidden');
+        if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+        if (livePill) livePill.classList.add('opacity-50');
+        showOfficialLink(cam);
+      };
+
+      // Iniciar el stream MJPEG
+      imgPlayer.src = `${cam.streamUrl}?t=${Date.now()}`;
+    }
+  }
+
+  // Caso 3: Solo enlace oficial (Planetario, Gurugú, Heliópolis)
+  //   No hay stream embebible verificado: mostrar tarjeta informativa honesta
+  else if (cam.streamType === 'link_only') {
+    if (surfersOverlay) {
+      // Reutilizamos el overlay de surfers con texto actualizado
+      const h4 = surfersOverlay.querySelector('h4');
+      const p  = surfersOverlay.querySelector('p');
+      const aBtn = surfersOverlay.querySelector('a');
+      if (h4) h4.textContent = cam.name;
+      if (p)  p.textContent  = cam.description;
+      if (aBtn) {
+        aBtn.href = cam.officialUrl;
+        aBtn.querySelector('span:first-child') && (aBtn.querySelector('span:first-child').textContent = 'Abrir cámara oficial');
+      }
+      surfersOverlay.classList.remove('hidden');
+    }
+    if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+    if (livePill) livePill.classList.add('opacity-50');
+    if (loader) loader.classList.add('hidden');
+  }
+
+  // Caso 4: Snapshots periódicos estáticos (fallback genérico)
+  else {
+    if (imgPlayer && cam.snapshotUrl) {
+      imgPlayer.classList.remove('hidden');
+      if (loader) loader.classList.remove('hidden');
+      const reloadSnap = () => {
+        imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+      };
+      imgPlayer.onload = () => {
+        if (loader) loader.classList.add('hidden');
+      };
+      imgPlayer.onerror = () => {
+        if (loader) loader.classList.add('hidden');
+        if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+        showOfficialLink(cam);
+      };
+      reloadSnap();
+      AppState.snapshotRefreshTimer = setInterval(reloadSnap, 10000);
+      if (liveLabel) liveLabel.textContent = 'FOTO (sin stream)';
+    }
+  }
+}
+
+
+function renderSpotSpotlight(spotId) {
+  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
+  initSpotlightSelector();
+
+  const nameEl = document.getElementById('spotlight-spot-name');
+  const zoneEl = document.getElementById('spotlight-spot-zone');
+  const orientEl = document.getElementById('spotlight-spot-orient');
+  const bottomEl = document.getElementById('spotlight-spot-bottom');
+  const tideEl = document.getElementById('spotlight-spot-best-tide');
+  const descEl = document.getElementById('spotlight-spot-desc');
+
+  if (nameEl) nameEl.textContent = spot.label;
+  if (zoneEl) zoneEl.textContent = spot.zoneName;
+  if (orientEl) orientEl.textContent = `${spot.azimut}° (${degreesToCompass(spot.azimut)})`;
+  if (bottomEl) bottomEl.textContent = spot.bottom;
+  if (tideEl) tideEl.textContent = spot.bestTide;
+  if (descEl) descEl.textContent = spot.desc;
+
+  // Cargar cámara del spot activo
+  loadSpotWebcam(spot.id);
+
+  // Calcular métricas actuales si hay datos
+  const data = AppState.forecastData;
+  if (!data || !data.times || !data.times.length) return;
+
+  const nowIso = new Date().toISOString();
+  let currentIndex = 0;
+  for (let i = 0; i < data.times.length; i++) {
+    if (data.times[i] >= nowIso.slice(0, 13)) {
+      currentIndex = i;
+      break;
+    }
+  }
+
+  const h = data.marine.wave_height[currentIndex] || 0;
+  const p = data.marine.wave_period[currentIndex] || 0;
+  const sDir = data.marine.wave_direction[currentIndex] || 0;
+  const ws = data.weather.wind_speed_10m[currentIndex] || 0;
+  const wd = data.weather.wind_direction_10m[currentIndex] || 0;
+
+  const hLocal = calcularFisica(spot.name, h, p, sDir);
+  const quality = calcularCalidad(hLocal, p, ws, wd, spot.name, 1013, 10);
+  const meta = getRatingMeta(quality);
+  const windInfo = getWindCondition(wd, ws, spot.name);
+  const anatomical = getAnatomicalHeight(hLocal);
+
+  const minH = Math.max(0.1, hLocal * 0.8).toFixed(1);
+  const maxH = (hLocal * 1.25).toFixed(1);
+  const wsKnots = Math.round(ws / 1.852);
+
+  // Actualizar DOM del Spotlight
+  const hValEl = document.getElementById('spotlight-height-val');
+  const hRangeEl = document.getElementById('spotlight-height-range');
+  const hBodyEl = document.getElementById('spotlight-height-body');
+  const ratingPillEl = document.getElementById('spotlight-spot-rating-pill');
+  const starsEl = document.getElementById('spotlight-spot-stars');
+
+  const windSpeedEl = document.getElementById('spotlight-wind-speed');
+  const windDirEl = document.getElementById('spotlight-wind-dir');
+  const windArrowEl = document.getElementById('spotlight-wind-arrow');
+  const windBadgeEl = document.getElementById('spotlight-wind-badge');
+  const windRangeEl = document.getElementById('spotlight-wind-range');
+
+  const swellHEl = document.getElementById('spotlight-swell-h');
+  const swellPEl = document.getElementById('spotlight-swell-p');
+  const swellDirEl = document.getElementById('spotlight-swell-dir');
+  const swellArrowEl = document.getElementById('spotlight-swell-arrow');
+
+  if (hValEl) hValEl.textContent = hLocal.toFixed(1);
+  if (hRangeEl) hRangeEl.textContent = `(${minH} - ${maxH} m)`;
+  if (hBodyEl) hBodyEl.textContent = anatomical;
+
+  if (ratingPillEl) {
+    ratingPillEl.textContent = meta.label;
+    ratingPillEl.className = `text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-lg border ${meta.badgeClass}`;
+  }
+  if (starsEl) {
+    starsEl.innerHTML = renderStarsHTML(quality, meta.starColor);
+  }
+
+  if (windSpeedEl) windSpeedEl.textContent = `${Math.round(ws)} km/h (${wsKnots} kt)`;
+  if (windDirEl) windDirEl.textContent = `${Math.round(wd)}° ${degreesToCompass(wd)}`;
+  if (windArrowEl) windArrowEl.style.transform = `rotate(${Math.round(wd)}deg)`;
+  if (windBadgeEl) {
+    windBadgeEl.textContent = windInfo.label;
+    windBadgeEl.className = `inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${windInfo.bgClass}`;
+  }
+  if (windRangeEl) windRangeEl.textContent = `Terral óptimo: ${spot.offshoreMin}°-${spot.offshoreMax}°`;
+
+  if (swellHEl) swellHEl.textContent = `${h.toFixed(1)} m mar abierto`;
+  if (swellPEl) swellPEl.textContent = `${p.toFixed(0)} s periodo`;
+  if (swellDirEl) swellDirEl.textContent = `${Math.round(sDir)}° ${degreesToCompass(sDir)}`;
+  if (swellArrowEl) swellArrowEl.style.transform = `rotate(${Math.round(sDir)}deg)`;
+}
+
+// ==========================================
+// 9. COMPARATIVA REGIONAL: CADA TARJETA TIENE SU WEBCAM
 // ==========================================
 
 function renderSpotCards(data, filter = 'all') {
@@ -637,37 +1195,70 @@ function renderSpotCards(data, filter = 'all') {
   let html = '';
 
   filteredSpots.forEach(spot => {
+    const cam = WEBCAMS_CATALOG.find(c => c.id === spot.webcamId) || WEBCAMS_CATALOG[0];
+    const isDirect = spot.webcamType === 'direct';
+    const isLinkOnly = cam.streamType === 'link_only';
+    const hasLiveStream = cam.streamType === 'hls' || cam.streamType === 'mjpeg';
+
     const hLocal = calcularFisica(spot.name, h, p, sDir);
     const quality = calcularCalidad(hLocal, p, ws, wd, spot.name, pres, 10);
     const meta = getRatingMeta(quality);
     const windInfo = getWindCondition(wd, ws, spot.name);
+    const anatomical = getAnatomicalHeight(hLocal);
     const compassSwell = degreesToCompass(sDir);
     const compassWind = degreesToCompass(wd);
 
-    // Altura mínima y máxima estimada (rango de serie)
     const minH = Math.max(0.1, (hLocal * 0.8)).toFixed(1);
     const maxH = (hLocal * 1.25).toFixed(1);
-
     const isSelected = spot.id === AppState.currentSpotId;
 
+    // Badge de cámara: honesto según el tipo real
+    let camBadgeColor, camBadgeLabel;
+    if (hasLiveStream && isDirect) {
+      camBadgeColor = 'bg-emerald-400 animate-pulse';
+      camBadgeLabel = 'DIRECTO';
+    } else if (hasLiveStream) {
+      camBadgeColor = 'bg-amber-400';
+      camBadgeLabel = 'DIRECTO REF.';
+    } else if (isLinkOnly) {
+      camBadgeColor = 'bg-slate-500';
+      camBadgeLabel = 'SOLO ENLACE';
+    } else {
+      camBadgeColor = 'bg-amber-400';
+      camBadgeLabel = 'CAM REF.';
+    }
+
+    // Thumbnail: si no hay snapshotUrl (link_only), mostrar placeholder con ícono
+    const thumbnailHtml = cam.snapshotUrl
+      ? `<img src="${cam.snapshotUrl}" alt="${spot.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />`
+      : `<div class="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-500 bg-surf-950">
+           <span class="material-symbols-outlined text-3xl">videocam_off</span>
+           <span class="text-[10px] font-bold uppercase tracking-wider">Sin stream verificado</span>
+           <a href="${cam.officialUrl}" target="_blank" rel="noopener noreferrer" class="mt-1 px-3 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-[10px] font-bold transition-colors flex items-center gap-1" onclick="event.stopPropagation()">
+             <span class="material-symbols-outlined text-xs">open_in_new</span>
+             Abrir cámara oficial
+           </a>
+         </div>`;
+
     html += `
-      <div data-spot-id="${spot.id}" class="spot-card relative bg-surf-900 border ${isSelected ? 'border-sky-500 ring-2 ring-sky-500/20' : 'border-surf-800 hover:border-surf-700'} rounded-2xl p-5 shadow-lg transition-all hover:shadow-xl hover:shadow-black/30 cursor-pointer flex flex-col justify-between group">
+      <div data-spot-id="${spot.id}" class="spot-card relative bg-surf-900 border ${isSelected ? 'border-sky-500 ring-2 ring-sky-500/20' : 'border-surf-800 hover:border-surf-700'} rounded-2xl p-4 sm:p-5 shadow-lg transition-all hover:shadow-xl hover:shadow-black/30 cursor-pointer flex flex-col justify-between group">
         
-        <!-- Cabecera de la tarjeta: Nombre y Rating -->
         <div>
-          <div class="flex items-start justify-between gap-2 mb-2">
+          <!-- Cabecera de la tarjeta: Nombre y Zona -->
+          <div class="flex items-start justify-between gap-2 mb-3">
             <div>
               <div class="flex items-center gap-1.5">
                 <span class="text-[10px] font-black tracking-wider uppercase px-2 py-0.5 rounded bg-surf-850 text-slate-400 border border-surf-700">
                   ${spot.zoneName}
                 </span>
-                ${spot.id === AppState.currentSpotId ? '<span class="text-[10px] font-bold text-sky-400">Activo</span>' : ''}
+                ${isSelected ? '<span class="text-[10px] font-black text-sky-400 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/30">ACTIVO</span>' : ''}
               </div>
-              <h3 class="text-lg font-black text-white group-hover:text-sky-300 transition-colors mt-1">
+              <h3 class="text-base sm:text-lg font-black text-white group-hover:text-sky-300 transition-colors mt-1">
                 ${spot.name}
               </h3>
             </div>
 
+            <!-- Calidad Surfline Pill y Estrellas Material -->
             <div class="flex flex-col items-end">
               <span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-lg border ${meta.badgeClass}">
                 ${meta.label}
@@ -678,72 +1269,71 @@ function renderSpotCards(data, filter = 'all') {
             </div>
           </div>
 
-          <!-- Altura de la Ola Prominente (Estilo Surfline) -->
-          <div class="my-4 p-3.5 rounded-xl bg-surf-950/70 border border-surf-800/80 flex items-baseline justify-between">
+          <!-- REPRODUCTOR / MINIATURA DE LA WEBCAM INTEGRADA EN EL SPOT -->
+          <div class="relative aspect-video rounded-xl overflow-hidden mb-3 border border-surf-800 bg-surf-950">
+            ${thumbnailHtml}
+            <div class="absolute inset-0 bg-gradient-to-t from-surf-950/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+
+            <div class="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-surf-950/90 backdrop-blur-md border border-surf-800 text-[10px] font-bold text-white shadow-sm">
+              <span class="w-1.5 h-1.5 rounded-full ${camBadgeColor}"></span>
+              <span>${camBadgeLabel}</span>
+            </div>
+
+            ${cam.snapshotUrl ? `<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surf-950/90 backdrop-blur-md border border-surf-800 text-[10px] font-bold text-sky-400 flex items-center gap-1">
+              <span class="material-symbols-outlined text-xs">play_circle</span>
+              <span>Ver rompiente</span>
+            </div>` : ''}
+          </div>
+
+          <!-- Altura Rompiente y Escala Corporal -->
+          <div class="my-3 p-3 rounded-xl bg-surf-950/70 border border-surf-800/80 flex items-baseline justify-between">
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Altura Rompiente</span>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Altura Rompiente</span>
               <div class="flex items-baseline gap-1 mt-0.5">
-                <span class="text-2xl sm:text-3xl font-black text-white">${hLocal.toFixed(1)}</span>
-                <span class="text-sm font-semibold text-slate-400">m</span>
-                <span class="text-xs text-slate-500 ml-1.5">(${minH} - ${maxH} m)</span>
+                <span class="text-2xl font-black text-white">${hLocal.toFixed(1)}</span>
+                <span class="text-xs font-semibold text-slate-400">m</span>
+                <span class="text-[11px] text-slate-500 ml-1">(${minH} - ${maxH} m)</span>
               </div>
             </div>
-            
-            <!-- Badge de Viento Offshore / Onshore -->
+
             <div class="flex flex-col items-end">
-              <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md border ${windInfo.bgClass}">
-                <span class="w-1.5 h-1.5 rounded-full ${windInfo.dotClass}"></span>
-                ${windInfo.label}
+              <span class="text-[10px] font-bold text-sky-300 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">
+                ${anatomical}
               </span>
-              <span class="text-[10px] text-slate-400 mt-1">${windInfo.desc}</span>
+              <span class="text-[10px] text-slate-400 mt-1">${windInfo.label}</span>
             </div>
           </div>
 
-          <!-- Métricas: Swell y Viento -->
+          <!-- Métricas de Swell y Viento -->
           <div class="grid grid-cols-2 gap-2 text-xs">
-            <!-- Swell Info -->
-            <div class="p-2.5 rounded-lg bg-surf-850/60 border border-surf-800">
-              <span class="text-[10px] text-slate-400 font-semibold block uppercase">Swell Dominante</span>
-              <div class="flex items-center gap-1.5 mt-1 font-bold text-white">
-                <span class="material-symbols-outlined text-sm text-sky-400 inline-block transition-transform" style="transform: rotate(${Math.round(sDir)}deg)">navigation</span>
+            <div class="p-2 rounded-lg bg-surf-850/60 border border-surf-800">
+              <span class="text-[10px] text-slate-400 font-semibold block uppercase">Swell</span>
+              <div class="flex items-center gap-1 mt-1 font-bold text-white">
+                <span class="material-symbols-outlined text-xs text-sky-400 inline-block" style="transform: rotate(${Math.round(sDir)}deg)">navigation</span>
                 <span>${compassSwell} (${Math.round(sDir)}°)</span>
               </div>
-              <span class="text-[10px] text-slate-400 mt-0.5 block">${p.toFixed(0)}s de período</span>
+              <span class="text-[10px] text-slate-400 mt-0.5 block">${p.toFixed(0)}s periodo</span>
             </div>
 
-            <!-- Viento Info -->
-            <div class="p-2.5 rounded-lg bg-surf-850/60 border border-surf-800">
-              <span class="text-[10px] text-slate-400 font-semibold block uppercase">Viento Local</span>
-              <div class="flex items-center gap-1.5 mt-1 font-bold text-white">
-                <span class="material-symbols-outlined text-sm text-amber-400 inline-block transition-transform" style="transform: rotate(${Math.round(wd)}deg)">navigation</span>
+            <div class="p-2 rounded-lg bg-surf-850/60 border border-surf-800">
+              <span class="text-[10px] text-slate-400 font-semibold block uppercase">Viento</span>
+              <div class="flex items-center gap-1 mt-1 font-bold text-white">
+                <span class="material-symbols-outlined text-xs text-amber-400 inline-block" style="transform: rotate(${Math.round(wd)}deg)">navigation</span>
                 <span>${Math.round(ws)} km/h ${compassWind}</span>
               </div>
               <span class="text-[10px] text-slate-400 mt-0.5 block">Terral: ${spot.offshoreMin}°-${spot.offshoreMax}°</span>
             </div>
           </div>
-
-          <p class="text-[11px] text-slate-400 mt-3 line-clamp-2 leading-relaxed">
-            ${spot.desc}
-          </p>
         </div>
 
-        <!-- Botones de Acción -->
         <div class="mt-4 pt-3 border-t border-surf-800/80 flex items-center justify-between gap-2">
-          ${(function() {
-            const hasCam = typeof WEBCAMS_CATALOG !== 'undefined' && WEBCAMS_CATALOG.some(c => c.spots && c.spots.includes(spot.id));
-            if (hasCam) {
-              return `
-                <button type="button" class="btn-spot-webcam flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold transition-all shadow-sm" data-spot-id="${spot.id}">
-                  <span class="material-symbols-outlined text-sm">videocam</span>
-                  <span>Ver Webcam</span>
-                </button>
-              `;
-            }
-            return `<span class="text-[10px] text-slate-500 italic">Previsión local</span>`;
-          })()}
+          <span class="text-[11px] font-semibold text-slate-400 flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs text-emerald-400">check_circle</span>
+            <span>${isDirect ? 'Cámara activa' : 'Ref. ' + cam.name.split('-')[0].trim()}</span>
+          </span>
 
-          <span class="text-xs font-semibold text-sky-400 group-hover:text-sky-300 flex items-center gap-1">
-            Ver tabla horaria
+          <span class="text-xs font-bold text-sky-400 group-hover:text-sky-300 flex items-center gap-1">
+            Ver detalle
             <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
           </span>
         </div>
@@ -754,30 +1344,14 @@ function renderSpotCards(data, filter = 'all') {
 
   container.innerHTML = html;
 
-  // Asignar eventos de clic a cada tarjeta
   container.querySelectorAll('.spot-card').forEach(card => {
     card.addEventListener('click', () => {
       const spotId = card.getAttribute('data-spot-id');
       if (spotId) {
         selectSpot(spotId);
-        // Scroll suave hacia la tabla horaria
-        const tableSection = document.getElementById('tabla-horaria');
-        if (tableSection) {
-          tableSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    });
-  });
-
-  // Asignar eventos directos a los botones de webcam en las tarjetas
-  container.querySelectorAll('.btn-spot-webcam').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const spotId = btn.getAttribute('data-spot-id');
-      if (spotId) {
-        selectSpot(spotId);
-        if (typeof selectWebcamForSpot === 'function') {
-          selectWebcamForSpot(spotId);
+        const spotlightEl = document.getElementById('spot-spotlight');
+        if (spotlightEl) {
+          spotlightEl.scrollIntoView({ behavior: 'smooth' });
         }
       }
     });
@@ -785,21 +1359,39 @@ function renderSpotCards(data, filter = 'all') {
 }
 
 // ==========================================
-// 8. RENDERIZADO DE LA TABLA HORARIA
+// 10. TABLA HORARIA DE CONDICIONES
 // ==========================================
+
+function initHourlySelector() {
+  const select = document.getElementById('spot-selector-hourly');
+  if (!select) return;
+
+  if (select.children.length === 0) {
+    let optionsHtml = '';
+    SPOTS.forEach(spot => {
+      optionsHtml += `<option value="${spot.id}">${spot.label}</option>`;
+    });
+    select.innerHTML = optionsHtml;
+
+    select.addEventListener('change', (e) => {
+      selectSpot(e.target.value);
+    });
+  }
+
+  select.value = AppState.currentSpotId;
+}
 
 function renderHourlyTable(data, spotId, dayOffset = 0) {
   const tbody = document.getElementById('hourly-table-body');
   if (!tbody || !data || !data.times) return;
 
+  initHourlySelector();
   const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
 
-  // Calcular la fecha objetivo
   const targetDate = new Date();
   targetDate.setDate(targetDate.getDate() + dayOffset);
   const targetDateStr = targetDate.toISOString().slice(0, 10);
 
-  // Filtrar los datos para las 24 horas del día seleccionado
   const hourlyRows = [];
   for (let i = 0; i < data.times.length; i++) {
     if (data.times[i].startsWith(targetDateStr)) {
@@ -817,13 +1409,11 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
   }
 
   if (hourlyRows.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-500">No hay datos horarios disponibles para este día.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-500">No hay datos horarios disponibles para este día.</td></tr>`;
     return;
   }
 
   let html = '';
-
-  // Mostrar filas clave del día (cada 2 o 3 horas entre 06:00 y 21:00 para máxima legibilidad)
   const displayHours = [6, 8, 10, 12, 14, 16, 18, 20, 22];
   const filteredRows = hourlyRows.filter(r => {
     const h = new Date(r.time).getHours();
@@ -835,22 +1425,18 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
   rowsToRender.forEach(row => {
     const d = new Date(row.time);
     const hourLabel = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-    // Cálculo de física costera en este punto horario
+
     const hLocal = calcularFisica(spot.name, row.wave_height, row.wave_period, row.wave_direction);
     const quality = calcularCalidad(hLocal, row.wave_period, row.wind_speed, row.wind_direction, spot.name, row.pressure, 10);
     const meta = getRatingMeta(quality);
     const windInfo = getWindCondition(row.wind_direction, row.wind_speed, spot.name);
+    const anatomical = getAnatomicalHeight(hLocal);
     const compassSwell = degreesToCompass(row.wave_direction);
-    const compassWind = degreesToCompass(row.wind_direction);
 
-    // Barra visual de tamaño (máximo estimado 2.0m)
     const barWidthPct = Math.min(100, Math.round((hLocal / 2.0) * 100));
 
     html += `
       <tr class="hover:bg-surf-850/60 transition-colors">
-        
-        <!-- Hora -->
         <td class="py-3 px-4 font-bold text-white whitespace-nowrap">
           <div class="flex items-center gap-1.5">
             <span class="material-symbols-outlined text-xs text-sky-400">schedule</span>
@@ -858,7 +1444,6 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
           </div>
         </td>
 
-        <!-- Calidad Surfline -->
         <td class="py-3 px-4 whitespace-nowrap">
           <div class="flex items-center gap-2">
             <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${meta.badgeClass}">
@@ -868,22 +1453,23 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
           </div>
         </td>
 
-        <!-- Altura Ola Spot -->
         <td class="py-3 px-4 whitespace-nowrap">
           <div class="flex items-center gap-3">
             <span class="text-base font-black text-white w-12">${hLocal.toFixed(1)} m</span>
-            <div class="hidden sm:block w-24 bg-surf-800 rounded-full h-2 overflow-hidden">
+            <div class="hidden sm:block w-20 bg-surf-800 rounded-full h-1.5 overflow-hidden">
               <div class="bg-gradient-to-r from-sky-500 to-cyan-400 h-full rounded-full" style="width: ${barWidthPct}%"></div>
             </div>
           </div>
         </td>
 
-        <!-- Período -->
+        <td class="py-3 px-4 whitespace-nowrap text-slate-300 font-bold">
+          ${anatomical}
+        </td>
+
         <td class="py-3 px-4 whitespace-nowrap text-slate-300 font-bold">
           ${Math.round(row.wave_period)} s
         </td>
 
-        <!-- Swell Alta Mar -->
         <td class="py-3 px-4 whitespace-nowrap text-slate-300">
           <div class="flex items-center gap-1.5">
             <span class="material-symbols-outlined text-xs text-sky-400 inline-block" style="transform: rotate(${Math.round(row.wave_direction)}deg)">navigation</span>
@@ -891,7 +1477,6 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
           </div>
         </td>
 
-        <!-- Viento -->
         <td class="py-3 px-4 whitespace-nowrap text-slate-300">
           <div class="flex items-center gap-1.5">
             <span class="material-symbols-outlined text-xs text-amber-400 inline-block" style="transform: rotate(${Math.round(row.wind_direction)}deg)">navigation</span>
@@ -900,14 +1485,12 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
           </div>
         </td>
 
-        <!-- Condición Viento -->
         <td class="py-3 px-4 whitespace-nowrap">
           <span class="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${windInfo.bgClass}">
             <span class="w-1.5 h-1.5 rounded-full ${windInfo.dotClass}"></span>
             ${windInfo.label}
           </span>
         </td>
-
       </tr>
     `;
   });
@@ -916,7 +1499,7 @@ function renderHourlyTable(data, spotId, dayOffset = 0) {
 }
 
 // ==========================================
-// 9. CONTROL DE SPOT SELECCIONADO, MAPA Y GRÁFICAS
+// 11. MAPA LEAFLET OSCURO Y GRÁFICAS CHART.JS
 // ==========================================
 
 function logTelemetry(msg, type = 'info') {
@@ -968,7 +1551,7 @@ function initLeafletMap() {
 
       marker.on('click', () => {
         selectSpot(spot.id);
-        const heroEl = document.getElementById('hero-section');
+        const heroEl = document.getElementById('spot-spotlight');
         if (heroEl) heroEl.scrollIntoView({ behavior: 'smooth' });
         logTelemetry(`[MAP] Spot seleccionado por mapa: ${spot.label}`, 'info');
       });
@@ -1031,7 +1614,7 @@ function updateMapMarkers(data) {
           <span class="text-sky-400 font-mono">${hLocal.toFixed(1)}m</span>
         </div>
         <div class="text-[10px] text-slate-300 flex items-center justify-between gap-2">
-          <span class="${meta.color}">${meta.label}</span>
+          <span>${meta.label}</span>
           <span class="text-slate-400">${Math.round(ws)} km/h</span>
         </div>
       </div>
@@ -1169,14 +1752,24 @@ function initWindyRadarModal() {
   }
 }
 
+// ==========================================
+// 12. GESTOR DE SELECCIÓN Y FILTROS
+// ==========================================
+
 function selectSpot(spotId) {
   AppState.currentSpotId = spotId;
 
-  // Actualizar selector desplegable
-  const dropdown = document.getElementById('spot-selector-hourly');
-  if (dropdown) dropdown.value = spotId;
+  // Sincronizar selectores desplegables
+  const spotlightSelect = document.getElementById('spotlight-spot-select');
+  if (spotlightSelect) spotlightSelect.value = spotId;
 
-  // Actualizar tarjetas, tabla, gráficas y mapa
+  const hourlySelect = document.getElementById('spot-selector-hourly');
+  if (hourlySelect) hourlySelect.value = spotId;
+
+  // Actualizar Spot Spotlight con su webcam
+  renderSpotSpotlight(spotId);
+
+  // Actualizar otros componentes si hay datos
   if (AppState.forecastData) {
     renderSpotCards(AppState.forecastData, AppState.currentFilter);
     renderHourlyTable(AppState.forecastData, spotId, AppState.currentDayIndex);
@@ -1186,7 +1779,7 @@ function selectSpot(spotId) {
 
   const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
   const cfg = getSpotConfig(spot.name);
-  logTelemetry(`[PHYSICS] Spot activo: ${spot.label} (Azimut ${cfg.azimut}°, θcrit ${cfg.thetaCrit}°, sBase ${cfg.sBase})`, 'math');
+  logTelemetry(`[SPOT] Seleccionado: ${spot.label} · Azimut ${cfg.azimut}° · Cam: ${spot.webcamId}`, 'info');
 }
 
 function setupFilterButtons() {
@@ -1196,7 +1789,6 @@ function setupFilterButtons() {
       const filter = btn.getAttribute('data-filter') || 'all';
       AppState.currentFilter = filter;
 
-      // Actualizar estilos activos de los botones
       buttons.forEach(b => {
         b.className = 'spot-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-surf-900 hover:bg-surf-800 text-slate-300 border border-surf-800 transition-colors';
       });
@@ -1208,15 +1800,6 @@ function setupFilterButtons() {
     });
   });
 
-  // Selector desplegable en la tabla horaria
-  const hourlySpotSelect = document.getElementById('spot-selector-hourly');
-  if (hourlySpotSelect) {
-    hourlySpotSelect.addEventListener('change', (e) => {
-      selectSpot(e.target.value);
-    });
-  }
-
-  // Botones de días en la tabla horaria
   const dayButtons = document.querySelectorAll('.day-tab-btn');
   dayButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1234,7 +1817,6 @@ function setupFilterButtons() {
     });
   });
 
-  // Botón manual de refresco de datos meteorológicos
   const refreshBtn = document.getElementById('refresh-data-btn');
   const refreshIcon = document.getElementById('refresh-icon');
   if (refreshBtn) {
@@ -1242,489 +1824,32 @@ function setupFilterButtons() {
       if (refreshIcon) refreshIcon.classList.add('animate-spin');
       const data = await fetchOpenMeteoData();
       AppState.forecastData = data;
-      renderHero(data);
+      renderRegionalHero(data);
+      renderSpotSpotlight(AppState.currentSpotId);
       renderSpotCards(data, AppState.currentFilter);
       renderHourlyTable(data, AppState.currentSpotId, AppState.currentDayIndex);
       renderCharts(AppState.currentSpotId, data);
       updateMapMarkers(data);
       logTelemetry('[REFRESH] Datos meteorológicos actualizados manualmente.', 'info');
-      setTimeout(() => {
-        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
-      }, 600);
+      showToast('Previsión marina actualizada', 'success');
+      if (refreshIcon) refreshIcon.classList.remove('animate-spin');
     });
   }
 }
 
 // ==========================================
-// 10. GESTOR DE WEBCAMS EN DIRECTO Y STREAMING
-// ==========================================
-
-const WEBCAMS_CATALOG = [
-  {
-    id: 'planetario',
-    name: 'Grao de Castellón - Planetario / Surfers Castellón',
-    zone: 'Grao de Castellón',
-    streamType: 'surfers',
-    streamUrl: 'https://www.surferscastellon.com/live-webcam/',
-    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
-    officialUrl: 'https://www.surferscastellon.com/live-webcam/',
-    altOfficialUrl: 'https://www.surferscastellon.com/webcam/',
-    description: 'Cámara principal de la rompiente del Planetario en el Grao de Castellón, ubicada frente a las instalaciones del club Surfers Castellón.',
-    spots: ['Planetario']
-  },
-  {
-    id: 'gurugu',
-    name: 'Grao de Castellón - Playa del Gurugú / Pinar',
-    zone: 'Grao de Castellón',
-    streamType: 'snapshot',
-    streamUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
-    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
-    officialUrl: 'https://camaramar.com/webcam-playa-del-gurugu-castellon/',
-    altOfficialUrl: 'https://www.aeroclubcastellon.com/webcam/',
-    description: 'Línea de costa y rompiente de las playas del Gurugú y del Pinar desde el Aeroclub.',
-    spots: ['Gurugu']
-  },
-  {
-    id: 'voramar',
-    name: 'Benicàssim - Playa Voramar',
-    zone: 'Benicàssim',
-    streamType: 'mjpeg',
-    streamUrl: 'https://cam1.voramar.net:445/axis-cgi/mjpg/video.cgi',
-    snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg',
-    officialUrl: 'https://voramar.net/webcam-playa-voramar-benicassim/',
-    description: 'Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim.',
-    spots: ['Voramar']
-  },
-  {
-    id: 'burriana',
-    name: 'Burriana - Puerto y Playa Arenal',
-    zone: 'Costa Sur',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Burriana/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1',
-    description: 'Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.',
-    spots: ['Burriana']
-  },
-  {
-    id: 'peniscola',
-    name: 'Peñíscola - Playa Norte y Castillo',
-    zone: 'Costa Norte',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Penyiscola/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Penyiscola/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1',
-    altOfficialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html',
-    description: 'Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.',
-    spots: ['Peniscola N']
-  },
-  {
-    id: 'oropesa',
-    name: 'Oropesa del Mar - Morro de Gos',
-    zone: 'Costa Norte',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/OropesadelMar/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/OropesadelMar/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/orpesa-oropesa-del-mar/webcams/oropesa-del-mar-1',
-    description: 'Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.',
-    spots: ['MorroGos']
-  },
-  {
-    id: 'vinaros',
-    name: 'Vinaròs - Playa del Fortí',
-    zone: 'Costa Norte',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Vinaros/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Vinaros/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/vinaros/webcams/vinaros-2',
-    description: 'Paseo marítimo y rompiente urbana del Fortí en el norte de Castellón.',
-    spots: ['Vinaros']
-  },
-  {
-    id: 'heliopolis',
-    name: 'Benicàssim - Playa Heliópolis',
-    zone: 'Benicàssim',
-    streamType: 'external',
-    streamUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
-    snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam2.jpg',
-    officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
-    description: 'Panorámica sur de Benicàssim transmitida en SkylineWebcams.',
-    spots: ['Heliopolis']
-  },
-  {
-    id: 'alcossebre',
-    name: 'Alcossebre - Playa Romana / Cargador',
-    zone: 'Costa Norte',
-    streamType: 'hls',
-    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8',
-    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png',
-    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1',
-    description: 'Playa de fina arena protegida por salientes rocosos con oleaje suave.',
-    spots: []
-  }
-];
-
-let snapshotRefreshTimer = null;
-
-function selectWebcamForSpot(spotId) {
-  const cam = WEBCAMS_CATALOG.find(c => c.spots && c.spots.includes(spotId));
-  if (cam) {
-    loadWebcam(cam.id);
-  }
-  const el = document.getElementById('seccion-webcams');
-  if (el) el.scrollIntoView({ behavior: 'smooth' });
-}
-
-function loadWebcam(camId) {
-  const cam = WEBCAMS_CATALOG.find(c => c.id === camId) || WEBCAMS_CATALOG[0];
-  if (!cam) return;
-
-  const selector = document.getElementById('webcam-selector');
-  if (selector && selector.value !== cam.id) selector.value = cam.id;
-
-  const titleEl = document.getElementById('webcam-current-title');
-  const descEl = document.getElementById('webcam-current-desc');
-  const linkEl = document.getElementById('webcam-official-link');
-  const statusBadge = document.getElementById('webcam-status-text');
-  const loader = document.getElementById('webcam-loader');
-  const videoPlayer = document.getElementById('webcam-video-player');
-  const imgPlayer = document.getElementById('webcam-img-player');
-  const extOverlay = document.getElementById('webcam-external-overlay');
-  const extTitle = document.getElementById('webcam-external-title');
-  const extDesc = document.getElementById('webcam-external-desc');
-  const extBtn = document.getElementById('webcam-external-btn');
-  const surfersOverlay = document.getElementById('webcam-surfers-overlay');
-  const surfersIframe = document.getElementById('webcam-surfers-iframe');
-  const surfersToggleBtn = document.getElementById('webcam-surfers-toggle-embed');
-  const surfersToggleText = document.getElementById('webcam-surfers-toggle-text');
-  const spotsContainer = document.getElementById('webcam-spots-container');
-
-  if (titleEl) titleEl.textContent = cam.name;
-  if (descEl) descEl.textContent = cam.description;
-  if (linkEl) linkEl.href = cam.officialUrl;
-
-  if (spotsContainer) {
-    let spotsHtml = '<span class="text-[11px] font-bold text-slate-400 mr-1">Spots:</span>';
-    if (cam.spots && cam.spots.length) {
-      cam.spots.forEach(spId => {
-        const spotObj = SPOTS.find(s => s.id === spId);
-        const label = spotObj ? spotObj.name : spId;
-        spotsHtml += `<button type="button" class="btn-cam-spot px-2.5 py-1 rounded-lg bg-surf-850 hover:bg-surf-800 text-sky-400 border border-surf-700 text-xs font-bold transition-all" data-spot-id="${spId}">${label} →</button>`;
-      });
-    } else {
-      spotsHtml += '<span class="text-xs text-slate-500 italic">Costa de Castellón</span>';
-    }
-    spotsContainer.innerHTML = spotsHtml;
-    spotsContainer.querySelectorAll('.btn-cam-spot').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const sId = btn.getAttribute('data-spot-id');
-        if (sId) {
-          selectSpot(sId);
-          const tableEl = document.getElementById('tabla-horaria');
-          if (tableEl) tableEl.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  }
-
-  if (snapshotRefreshTimer) {
-    clearInterval(snapshotRefreshTimer);
-    snapshotRefreshTimer = null;
-  }
-
-  // Ocultar iframe de Surfers por defecto al cambiar de cámara
-  if (surfersIframe) {
-    surfersIframe.classList.add('hidden');
-    surfersIframe.src = 'about:blank';
-  }
-  if (surfersToggleText) {
-    surfersToggleText.textContent = 'Incrustar Visor Club';
-  }
-
-  if (cam.streamType === 'surfers') {
-    if (AppState.hlsInstance) {
-      AppState.hlsInstance.destroy();
-      AppState.hlsInstance = null;
-    }
-    if (videoPlayer) {
-      videoPlayer.pause();
-      videoPlayer.classList.add('hidden');
-    }
-    if (extOverlay) extOverlay.classList.add('hidden');
-    if (loader) loader.classList.add('hidden');
-    if (imgPlayer) {
-      imgPlayer.classList.remove('hidden');
-      const reloadSnap = () => {
-        imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
-      };
-      reloadSnap();
-      snapshotRefreshTimer = setInterval(reloadSnap, 15000);
-    }
-    if (surfersOverlay) {
-      surfersOverlay.classList.remove('hidden');
-      if (surfersToggleBtn && !surfersToggleBtn.dataset.bound) {
-        surfersToggleBtn.dataset.bound = 'true';
-        surfersToggleBtn.addEventListener('click', () => {
-          if (!surfersIframe) return;
-          const isHidden = surfersIframe.classList.contains('hidden');
-          if (isHidden) {
-            surfersIframe.src = 'https://surferscastellon.com/live-webcam/';
-            surfersIframe.classList.remove('hidden');
-            if (surfersToggleText) surfersToggleText.textContent = 'Cerrar Visor Club';
-          } else {
-            surfersIframe.classList.add('hidden');
-            surfersIframe.src = 'about:blank';
-            if (surfersToggleText) surfersToggleText.textContent = 'Incrustar Visor Club';
-          }
-        });
-      }
-    }
-    if (statusBadge) statusBadge.textContent = 'Club Surfers CS';
-  } else if (cam.streamType === 'hls') {
-    if (surfersOverlay) surfersOverlay.classList.add('hidden');
-    if (extOverlay) extOverlay.classList.add('hidden');
-    if (imgPlayer) imgPlayer.classList.add('hidden');
-    if (videoPlayer) videoPlayer.classList.remove('hidden');
-    if (loader) loader.classList.remove('hidden');
-    if (statusBadge) statusBadge.textContent = 'Conectando HLS...';
-
-    if (window.Hls && Hls.isSupported()) {
-      if (AppState.hlsInstance) {
-        AppState.hlsInstance.destroy();
-      }
-      const hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: true,
-        manifestLoadingTimeOut: 10000
-      });
-      AppState.hlsInstance = hls;
-      hls.loadSource(cam.streamUrl);
-      hls.attachMedia(videoPlayer);
-
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        if (loader) loader.classList.add('hidden');
-        if (statusBadge) statusBadge.textContent = 'Stream HD Activo';
-        videoPlayer.play().catch(() => {});
-      });
-
-      hls.on(Hls.Events.ERROR, (event, data) => {
-        if (data.fatal) {
-          if (loader) loader.classList.add('hidden');
-          if (statusBadge) statusBadge.textContent = 'Reintentando...';
-          switch (data.type) {
-            case Hls.ErrorTypes.NETWORK_ERROR:
-              hls.startLoad();
-              break;
-            case Hls.ErrorTypes.MEDIA_ERROR:
-              hls.recoverMediaError();
-              break;
-            default:
-              hls.destroy();
-              break;
-          }
-        }
-      });
-    } else if (videoPlayer && videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-      videoPlayer.src = cam.streamUrl;
-      videoPlayer.addEventListener('loadedmetadata', () => {
-        if (loader) loader.classList.add('hidden');
-        if (statusBadge) statusBadge.textContent = 'En Directo (iOS)';
-        videoPlayer.play().catch(() => {});
-      });
-    }
-  } else if (cam.streamType === 'mjpeg') {
-    if (AppState.hlsInstance) {
-      AppState.hlsInstance.destroy();
-      AppState.hlsInstance = null;
-    }
-    if (videoPlayer) {
-      videoPlayer.pause();
-      videoPlayer.classList.add('hidden');
-    }
-    if (surfersOverlay) surfersOverlay.classList.add('hidden');
-    if (extOverlay) extOverlay.classList.add('hidden');
-    if (imgPlayer) {
-      imgPlayer.classList.remove('hidden');
-      if (loader) loader.classList.remove('hidden');
-      imgPlayer.src = cam.streamUrl;
-      imgPlayer.onload = () => {
-        if (loader) loader.classList.add('hidden');
-        if (statusBadge) statusBadge.textContent = 'Cámara en Vivo';
-      };
-      imgPlayer.onerror = () => {
-        imgPlayer.src = cam.snapshotUrl;
-        if (loader) loader.classList.add('hidden');
-        if (statusBadge) statusBadge.textContent = 'Imagen en Vivo';
-      };
-    }
-  } else if (cam.streamType === 'snapshot') {
-    if (AppState.hlsInstance) {
-      AppState.hlsInstance.destroy();
-      AppState.hlsInstance = null;
-    }
-    if (videoPlayer) {
-      videoPlayer.pause();
-      videoPlayer.classList.add('hidden');
-    }
-    if (surfersOverlay) surfersOverlay.classList.add('hidden');
-    if (extOverlay) extOverlay.classList.add('hidden');
-    if (imgPlayer) {
-      imgPlayer.classList.remove('hidden');
-      if (loader) loader.classList.remove('hidden');
-      const reloadSnap = () => {
-        imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
-      };
-      reloadSnap();
-      imgPlayer.onload = () => {
-        if (loader) loader.classList.add('hidden');
-        if (statusBadge) statusBadge.textContent = 'Foto en Directo';
-      };
-      snapshotRefreshTimer = setInterval(reloadSnap, 15000);
-    }
-  } else if (cam.streamType === 'external') {
-    if (AppState.hlsInstance) {
-      AppState.hlsInstance.destroy();
-      AppState.hlsInstance = null;
-    }
-    if (videoPlayer) {
-      videoPlayer.pause();
-      videoPlayer.classList.add('hidden');
-    }
-    if (loader) loader.classList.add('hidden');
-    if (surfersOverlay) surfersOverlay.classList.add('hidden');
-    if (imgPlayer) {
-      imgPlayer.classList.remove('hidden');
-      imgPlayer.src = cam.snapshotUrl;
-    }
-    if (extOverlay) {
-      extOverlay.classList.remove('hidden');
-      if (extTitle) extTitle.textContent = cam.name;
-      if (extDesc) extDesc.textContent = cam.description;
-      if (extBtn) extBtn.href = cam.officialUrl;
-    }
-    if (statusBadge) statusBadge.textContent = 'Portal Externo';
-  }
-}
-
-function renderWebcamGrid() {
-  const container = document.getElementById('webcam-grid');
-  if (!container) return;
-
-  let html = '';
-  WEBCAMS_CATALOG.forEach(cam => {
-    const isStream = cam.streamType === 'hls' || cam.streamType === 'mjpeg';
-    html += `
-      <div class="webcam-card bg-surf-950/80 border border-surf-800 hover:border-sky-500/50 rounded-2xl overflow-hidden shadow-lg transition-all group flex flex-col justify-between">
-        <div>
-          <!-- Thumbnail / Preview -->
-          <div class="relative aspect-video bg-surf-900 overflow-hidden cursor-pointer btn-play-cam" data-cam-id="${cam.id}">
-            <img src="${cam.snapshotUrl}" alt="${cam.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/640x360/0c1322/38bdf8?text=${encodeURIComponent(cam.name)}'" />
-            <div class="absolute inset-0 bg-gradient-to-t from-surf-950 via-transparent to-transparent opacity-80"></div>
-            
-            <div class="absolute top-2.5 left-2.5 flex items-center gap-1 px-2 py-0.5 rounded-md bg-surf-950/80 backdrop-blur-sm border border-surf-800 text-[10px] font-bold text-slate-300">
-              <span class="w-1.5 h-1.5 rounded-full ${isStream ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}"></span>
-              <span>${isStream ? 'DIRECTO' : 'ACTUALIZADA'}</span>
-            </div>
-
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-surf-950/40 backdrop-blur-[2px]">
-              <span class="p-3 rounded-full bg-sky-500 text-slate-950 shadow-xl shadow-sky-500/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-2xl font-bold">play_arrow</span>
-              </span>
-            </div>
-          </div>
-
-          <!-- Datos de la cámara -->
-          <div class="p-4 space-y-1">
-            <span class="text-[10px] font-black uppercase tracking-wider text-sky-400">${cam.zone}</span>
-            <h4 class="text-sm font-bold text-white leading-tight group-hover:text-sky-300 transition-colors">${cam.name}</h4>
-            <p class="text-[11px] text-slate-400 line-clamp-2 mt-1">${cam.description}</p>
-          </div>
-        </div>
-
-        <!-- Acciones -->
-        <div class="px-4 pb-4 pt-2 border-t border-surf-800/80 flex items-center justify-between gap-2">
-          <button type="button" class="btn-play-cam flex items-center gap-1 text-xs font-bold text-sky-400 hover:text-sky-300 transition-colors" data-cam-id="${cam.id}">
-            <span class="material-symbols-outlined text-base">play_circle</span>
-            <span>Ver arriba</span>
-          </button>
-          <a href="${cam.officialUrl}" target="_blank" rel="noopener noreferrer" title="Abrir fuente externa" class="p-1.5 rounded-lg bg-surf-850 hover:bg-surf-800 text-slate-400 hover:text-white border border-surf-700 transition-colors">
-            <span class="material-symbols-outlined text-xs">open_in_new</span>
-          </a>
-        </div>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
-
-  container.querySelectorAll('.btn-play-cam').forEach(el => {
-    el.addEventListener('click', () => {
-      const camId = el.getAttribute('data-cam-id');
-      if (camId) {
-        loadWebcam(camId);
-        const section = document.getElementById('seccion-webcams');
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-}
-
-function initWebcams() {
-  const selector = document.getElementById('webcam-selector');
-  if (selector) {
-    selector.addEventListener('change', (e) => {
-      loadWebcam(e.target.value);
-    });
-  }
-
-  const refreshBtn = document.getElementById('webcam-refresh-btn');
-  if (refreshBtn) {
-    refreshBtn.addEventListener('click', () => {
-      if (selector) loadWebcam(selector.value);
-    });
-  }
-
-  // Cargar catálogo actualizado desde webcams.json
-  fetch('webcams.json')
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (data && Array.isArray(data.webcams) && data.webcams.length) {
-        data.webcams.forEach(item => {
-          const match = WEBCAMS_CATALOG.find(c => c.id === item.id);
-          if (match) {
-            Object.assign(match, item);
-          } else {
-            WEBCAMS_CATALOG.push(item);
-          }
-        });
-      }
-      renderWebcamGrid();
-      const onlineBadge = document.getElementById('webcams-online-count');
-      if (onlineBadge) onlineBadge.textContent = `${WEBCAMS_CATALOG.length} Cámaras de Costa`;
-    })
-    .catch(() => {
-      renderWebcamGrid();
-    });
-
-  // Render inicial del grid y carga de la primera cámara (Planetario por defecto)
-  renderWebcamGrid();
-  loadWebcam('planetario');
-}
-
-// ==========================================
-// 11. REGISTRO PWA Y SERVICE WORKER
+// 13. REGISTRO PWA Y SERVICE WORKER
 // ==========================================
 
 function initPWA() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker de Surfline CS registrado con éxito:', reg.scope))
-        .catch(err => console.warn('Fallo al registrar Service Worker:', err));
+        .then(reg => console.log('[SW] Service Worker registrado:', reg.scope))
+        .catch(err => console.warn('[SW] Error en registro:', err));
     });
   }
 
-  // Capturar evento de instalación de PWA
   let deferredPrompt;
   const installBtn = document.getElementById('pwa-install-btn');
 
@@ -1742,14 +1867,13 @@ function initPWA() {
       if (!deferredPrompt) return;
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      console.log(`Respuesta del usuario a la instalación PWA: ${outcome}`);
+      console.log(`[PWA] Respuesta del usuario: ${outcome}`);
       deferredPrompt = null;
       installBtn.classList.add('hidden');
       installBtn.classList.remove('flex');
     });
   }
 
-  // Detectar estado de conexión
   const offlineBanner = document.getElementById('offline-banner');
   function updateOnlineStatus() {
     if (navigator.onLine) {
@@ -1765,7 +1889,7 @@ function initPWA() {
 }
 
 // ==========================================
-// 12. GESTIÓN DE SESIÓN DE USUARIO Y TOASTS
+// 14. SESIÓN DE USUARIO Y TOASTS
 // ==========================================
 
 function showToast(msg, type = 'success') {
@@ -1848,8 +1972,8 @@ function initUserSession() {
     const aliasInput = document.getElementById('login-alias');
     const emailInput = document.getElementById('login-email');
     if (!user && aliasInput && !aliasInput.value) {
-      aliasInput.value = 'mr.alcachofino';
-      if (emailInput && !emailInput.value) emailInput.value = 'mr.alcachofino@gmail.com';
+      aliasInput.value = 'jordi_surf';
+      if (emailInput && !emailInput.value) emailInput.value = 'jordi@ejemplo.com';
     }
     modal.classList.remove('hidden');
     modal.classList.add('flex');
@@ -1875,21 +1999,14 @@ function initUserSession() {
       const alias = document.getElementById('login-alias')?.value.trim() || 'Surfista';
       const email = document.getElementById('login-email')?.value.trim() || '';
 
-      const userData = {
-        alias,
-        email,
-        savedAt: new Date().toISOString()
-      };
-
+      const userData = { alias, email, savedAt: new Date().toISOString() };
       try {
         localStorage.setItem('surfline_cs_user', JSON.stringify(userData));
-      } catch (err) {
-        console.warn('Error guardando usuario local:', err);
-      }
+      } catch (err) {}
 
       updateUserUI();
       closeModal();
-      showToast(`¡Sesión iniciada con éxito! Hola, ${alias}`, 'success');
+      showToast(`Sesión iniciada como ${alias}`, 'success');
     });
   }
 
@@ -1904,62 +2021,50 @@ function initUserSession() {
     });
   }
 
-  // Comprobar si hay sesión por defecto guardada o iniciar automáticamente si no existe conflicto
-  const existingUser = getUser();
-  if (!existingUser) {
-    // Inicializar sesión por defecto para el usuario local
-    const defaultUser = {
-      alias: 'mr.alcachofino',
-      email: 'mr.alcachofino@gmail.com',
-      savedAt: new Date().toISOString()
-    };
-    try {
-      localStorage.setItem('surfline_cs_user', JSON.stringify(defaultUser));
-    } catch (e) {}
-  }
-
   updateUserUI();
 }
 
 // ==========================================
-// 13. INICIALIZACIÓN DE LA APLICACIÓN (INSTANT-LOAD)
+// 15. INICIALIZACIÓN DE LA APLICACIÓN
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', async () => {
   setupFilterButtons();
-  initWebcams();
   initPWA();
   initUserSession();
   initLeafletMap();
   initWindyRadarModal();
 
-  // 1. Carga instantánea desde caché local para evitar cualquier bloqueo en móvil
+  // 1. Carga instantánea desde caché local para evitar cualquier retraso
   try {
     const cachedStr = localStorage.getItem('surfline_cs_cache');
     if (cachedStr) {
       const cachedData = JSON.parse(cachedStr);
       AppState.forecastData = cachedData;
-      renderHero(cachedData);
+      renderRegionalHero(cachedData);
+      renderSpotSpotlight(AppState.currentSpotId);
       renderSpotCards(cachedData, AppState.currentFilter);
       renderHourlyTable(cachedData, AppState.currentSpotId, AppState.currentDayIndex);
       renderCharts(AppState.currentSpotId, cachedData);
       updateMapMarkers(cachedData);
-      logTelemetry('⚡ Renderizado instantáneo desde memoria local completado.', 'success');
+      logTelemetry('[CACHE] Renderizado instantáneo desde memoria local completado.', 'success');
+    } else {
+      renderSpotSpotlight(AppState.currentSpotId);
     }
   } catch (e) {
-    console.warn('Caché no disponible en primer arranque');
+    renderSpotSpotlight(AppState.currentSpotId);
   }
 
-  // 2. Consulta en segundo plano de datos frescos (con timeout de 4s)
+  // 2. Sincronización en segundo plano con Open-Meteo
   const freshData = await fetchOpenMeteoData();
   AppState.forecastData = freshData;
 
-  // 3. Renderizar con datos actualizados
-  renderHero(freshData);
+  // 3. Renderizar vista actualizada
+  renderRegionalHero(freshData);
+  renderSpotSpotlight(AppState.currentSpotId);
   renderSpotCards(freshData, AppState.currentFilter);
   renderHourlyTable(freshData, AppState.currentSpotId, AppState.currentDayIndex);
   renderCharts(AppState.currentSpotId, freshData);
   updateMapMarkers(freshData);
   logTelemetry('[NET] Previsión meteorológica Copernicus/ECMWF 96h sincronizada.', 'success');
 });
-
