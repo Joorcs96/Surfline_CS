@@ -392,7 +392,7 @@
             <!-- Calidad Surfline y Estrellas -->
             <div class="pt-3 border-t border-surf-800/80 flex items-center justify-between gap-2">
               <div class="flex items-center gap-2">
-                <span id="spotlight-spot-rating-pill" class="text-xs font-black uppercase tracking-wider px-2.5 py-1 rounded-lg border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">
+                <span id="spotlight-spot-rating-pill" class="text-sm sm:text-base font-black uppercase tracking-widest px-3 py-1.5 rounded-xl border bg-emerald-500/20 text-emerald-300 border-emerald-500/40">
                   Regular a Bueno
                 </span>
               </div>
@@ -404,7 +404,7 @@
           </div>
 
           <!-- Métricas de Viento y Swell -->
-          <div class="grid grid-cols-2 gap-3 text-xs">
+          <div class="grid grid-cols-3 gap-3 text-xs">
             
             <!-- Viento Local -->
             <div class="p-3.5 rounded-xl bg-surf-950/60 border border-surf-800 space-y-1.5">
@@ -442,22 +442,67 @@
 
           </div>
 
-          <!-- Ficha Geográfica y Física del Spot -->
-          <div class="p-3.5 rounded-xl bg-surf-950/60 border border-surf-800 space-y-2 text-xs">
-            <div class="grid grid-cols-3 gap-2 text-center border-b border-surf-800/80 pb-2">
+          
+          <!-- Brújula SVG -->
+          <div class="p-3.5 rounded-xl bg-surf-950/60 border border-surf-800 flex flex-col items-center justify-center">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-2 w-full text-left">Condiciones Óptimas</span>
+            <div id="spotlight-compass-svg" class="w-24 h-24 relative"></div>
+            <div class="flex flex-wrap gap-2 mt-2 text-[9px] text-slate-400 justify-center">
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500/40 border border-emerald-500"></span> Mar</span>
+                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-sky-500/40 border border-sky-500"></span> Terral</span>
+                <span class="flex items-center gap-1"><span class="w-3 h-0.5 bg-slate-400"></span> Costa</span>
+            </div>
+          </div>
+
+                    <!-- Ficha Geográfica y Física del Spot -->
+          <div class="p-4 rounded-xl bg-surf-950/60 border border-surf-800 space-y-3 text-xs">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block border-b border-surf-800/80 pb-2">Guía del Spot</span>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center pb-2">
               <div>
-                <span class="text-[10px] text-slate-400 block uppercase font-bold">Orientación</span>
-                <span id="spotlight-spot-orient" class="font-bold text-white mt-0.5 block">26° NNE</span>
+                <span class="text-[10px] text-slate-400 block uppercase">Orientación</span>
+                <span id="spotlight-spot-orient" class="font-bold text-white mt-0.5 block">26°</span>
               </div>
               <div>
-                <span class="text-[10px] text-slate-400 block uppercase font-bold">Fondo</span>
+                <span class="text-[10px] text-slate-400 block uppercase">Fondo</span>
                 <span id="spotlight-spot-bottom" class="font-bold text-white mt-0.5 block">Arena</span>
               </div>
               <div>
-                <span class="text-[10px] text-slate-400 block uppercase font-bold">Mejor Marea</span>
-                <span id="spotlight-spot-best-tide" class="font-bold text-white mt-0.5 block">Media / Subiendo</span>
+                <span class="text-[10px] text-slate-400 block uppercase">Mejor Marea</span>
+                <span id="spotlight-spot-best-tide" class="font-bold text-white mt-0.5 block">Media</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase">Nivel</span>
+                <span id="spotlight-spot-nivel" class="font-bold text-white mt-0.5 block">Intermedio</span>
               </div>
             </div>
+            
+            <div class="grid grid-cols-2 gap-3 text-center border-t border-surf-800/80 pt-2 pb-2">
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase">Swell Óptimo</span>
+                <span id="spotlight-spot-swell-opt" class="font-bold text-emerald-400 mt-0.5 block">90° - 160°</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block uppercase">Viento Terral</span>
+                <span id="spotlight-spot-wind-opt" class="font-bold text-sky-400 mt-0.5 block">270° - 340°</span>
+              </div>
+            </div>
+
+            <div class="space-y-1.5 pt-1 border-t border-surf-800/80">
+              <p class="text-[11px] text-slate-300 flex items-start gap-1.5">
+                <span class="material-symbols-outlined text-sm text-rose-400">warning</span>
+                <span id="spotlight-spot-peligros">Peligros: Ninguno reseñable</span>
+              </p>
+              <p class="text-[11px] text-slate-300 flex items-start gap-1.5">
+                <span class="material-symbols-outlined text-sm text-amber-400">calendar_month</span>
+                <span id="spotlight-spot-epoca">Mejor época: Otoño - Primavera</span>
+              </p>
+              <p class="text-[11px] text-slate-300 flex items-start gap-1.5">
+                <span class="material-symbols-outlined text-sm text-slate-400">info</span>
+                <span id="spotlight-spot-desc">Fondo de arena. Funciona con Levante y Gregal.</span>
+              </p>
+            </div>
+          </div>
             <p id="spotlight-spot-desc" class="text-[11px] text-slate-300 leading-relaxed pt-1">
               Fondo de arena frente al planetario del Grao. Funciona con oleaje de Levante y Gregal.
             </p>
@@ -547,6 +592,15 @@
         </div>
       </div>
 
+      
+      <!-- Barras de Previsión Surfline -->
+      <div class="mb-6">
+        <h3 class="text-sm font-bold text-white mb-3">Previsión a 5 días</h3>
+        <div id="forecast-bars-container" class="flex items-end gap-2 overflow-x-auto pb-4 pt-10 scroll-smooth snap-x snap-mandatory hide-scrollbar">
+          <!-- Dinámico en app.js -->
+        </div>
+      </div>
+
       <!-- Tabla Responsive -->
       <div class="overflow-x-auto rounded-2xl border border-surf-800 bg-surf-950/60">
         <table class="w-full text-left border-collapse text-xs sm:text-sm">
@@ -576,12 +630,13 @@
       <div class="p-4 rounded-xl bg-surf-850/60 border border-surf-800 text-xs flex flex-wrap items-center justify-between gap-3 text-slate-400">
         <div class="flex flex-wrap items-center gap-3">
           <span class="font-bold text-white uppercase tracking-wider text-[11px]">Escala Surfline:</span>
-          <span class="inline-flex items-center gap-1.5 text-slate-400"><span class="w-2.5 h-2.5 rounded bg-slate-600"></span> 0 Estrellas · Plato</span>
-          <span class="inline-flex items-center gap-1.5 text-rose-400"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> 1 Estrella · Muy Pobre</span>
-          <span class="inline-flex items-center gap-1.5 text-orange-400"><span class="w-2.5 h-2.5 rounded bg-orange-500"></span> 2 Estrellas · Pobre</span>
-          <span class="inline-flex items-center gap-1.5 text-amber-400"><span class="w-2.5 h-2.5 rounded bg-amber-500"></span> 3 Estrellas · Regular</span>
-          <span class="inline-flex items-center gap-1.5 text-emerald-400"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span> 4 Estrellas · Muy Bueno</span>
-          <span class="inline-flex items-center gap-1.5 text-sky-400"><span class="w-2.5 h-2.5 rounded bg-sky-500"></span> 5 Estrellas · Épico</span>
+          <span class="inline-flex items-center gap-1.5 text-slate-500"><span class="w-2.5 h-2.5 rounded bg-slate-500"></span> MUY MALO</span>
+          <span class="inline-flex items-center gap-1.5 text-rose-500"><span class="w-2.5 h-2.5 rounded bg-rose-500"></span> MALO</span>
+          <span class="inline-flex items-center gap-1.5 text-orange-500"><span class="w-2.5 h-2.5 rounded bg-orange-500"></span> MALO-REGULAR</span>
+          <span class="inline-flex items-center gap-1.5 text-amber-400"><span class="w-2.5 h-2.5 rounded bg-amber-400"></span> REGULAR</span>
+          <span class="inline-flex items-center gap-1.5 text-lime-400"><span class="w-2.5 h-2.5 rounded bg-lime-400"></span> REGULAR-BUENO</span>
+          <span class="inline-flex items-center gap-1.5 text-emerald-500"><span class="w-2.5 h-2.5 rounded bg-emerald-500"></span> BUENO</span>
+          <span class="inline-flex items-center gap-1.5 text-purple-500"><span class="w-2.5 h-2.5 rounded bg-purple-500"></span> EPICO</span>
         </div>
         <p class="text-[11px] text-slate-500 italic">
           Cálculo dinámico basado en altura efectiva, período cuadrático, azimut y viento offshore.

@@ -15,15 +15,21 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Planetario',
-    lat: 39.986,
-    lon: 0.026,
-    azimut: 26,
+    lat: 39.98585,
+    lon: 0.02766,
+    orientacion: 97,
     thetaCrit: 45,
     sBase: 0.15,
     offshoreMin: 275,
     offshoreMax: 315,
     webcamId: 'planetario',
     webcamType: 'direct',
+    ventanaMar: [62, 132],
+    ventanaViento: [232, 322],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Planetario de Castellón',
     bottom: 'Arena',
     bestTide: 'Media marea subiendo',
     desc: 'Fondo de arena frente al planetario del Grao. Rompiente clásica con oleaje de Levante y Gregal.'
@@ -34,15 +40,21 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Gurugú',
-    lat: 39.999,
-    lon: 0.03,
-    azimut: 26,
+    lat: 39.99872,
+    lon: 0.03137,
+    orientacion: 105,
     thetaCrit: 45,
     sBase: 0.15,
     offshoreMin: 275,
     offshoreMax: 315,
     webcamId: 'gurugu',
     webcamType: 'direct',
+    ventanaMar: [70, 140],
+    ventanaViento: [240, 330],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa del Gurugú',
     bottom: 'Arena',
     bestTide: 'Todas las mareas',
     desc: 'Playa abierta con picos variables. Muy expuesta y consistente, ideal con vientos terrales flojos.'
@@ -53,14 +65,20 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao / Almassora',
     label: 'Grao - Pirámides',
-    lat: 39.96,
-    lon: 0.015,
+    lat: 39.95947,
+    lon: 0.01499,
     webcamId: null,
-    azimut: 38,
+    orientacion: 24,
     thetaCrit: 50,
     sBase: 0.10,
     offshoreMin: 285,
     offshoreMax: 330,
+    ventanaMar: [349, 59],
+    ventanaViento: [159, 249],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa del Serradal',
     bottom: 'Arena y bloques sumergidos',
     bestTide: 'Baja a media',
     desc: 'Estructuras piramidales en el límite sur del Grao. Bancos estables protegidos con W y NW.'
@@ -71,14 +89,20 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Burriana',
     label: 'Burriana - El Palaciet',
-    lat: 39.912,
-    lon: -0.022,
+    lat: 39.90453,
+    lon: -0.01584,
     webcamId: null,
-    azimut: 45,
+    orientacion: 166,
     thetaCrit: 55,
     sBase: 0.10,
     offshoreMin: 290,
     offshoreMax: 340,
+    ventanaMar: [131, 201],
+    ventanaViento: [301, 31],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'El Coso / Cami del Palaciet',
     bottom: 'Arena fina',
     bestTide: 'Media marea',
     desc: 'Playa abrigada junto a la antigua vía de Benicàssim con rompiente suave ideal para tablones.'
@@ -89,15 +113,21 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Benicàssim',
     label: 'Benicàssim - Voramar',
-    lat: 40.056,
-    lon: 0.082,
-    azimut: 54,
+    lat: 40.05464,
+    lon: 0.08248,
+    orientacion: 165,
     thetaCrit: 65,
     sBase: 0.05,
     offshoreMin: 300,
     offshoreMax: 350,
     webcamId: 'voramar',
     webcamType: 'direct',
+    ventanaMar: [130, 200],
+    ventanaViento: [300, 30],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa Voramar',
     bottom: 'Arena y puntal rocoso',
     bestTide: 'Media a alta',
     desc: 'Punta norte de Benicàssim protegida por la bahía. Aguanta temporales grandes y vientos fuertes de Levante.'
@@ -108,15 +138,21 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Benicàssim',
     label: 'Benicàssim - Heliópolis',
-    lat: 40.026,
-    lon: 0.044,
-    azimut: 35,
+    lat: 40.02567,
+    lon: 0.04526,
+    orientacion: 109,
     thetaCrit: 45,
     sBase: 0.15,
     offshoreMin: 280,
     offshoreMax: 330,
     webcamId: 'heliopolis',
     webcamType: 'direct',
+    ventanaMar: [74, 144],
+    ventanaViento: [244, 334],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa Heliópolis',
     bottom: 'Arena',
     bestTide: 'Media marea',
     desc: 'Línea de rompiente en la zona sur de Benicàssim con buenas secciones de derechas.'
@@ -127,15 +163,21 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Oropesa del Mar',
     label: 'Oropesa - Morro de Gos',
-    lat: 40.095,
-    lon: 0.148,
-    azimut: 60,
+    lat: 40.09491,
+    lon: 0.14854,
+    orientacion: 102,
     thetaCrit: 65,
     sBase: 0.05,
     offshoreMin: 300,
     offshoreMax: 350,
     webcamId: 'oropesa',
     webcamType: 'direct',
+    ventanaMar: [67, 137],
+    ventanaViento: [237, 327],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa Morro de Gos',
     bottom: 'Arena y resalte rocoso',
     bestTide: 'Media marea subiendo',
     desc: 'Playa abierta de Oropesa. Recibe mar de fondo intenso con vientos del oeste y noroeste.'
@@ -146,14 +188,20 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Oropesa del Mar',
     label: 'Oropesa - La Renegà',
-    lat: 40.062,
-    lon: 0.12,
+    lat: 40.06195,
+    lon: 0.1206,
     webcamId: null,
-    azimut: 172,
+    orientacion: 97,
     thetaCrit: 10,
     sBase: 0.90,
     offshoreMin: 260,
     offshoreMax: 310,
+    ventanaMar: [62, 132],
+    ventanaViento: [232, 322],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'La Renegà',
     bottom: 'Roca y lajas planas',
     bestTide: 'Alta marea',
     desc: 'Calas rocosas vírgenes protegidas del viento del norte. Requiere oleaje potente del Este.'
@@ -164,15 +212,21 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Burriana',
     label: 'Burriana - Arenal / Escollera',
-    lat: 39.87,
-    lon: -0.061,
-    azimut: 26,
+    lat: 39.86977,
+    lon: -0.05905,
+    orientacion: 99,
     thetaCrit: 45,
     sBase: 0.20,
     offshoreMin: 275,
     offshoreMax: 315,
     webcamId: 'burriana',
     webcamType: 'direct',
+    ventanaMar: [64, 134],
+    ventanaViento: [234, 324],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Escollera Puerto',
     bottom: 'Arena junto a escollera',
     bestTide: 'Todas las mareas',
     desc: 'Rompiente clásica junto a la escollera del puerto. Derecha larga y consistente sobre fondo de arena.'
@@ -183,14 +237,20 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Nules',
     label: 'Nules - Espigones',
-    lat: 39.825,
-    lon: -0.111,
+    lat: 39.82462,
+    lon: -0.11001,
     webcamId: null,
-    azimut: 26,
+    orientacion: 116,
     thetaCrit: 40,
     sBase: 0.25,
     offshoreMin: 275,
     offshoreMax: 315,
+    ventanaMar: [81, 151],
+    ventanaViento: [251, 341],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Espigones de Nules',
     bottom: 'Grava y arena entre espigones',
     bestTide: 'Media marea',
     desc: 'Zona de espigones cortos con picos rápidos de derecha e izquierda en temporales invernales.'
@@ -201,14 +261,20 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Almenara',
     label: 'Almenara - Casablanca',
-    lat: 39.734,
-    lon: -0.183,
+    lat: 39.7332,
+    lon: -0.18107,
     webcamId: null,
-    azimut: 26,
+    orientacion: 118,
     thetaCrit: 35,
     sBase: 0.30,
     offshoreMin: 275,
     offshoreMax: 315,
+    ventanaMar: [83, 153],
+    ventanaViento: [253, 343],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa Casablanca',
     bottom: 'Guijarros y arena gruesa',
     bestTide: 'Media marea',
     desc: 'Orillera contundente en playa mixta de grava y arena. Picos muy rápidos, huecos y tuberos.'
@@ -219,15 +285,21 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Peñíscola',
     label: 'Peñíscola - Playa Norte',
-    lat: 40.381,
-    lon: 0.409,
-    azimut: 10,
+    lat: 40.3806,
+    lon: 0.41021,
+    orientacion: 114,
     thetaCrit: 10,
     sBase: 0.80,
     offshoreMin: 260,
     offshoreMax: 300,
     webcamId: 'peniscola',
     webcamType: 'direct',
+    ventanaMar: [79, 149],
+    ventanaViento: [249, 339],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'Playa Norte Peñíscola',
     bottom: 'Arena protegida',
     bestTide: 'Media a alta',
     desc: 'Bahía natural protegida por el peñón templario. Funciona con swells fuertes del Este y Gregal.'
@@ -238,15 +310,21 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Vinaròs',
     label: 'Vinaròs - El Fortí',
-    lat: 40.469,
-    lon: 0.478,
-    azimut: 10,
+    lat: 40.46877,
+    lon: 0.47904,
+    orientacion: 106,
     thetaCrit: 10,
     sBase: 0.85,
     offshoreMin: 260,
     offshoreMax: 300,
     webcamId: 'vinaros',
     webcamType: 'direct',
+    ventanaMar: [71, 141],
+    ventanaViento: [241, 331],
+    nivel: 'Intermedio',
+    peligros: 'Ninguno reseñable',
+    epoca: 'Otoño - Primavera',
+    refLocation: 'El Fortí',
     bottom: 'Arena y escollera urbana',
     bestTide: 'Media marea',
     desc: 'Playa urbana con rompientes definidas cerca del dique del puerto comercial.'
@@ -394,140 +472,92 @@ const WEBCAMS_CATALOG = [
 // 3. FÍSICA COSTERA Y ALGORITMOS DE CALIDAD
 // ==========================================
 
-function calcularFisica(nombre, h, periodo, dirSwell) {
+// --- CONSTANTES SURFLINE ---
+// Ajuste del periodo para altura en rompiente
+const SURFLINE_FACTOR_PERIODO = 0.15; 
+// Penalización por ángulo
+const SURFLINE_FACTOR_ANGULO = 0.8; 
+const SURFLINE_VIENTO_TERRAL_BONUS = 1;
+const SURFLINE_VIENTO_CRUZADO_PENAL = -0.5;
+const SURFLINE_VIENTO_MAR_PENAL = -2;
+
+function calcularFisica(spotId, h, periodo, dirSwell) {
   h = Number(h) || 0;
   periodo = Number(periodo) || 0;
   dirSwell = Number(dirSwell) || 0;
   if (h <= 0) return 0;
 
-  const cfg = getSpotConfig(nombre);
-  const k = 0.15;
-  const sf = cfg.sBase + (1 - cfg.sBase) / (1 + Math.exp(-k * (dirSwell - cfg.thetaCrit)));
+  const spot = SPOTS.find(s => s.id === spotId || s.name === spotId) || SPOTS[0];
+  const orientacion = spot.orientacion || 90;
+  
+  // Si el mar viene de tierra (fuera de ventana +-90 grados de la normal)
+  let diffAngulo = Math.abs(dirSwell - orientacion);
+  if (diffAngulo > 180) diffAngulo = 360 - diffAngulo;
+  
+  if (diffAngulo > 90) return 0; // Mar de tierra o fuera de ventana total
 
-  let amplificador = 1.0;
-  if (dirSwell < 75) {
-    let ganancia = Math.pow(periodo / 4.0, 2);
-    ganancia = Math.min(Math.max(ganancia, 1.0), 2.5);
-    const factorSombra = 1.0 - sf;
-    amplificador = 1.0 + ((ganancia - 1.0) * factorSombra);
-  }
-
-  const normalCosta = cfg.azimut + 90;
-  let exposicion = Math.abs(Math.cos((dirSwell - normalCosta) * Math.PI / 180));
-  exposicion = Math.max(exposicion, 0.05);
-
-  return Math.round(h * sf * amplificador * exposicion * 100) / 100;
+  // Altura = H * (1 + factor_periodo * periodo) * cos(angulo)
+  const factorSwell = 1 + (SURFLINE_FACTOR_PERIODO * (periodo - 4) / 4);
+  const cosAngulo = Math.cos(diffAngulo * Math.PI / 180);
+  
+  const alturaRompiente = h * factorSwell * (Math.pow(cosAngulo, SURFLINE_FACTOR_ANGULO));
+  
+  return Math.round(alturaRompiente * 100) / 100;
 }
 
-function calcularCalidad(h, p, ws, wd, nombre, presion, visib) {
-  h = Number(h) || 0;
-  p = Number(p) || 0;
-  ws = Number(ws) || 0;
-  wd = Number(wd) || 0;
+function calcularCalidad(hSpot, p, ws, wd, spotId) {
+  hSpot = Number(hSpot) || 0;
+  if (hSpot < 0.2) return 0; // MUY MALO
 
-  if (h < 0.2) return 0;
-  if (h < 0.35) return 1;
+  const spot = SPOTS.find(s => s.id === spotId || s.name === spotId) || SPOTS[0];
+  const orientacion = spot.orientacion || 90;
+  
+  let score = 0;
+  if (hSpot >= 0.2) score = 1;
+  if (hSpot >= 0.4) score = 2;
+  if (hSpot >= 0.6) score = 3;
+  if (hSpot >= 0.8) score = 4;
+  if (hSpot >= 1.2) score = 5;
+  if (hSpot >= 2.0 && p >= 7) score = 6;
 
-  let s = 2;
-  if (h >= 0.5) s++;
-  if (h >= 0.9) s++;
-  if (p >= 6) s += 0.5;
-  if (p >= 8) s += 0.5;
+  let diffAngulo = Math.abs(wd - orientacion);
+  if (diffAngulo > 180) diffAngulo = 360 - diffAngulo;
 
-  const energia = h * h * p;
-  if (energia >= 5) s += 0.5;
-  if (energia >= 15) s += 0.5;
-
-  const cfg = nombre ? getSpotConfig(nombre) : null;
-  if (cfg) {
-    const isOffshore = (cfg.offshoreMin < cfg.offshoreMax)
-      ? (wd >= cfg.offshoreMin && wd <= cfg.offshoreMax)
-      : (wd >= cfg.offshoreMin || wd <= cfg.offshoreMax);
-    if (isOffshore && ws < 15) s += 1;
-    if (isOffshore && ws < 8) s += 0.5;
-  } else {
-    const offGen = (wd >= 260 && wd <= 360) || (wd >= 0 && wd < 45);
-    if (offGen && ws < 12) s++;
+  if (ws >= 5) {
+      if (diffAngulo > 135) {
+          score += SURFLINE_VIENTO_TERRAL_BONUS;
+      } else if (diffAngulo >= 45 && diffAngulo <= 135) {
+          score += SURFLINE_VIENTO_CRUZADO_PENAL;
+      } else {
+          score += SURFLINE_VIENTO_MAR_PENAL * (ws / 15);
+      }
   }
-
-  if (ws > 20) s -= 1;
-  if (ws > 30) s -= 1;
-
-  presion = Number(presion) || 1013;
-  if (presion > 0 && presion < 1008) s += 0.5;
-  if (presion > 0 && presion < 995) s += 0.5;
-
-  return Math.min(Math.max(Math.round(s), 0), 5);
+  
+  return Math.max(0, Math.min(6, Math.round(score)));
 }
-
-// ==========================================
-// 4. HELPERS ESTILO SURFLINE (ANATÓMICO, ESTRELLAS MATERIAL Y VIENTO)
-// ==========================================
 
 function getAnatomicalHeight(h) {
-  if (h < 0.2) return 'Plato / Calma';
-  if (h < 0.4) return 'Tobillo a Rodilla';
-  if (h < 0.7) return 'Rodilla a Cintura';
-  if (h < 1.1) return 'Cintura a Pecho';
-  if (h < 1.5) return 'Pecho a Cabeza';
-  if (h < 2.0) return 'Cabeza a Por Encima';
-  return 'Muy Por Encima';
+  if (h < 0.3) return 'Tobillo';
+  if (h < 0.6) return 'Rodilla';
+  if (h < 0.9) return 'Cintura';
+  if (h < 1.2) return 'Pecho';
+  if (h < 1.8) return 'Cabeza';
+  return 'Por encima de la cabeza';
 }
 
 function getRatingMeta(score) {
-  const s = Math.max(0, Math.min(5, Math.round(score)));
+  const s = Math.max(0, Math.min(6, Math.round(score)));
   switch (s) {
-    case 5:
-      return {
-        label: 'Épico',
-        badgeClass: 'bg-sky-500/20 text-sky-300 border-sky-500/40',
-        starColor: 'text-sky-400',
-        barColor: '#0ea5e9',
-        desc: 'Temporal clásico del Mediterráneo, series ordenadas y tubos'
-      };
-    case 4:
-      return {
-        label: 'Muy Bueno',
-        badgeClass: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
-        starColor: 'text-emerald-400',
-        barColor: '#10b981',
-        desc: 'Líneas limpias con viento terral y series consistentes'
-      };
-    case 3:
-      return {
-        label: 'Regular a Bueno',
-        badgeClass: 'bg-teal-500/20 text-teal-300 border-teal-500/40',
-        starColor: 'text-teal-400',
-        barColor: '#14b8a6',
-        desc: 'Rompiente definida y periodos aprovechables'
-      };
-    case 2:
-      return {
-        label: 'Pobre a Regular',
-        badgeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-        starColor: 'text-amber-400',
-        barColor: '#f59e0b',
-        desc: 'Olas pequeñas para tablón o viento cruzado'
-      };
-    case 1:
-      return {
-        label: 'Muy Pobre',
-        badgeClass: 'bg-rose-500/20 text-rose-300 border-rose-500/40',
-        starColor: 'text-rose-400',
-        barColor: '#ef4444',
-        desc: 'Orillero escaso o mar de viento picado'
-      };
-    case 0:
-    default:
-      return {
-        label: 'Plato',
-        badgeClass: 'bg-slate-700/60 text-slate-300 border-slate-600',
-        starColor: 'text-slate-500',
-        barColor: '#64748b',
-        desc: 'Sin rompiente surfeable'
-      };
+    case 6: return { label: 'ÉPICO', badgeClass: 'bg-purple-500/20 text-purple-400 border-purple-500/40', starColor: 'text-purple-500', barColor: '#a855f7', desc: 'Épico' };
+    case 5: return { label: 'BUENO', badgeClass: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40', starColor: 'text-emerald-500', barColor: '#10b981', desc: 'Bueno' };
+    case 4: return { label: 'REGULAR-BUENO', badgeClass: 'bg-lime-500/20 text-lime-400 border-lime-500/40', starColor: 'text-lime-500', barColor: '#a3e635', desc: 'Regular a Bueno' };
+    case 3: return { label: 'REGULAR', badgeClass: 'bg-amber-400/20 text-amber-400 border-amber-400/40', starColor: 'text-amber-400', barColor: '#fbbf24', desc: 'Regular' };
+    case 2: return { label: 'MALO-REGULAR', badgeClass: 'bg-orange-500/20 text-orange-400 border-orange-500/40', starColor: 'text-orange-500', barColor: '#f97316', desc: 'Malo a Regular' };
+    case 1: return { label: 'MALO', badgeClass: 'bg-rose-500/20 text-rose-400 border-rose-500/40', starColor: 'text-rose-500', barColor: '#f43f5e', desc: 'Malo' };
+    default: return { label: 'MUY MALO', badgeClass: 'bg-slate-500/20 text-slate-400 border-slate-500/40', starColor: 'text-slate-500', barColor: '#64748b', desc: 'Muy Malo' };
   }
 }
+
 
 function renderStarsHTML(score, starColor = 'text-sky-400') {
   const rounded = Math.min(5, Math.max(0, Math.round(score)));
@@ -548,46 +578,43 @@ function degreesToCompass(deg) {
   return arr[(val % 16)];
 }
 
+
 function getWindCondition(wd, ws, spotName) {
-  const cfg = getSpotConfig(spotName);
-  const isOffshore = (cfg.offshoreMin < cfg.offshoreMax)
-    ? (wd >= cfg.offshoreMin && wd <= cfg.offshoreMax)
-    : (wd >= cfg.offshoreMin || wd <= cfg.offshoreMax);
-
-  const normalCosta = cfg.azimut + 90;
-  let diffNormal = Math.abs(wd - normalCosta);
-  if (diffNormal > 180) diffNormal = 360 - diffNormal;
-  const isOnshore = diffNormal <= 45;
-
-  if (isOffshore) {
+  const spot = SPOTS.find(s => s.id === spotName || s.name === spotName) || SPOTS[0];
+  const orientacion = spot.orientacion || 90;
+  
+  if (ws < 5) {
     return {
-      type: 'offshore',
-      label: 'Terral (Offshore)',
-      bgClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
-      dotClass: 'bg-emerald-400',
-      icon: 'air',
-      desc: 'Terral limpio'
+      type: 'offshore', label: 'Sin Viento',
+      bgClass: 'bg-slate-500/15 text-slate-400 border-slate-500/30',
+      dotClass: 'bg-slate-400', icon: 'air', desc: 'Sin viento'
     };
-  } else if (isOnshore) {
+  }
+
+  let diffAngulo = Math.abs(wd - orientacion);
+  if (diffAngulo > 180) diffAngulo = 360 - diffAngulo;
+
+  if (diffAngulo > 135) {
     return {
-      type: 'onshore',
-      label: 'Chopi (Onshore)',
-      bgClass: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
-      dotClass: 'bg-rose-400',
-      icon: 'waves',
-      desc: 'Mar picado'
+      type: 'offshore', label: 'Terral (Offshore)',
+      bgClass: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+      dotClass: 'bg-emerald-400', icon: 'air', desc: 'Terral limpio'
+    };
+  } else if (diffAngulo >= 45 && diffAngulo <= 135) {
+    return {
+      type: 'cross', label: 'Cruzado (Cross)',
+      bgClass: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+      dotClass: 'bg-amber-400', icon: 'air', desc: 'Viento lateral'
     };
   } else {
     return {
-      type: 'cross',
-      label: 'Cruzado (Cross-shore)',
-      bgClass: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
-      dotClass: 'bg-amber-400',
-      icon: 'swap_horiz',
-      desc: 'Viento cruzado'
+      type: 'onshore', label: 'De mar (Onshore)',
+      bgClass: 'bg-rose-500/15 text-rose-400 border-rose-500/30',
+      dotClass: 'bg-rose-400', icon: 'air', desc: 'Revuelto (Onshore)'
     };
   }
 }
+
 
 // ==========================================
 // 5. ESTADO GLOBAL DE LA APLICACIÓN
@@ -708,6 +735,7 @@ function renderRegionalHero(data) {
       break;
     }
   }
+  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0;
   const p = data.marine.wave_period[currentIndex] || 0;
@@ -1126,6 +1154,7 @@ function loadSpotWebcam(spotId) {
 
 
 function renderSpotSpotlight(spotId) {
+  const compassContainer = document.getElementById("spotlight-compass-svg");
   const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
   initSpotlightSelector();
 
@@ -1151,6 +1180,7 @@ function renderSpotSpotlight(spotId) {
   if (!data || !data.times || !data.times.length) return;
 
   const nowIso = new Date().toISOString();
+  renderForecastBars(data, spotId);
   let currentIndex = 0;
   for (let i = 0; i < data.times.length; i++) {
     if (data.times[i] >= nowIso.slice(0, 13)) {
@@ -1158,6 +1188,7 @@ function renderSpotSpotlight(spotId) {
       break;
     }
   }
+  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0;
   const p = data.marine.wave_period[currentIndex] || 0;
@@ -1236,6 +1267,7 @@ function renderSpotCards(data, filter = 'all') {
       break;
     }
   }
+  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0;
   const p = data.marine.wave_period[currentIndex] || 0;
@@ -1441,6 +1473,71 @@ function initHourlySelector() {
   }
 
   select.value = AppState.currentSpotId;
+}
+
+
+let forecastState = { spotId: 'Planetario', selectedTimeIndex: null };
+
+function renderForecastBars(data, spotId) {
+  const container = document.getElementById('forecast-bars-container');
+  if (!container || !data || !data.times) return;
+
+  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
+  let html = '';
+  
+  // Agrupar por días y cada 3h
+  let currentDay = '';
+  const nowIso = new Date().toISOString();
+  
+  for (let i = 0; i < data.times.length; i++) {
+    const timeStr = data.times[i];
+    if (timeStr < nowIso.slice(0, 13)) continue;
+    
+    const d = new Date(timeStr);
+    const hour = d.getHours();
+    
+    // Cada 3h
+    if (hour % 3 !== 0) continue;
+    
+    const day = d.toLocaleDateString('es-ES', { weekday: 'short' });
+    const isNewDay = day !== currentDay;
+    if (isNewDay) currentDay = day;
+    
+    const h = data.marine.wave_height[i];
+    const p = data.marine.wave_period[i];
+    const sDir = data.marine.wave_direction[i];
+    const ws = data.weather.wind_speed_10m[i];
+    const wd = data.weather.wind_direction_10m[i];
+    const pres = data.weather.surface_pressure[i];
+    
+    const hLocal = calcularFisica(spot.name, h, p, sDir);
+    const quality = calcularCalidad(hLocal, p, ws, wd, spot.name, pres, 10);
+    const meta = getRatingMeta(quality);
+    
+    const heightPx = Math.max(10, hLocal * 50); // Scale for visual
+    const timeLabel = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    const isSelected = forecastState.selectedTimeIndex === i;
+    
+    html += `
+      <div class="flex flex-col items-center shrink-0 snap-start relative group cursor-pointer" onclick="selectForecastTime(${i})">
+        ${isNewDay ? `<div class="absolute -top-10 text-[10px] font-bold text-slate-400 border-b border-surf-800 w-full text-center pb-1">${day.toUpperCase()}</div>` : ''}
+        <div class="text-[10px] font-black text-white mb-1 transition-transform group-hover:-translate-y-1">${hLocal.toFixed(1)}m</div>
+        <div class="w-8 rounded-t-sm transition-all duration-300 ${isSelected ? 'ring-2 ring-white' : 'opacity-80 hover:opacity-100'}" style="height: ${heightPx}px; background-color: ${meta.barColor}"></div>
+        <div class="text-[9px] text-slate-500 mt-2 font-medium">${timeLabel}</div>
+      </div>
+    `;
+  }
+  
+  container.innerHTML = html;
+}
+
+function selectForecastTime(index) {
+  forecastState.selectedTimeIndex = index;
+  // Update UI components that rely on time
+  renderSpotSpotlight(AppState.weatherData, AppState.currentSpotId, index);
+  // Re-render bars to highlight selected
+  renderForecastBars(AppState.weatherData, AppState.currentSpotId);
 }
 
 function renderHourlyTable(data, spotId, dayOffset = 0) {
@@ -1653,6 +1750,7 @@ function updateMapMarkers(data) {
       break;
     }
   }
+  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0.4;
   const p = data.marine.wave_period[currentIndex] || 4.5;
@@ -2130,3 +2228,81 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateMapMarkers(freshData);
   logTelemetry('[NET] Previsión meteorológica Copernicus/ECMWF 96h sincronizada.', 'success');
 });
+
+
+function polarToCartesian(cx, cy, r, angleInDegrees) {
+  const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+  return {
+    x: cx + (r * Math.cos(angleInRadians)),
+    y: cy + (r * Math.sin(angleInRadians))
+  };
+}
+
+function describeArc(x, y, r, startAngle, endAngle) {
+  const start = polarToCartesian(x, y, r, endAngle);
+  const end = polarToCartesian(x, y, r, startAngle);
+  let largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+  if (endAngle < startAngle) {
+      largeArcFlag = (endAngle + 360 - startAngle) <= 180 ? "0" : "1";
+  }
+  return [
+    "M", x, y,
+    "L", start.x, start.y, 
+    "A", r, r, 0, largeArcFlag, 0, end.x, end.y,
+    "Z"
+  ].join(" ");
+}
+
+function renderCompassSVG(spotId, currentMarDir, currentVientoDir) {
+  const spot = SPOTS.find(s => s.id === spotId || s.name === spotId) || SPOTS[0];
+  const orient = spot.orientacion || 90;
+  const mar = spot.ventanaMar || [(orient - 35 + 360)%360, (orient + 35)%360];
+  const viento = spot.ventanaViento || [(orient + 180 - 45 + 360)%360, (orient + 180 + 45)%360];
+  
+  const cx = 50, cy = 50, r = 40;
+  
+  // Coastline line (perpendicular to normal)
+  const coastAngle1 = (orient - 90 + 360) % 360;
+  const coastAngle2 = (orient + 90) % 360;
+  const p1 = polarToCartesian(cx, cy, r + 5, coastAngle1);
+  const p2 = polarToCartesian(cx, cy, r + 5, coastAngle2);
+  
+  // Arcs
+  const marArc = describeArc(cx, cy, r, mar[0], mar[1]);
+  const vientoArc = describeArc(cx, cy, r, viento[0], viento[1]);
+  
+  // Arrows for current conditions
+  const pMar = polarToCartesian(cx, cy, r - 5, currentMarDir);
+  const pViento = polarToCartesian(cx, cy, r - 5, currentVientoDir);
+  
+  const svg = `
+    <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg">
+      <circle cx="50" cy="50" r="45" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+      
+      <!-- Cuñas -->
+      <path d="${marArc}" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="1"/>
+      <path d="${vientoArc}" fill="rgba(14, 165, 233, 0.2)" stroke="#0ea5e9" stroke-width="1"/>
+      
+      <!-- Línea de costa -->
+      <line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="${p1.x}" cy="${p1.y}" r="2" fill="#94a3b8"/>
+      <circle cx="${p2.x}" cy="${p2.y}" r="2" fill="#94a3b8"/>
+      
+      <!-- Flechas de condiciones actuales (si vienen de ese ángulo) -->
+      <!-- Flecha mar: apunta DESDE el origen de la ola hacia la costa, o desde el mar hacia el centro -->
+      <!-- En Surfline la flecha de ola y viento apunta en la dirección a la que VAN, es decir, el centro -->
+      <line x1="${pMar.x}" y1="${pMar.y}" x2="50" y2="50" stroke="#34d399" stroke-width="2" marker-end="url(#arrow-mar)"/>
+      <line x1="${pViento.x}" y1="${pViento.y}" x2="50" y2="50" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrow-viento)"/>
+      
+      <defs>
+        <marker id="arrow-mar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#34d399" />
+        </marker>
+        <marker id="arrow-viento" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
+        </marker>
+      </defs>
+    </svg>
+  `;
+  return svg;
+}
