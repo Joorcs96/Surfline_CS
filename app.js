@@ -1178,7 +1178,7 @@ function renderSpotSpotlight(spotId) {
 
   if (nameEl) nameEl.textContent = spot.label;
   if (zoneEl) zoneEl.textContent = spot.zoneName;
-  if (orientEl) orientEl.textContent = `${spot.azimut}° (${degreesToCompass(spot.azimut)})`;
+  if (orientEl) orientEl.textContent = `${spot.orientacion}° (${degreesToCompass(spot.orientacion)})`;
   if (bottomEl) bottomEl.textContent = spot.bottom;
   if (tideEl) tideEl.textContent = spot.bestTide;
   if (descEl) descEl.textContent = spot.desc;
@@ -1206,6 +1206,9 @@ function renderSpotSpotlight(spotId) {
   const sDir = data.marine.wave_direction[currentIndex] || 0;
   const ws = data.weather.wind_speed_10m[currentIndex] || 0;
   const wd = data.weather.wind_direction_10m[currentIndex] || 0;
+
+  // Brújula: costa, ventanas óptimas y flechas de mar y viento de la franja mostrada
+  if (compassContainer) compassContainer.innerHTML = renderCompassSVG(spot.id, sDir, wd);
 
   const hLocal = calcularFisica(spot.name, h, p, sDir);
   const quality = calcularCalidad(hLocal, p, ws, wd, spot.name, 1013, 10);
