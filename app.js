@@ -620,6 +620,9 @@ function getWindCondition(wd, ws, spotName) {
 // 5. ESTADO GLOBAL DE LA APLICACIÓN
 // ==========================================
 
+// Franja de la previsión que el usuario ha tocado (null = ahora)
+const forecastState = { spotId: 'Planetario', selectedTimeIndex: null };
+
 const AppState = {
   forecastData: null,
   currentSpotId: 'Planetario',
@@ -735,7 +738,6 @@ function renderRegionalHero(data) {
       break;
     }
   }
-  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0;
   const p = data.marine.wave_period[currentIndex] || 0;
@@ -1188,7 +1190,7 @@ function renderSpotSpotlight(spotId) {
       break;
     }
   }
-  if (timeIndex !== null) currentIndex = timeIndex;
+  if (forecastState.selectedTimeIndex != null) currentIndex = forecastState.selectedTimeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0;
   const p = data.marine.wave_period[currentIndex] || 0;
@@ -1267,7 +1269,6 @@ function renderSpotCards(data, filter = 'all') {
       break;
     }
   }
-  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0;
   const p = data.marine.wave_period[currentIndex] || 0;
@@ -1476,7 +1477,6 @@ function initHourlySelector() {
 }
 
 
-let forecastState = { spotId: 'Planetario', selectedTimeIndex: null };
 
 function renderForecastBars(data, spotId) {
   const container = document.getElementById('forecast-bars-container');
@@ -1535,9 +1535,8 @@ function renderForecastBars(data, spotId) {
 function selectForecastTime(index) {
   forecastState.selectedTimeIndex = index;
   // Update UI components that rely on time
-  renderSpotSpotlight(AppState.weatherData, AppState.currentSpotId, index);
-  // Re-render bars to highlight selected
-  renderForecastBars(AppState.weatherData, AppState.currentSpotId);
+  // renderSpotSpotlight ya vuelve a pintar las barras con la franja resaltada
+  renderSpotSpotlight(AppState.currentSpotId);
 }
 
 function renderHourlyTable(data, spotId, dayOffset = 0) {
@@ -1750,7 +1749,6 @@ function updateMapMarkers(data) {
       break;
     }
   }
-  if (timeIndex !== null) currentIndex = timeIndex;
 
   const h = data.marine.wave_height[currentIndex] || 0.4;
   const p = data.marine.wave_period[currentIndex] || 4.5;
@@ -1917,6 +1915,7 @@ function initWindyRadarModal() {
 // ==========================================
 
 function selectSpot(spotId) {
+  forecastState.selectedTimeIndex = null;
   AppState.currentSpotId = spotId;
 
   // Sincronizar selectores desplegables
