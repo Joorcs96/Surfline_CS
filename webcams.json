@@ -1,37 +1,37 @@
 {
-  "updatedAt": "2026-09-25T08:21:02.377716+00:00",
+  "updatedAt": "2026-09-25T09:50:00.000000+00:00",
   "webcams": [
     {
       "id": "planetario",
       "name": "Grao de Castellón - Planetario / Surfers Castellón",
       "zone": "Grao de Castellón",
-      "streamType": "surfers",
-      "streamUrl": "https://www.surferscastellon.com/live-webcam/",
-      "snapshotUrl": "https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg",
+      "streamType": "link_only",
+      "streamUrl": null,
+      "snapshotUrl": null,
       "officialUrl": "https://www.surferscastellon.com/live-webcam/",
       "altOfficialUrl": "https://www.surferscastellon.com/webcam/",
-      "status": "online",
-      "description": "Cámara principal de la rompiente del Planetario en el Grao de Castellón, ubicada frente a las instalaciones del club Surfers Castellón.",
-      "spots": [
-        "Planetario"
-      ],
-      "lastChecked": "2026-09-25T08:21:00.318042+00:00"
+      "status": "link_only",
+      "liveStatus": false,
+      "reason": "La web del club (surferscastellon.com/live-webcam/) redirige a una página web, no emite stream embebible directamente. Sin fuente HLS/MJPEG verificada.",
+      "description": "Rompiente del Planetario en el Grao de Castellón. Cámara del club Surfers Castellón accesible en su web oficial.",
+      "spots": ["Planetario"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "gurugu",
       "name": "Grao de Castellón - Playa del Gurugú / Pinar",
       "zone": "Grao de Castellón",
-      "streamType": "snapshot",
-      "streamUrl": "https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg",
-      "snapshotUrl": "https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg",
+      "streamType": "link_only",
+      "streamUrl": null,
+      "snapshotUrl": null,
       "officialUrl": "https://camaramar.com/webcam-playa-del-gurugu-castellon/",
       "altOfficialUrl": "https://www.aeroclubcastellon.com/webcam/",
-      "status": "online",
-      "description": "Línea de costa y rompiente de las playas del Gurugú y del Pinar desde el Aeroclub.",
-      "spots": [
-        "Gurugu"
-      ],
-      "lastChecked": "2026-09-25T08:21:00.442283+00:00"
+      "status": "link_only",
+      "liveStatus": false,
+      "reason": "La URL de aeroclubcastellon.com/wp-content/.../webcam-aeroclub-cs.jpg es una foto estática de 2016, no un stream en directo.",
+      "description": "Línea de costa y rompiente de las playas del Gurugú y del Pinar. Accede al visor oficial para ver la imagen actual.",
+      "spots": ["Gurugu"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "voramar",
@@ -42,11 +42,11 @@
       "snapshotUrl": "https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg",
       "officialUrl": "https://voramar.net/webcam-playa-voramar-benicassim/",
       "status": "online",
-      "description": "Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim.",
-      "spots": [
-        "Voramar"
-      ],
-      "lastChecked": "2026-09-25T08:21:01.140134+00:00"
+      "liveStatus": true,
+      "reason": "MJPEG en puerto 445 (puede estar bloqueado en redes móviles). Snapshot de fallback disponible.",
+      "description": "Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim. Si no carga, accede al enlace oficial.",
+      "spots": ["Voramar"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "burriana",
@@ -57,11 +57,11 @@
       "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Burriana/webcam_mini.png",
       "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/borriana-burriana/webcams/burriana-1",
       "status": "online",
+      "liveStatus": true,
+      "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.",
-      "spots": [
-        "Burriana"
-      ],
-      "lastChecked": "2026-09-25T08:21:01.345347+00:00"
+      "spots": ["Burriana"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "peniscola",
@@ -73,11 +73,11 @@
       "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/peniscola-peniscola/webcams/peniscola-1",
       "altOfficialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/peniscola.html",
       "status": "online",
+      "liveStatus": true,
+      "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.",
-      "spots": [
-        "Peniscola N"
-      ],
-      "lastChecked": "2026-09-25T08:21:01.642120+00:00"
+      "spots": ["Peniscola N"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "oropesa",
@@ -88,11 +88,11 @@
       "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/OropesadelMar/webcam_mini.png",
       "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/orpesa-oropesa-del-mar/webcams/oropesa-del-mar-1",
       "status": "online",
+      "liveStatus": true,
+      "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.",
-      "spots": [
-        "MorroGos"
-      ],
-      "lastChecked": "2026-09-25T08:21:01.757866+00:00"
+      "spots": ["MorroGos"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "vinaros",
@@ -103,26 +103,26 @@
       "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Vinaros/webcam_mini.png",
       "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/vinaros/webcams/vinaros-2",
       "status": "online",
+      "liveStatus": true,
+      "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Paseo marítimo y rompiente urbana del Fortí en el norte de Castellón.",
-      "spots": [
-        "Vinaros"
-      ],
-      "lastChecked": "2026-09-25T08:21:01.960840+00:00"
+      "spots": ["Vinaros"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "heliopolis",
       "name": "Benicàssim - Playa Heliópolis",
       "zone": "Benicàssim",
-      "streamType": "external",
-      "streamUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html",
-      "snapshotUrl": "https://voramar.net/wp-content/uploads/2022/04/Webcam2.jpg",
+      "streamType": "link_only",
+      "streamUrl": null,
+      "snapshotUrl": null,
       "officialUrl": "https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html",
-      "status": "online",
-      "description": "Panorámica sur de Benicàssim transmitida en SkylineWebcams.",
-      "spots": [
-        "Heliopolis"
-      ],
-      "lastChecked": "2026-09-25T08:21:02.161135+00:00"
+      "status": "link_only",
+      "liveStatus": false,
+      "reason": "skylinewebcams.com envía X-Frame-Options: SAMEORIGIN, no se puede incrustar en iframe. Sin HLS/MJPEG embebible verificado.",
+      "description": "Panorámica sur de Benicàssim en SkylineWebcams. Accede al enlace oficial para verla en directo.",
+      "spots": ["Heliopolis"],
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     },
     {
       "id": "alcossebre",
@@ -133,10 +133,13 @@
       "snapshotUrl": "https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png",
       "officialUrl": "https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1",
       "status": "online",
+      "liveStatus": true,
+      "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Playa de fina arena protegida por salientes rocosos con oleaje suave.",
       "spots": [],
-      "lastChecked": "2026-09-25T08:21:02.377716+00:00"
+      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
     }
   ],
-  "totalActive": 9
+  "totalActive": 6,
+  "totalLinkOnly": 3
 }

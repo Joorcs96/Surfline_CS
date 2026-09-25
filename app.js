@@ -306,31 +306,36 @@ const WEBCAMS_CATALOG = [
     id: 'planetario',
     name: 'Grao de Castellón - Planetario / Surfers CS',
     zone: 'Grao de Castellón',
-    streamType: 'surfers',
-    streamUrl: 'https://www.surferscastellon.com/live-webcam/',
-    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    // La web de Surfers Castellón redirige (301) a una página web, no emite HLS/MJPEG embebible.
+    // La foto aeroclubcastellon.com/...webcam-aeroclub-cs.jpg es una imagen estática de 2016: descartada.
+    streamType: 'link_only',
+    streamUrl: null,
+    snapshotUrl: null,
     officialUrl: 'https://www.surferscastellon.com/live-webcam/',
-    description: 'Cámara oficial del club Surfers Castellón frente a la rompiente del Planetario.'
+    description: 'Cámara del club Surfers Castellón frente a la rompiente del Planetario. Accede al enlace oficial para verla.'
   },
   {
     id: 'gurugu',
-    name: 'Grao de Castellón - Playa del Gurugú / Aeroclub',
+    name: 'Grao de Castellón - Playa del Gurugú / Pinar',
     zone: 'Grao de Castellón',
-    streamType: 'snapshot',
-    streamUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
-    snapshotUrl: 'https://aeroclubcastellon.com/wp-content/uploads/2016/09/webcam-aeroclub-cs.jpg',
+    // aeroclubcastellon.com/wp-content/.../webcam-aeroclub-cs.jpg es una foto estática de 2016: descartada.
+    streamType: 'link_only',
+    streamUrl: null,
+    snapshotUrl: null,
     officialUrl: 'https://camaramar.com/webcam-playa-del-gurugu-castellon/',
-    description: 'Panorámica de la rompiente del Gurugú y del Pinar desde el Aeroclub.'
+    description: 'Panorámica de la rompiente del Gurugú. Sin stream en directo embebible verificado; accede al enlace oficial.'
   },
   {
     id: 'voramar',
     name: 'Benicàssim - Playa Voramar',
     zone: 'Benicàssim',
-    streamType: 'snapshot',
-    streamUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg',
+    // MJPEG en puerto 445 con CORS OK, pero el puerto puede estar bloqueado en redes móviles.
+    // Tras 8 s de timeout, se muestra el snapshot estático + botón oficial.
+    streamType: 'mjpeg',
+    streamUrl: 'https://cam1.voramar.net:445/axis-cgi/mjpg/video.cgi',
     snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam1.jpg',
     officialUrl: 'https://voramar.net/webcam-playa-voramar-benicassim/',
-    description: 'Cámara de alta resolución del Hotel Voramar sobre la bahía norte de Benicàssim.'
+    description: 'Cámara MJPEG del Hotel Voramar (puerto 445). Puede estar bloqueado en redes móviles; si no carga, accede al enlace oficial.'
   },
   {
     id: 'burriana',
@@ -376,11 +381,22 @@ const WEBCAMS_CATALOG = [
     id: 'heliopolis',
     name: 'Benicàssim - Playa Heliópolis',
     zone: 'Benicàssim',
-    streamType: 'snapshot',
-    streamUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam2.jpg',
-    snapshotUrl: 'https://voramar.net/wp-content/uploads/2022/04/Webcam2.jpg',
+    // skylinewebcams.com devuelve X-Frame-Options: SAMEORIGIN → no se puede incrustar.
+    streamType: 'link_only',
+    streamUrl: null,
+    snapshotUrl: null,
     officialUrl: 'https://www.skylinewebcams.com/es/webcam/espana/comunidad-valenciana/castellon/heliopolis.html',
-    description: 'Panorámica de la zona sur de Benicàssim transmitida en directo.'
+    description: 'Panorámica sur de Benicàssim en SkylineWebcams. La web no permite incrustar su visor; accede al enlace oficial.'
+  },
+  {
+    id: 'alcossebre',
+    name: 'Alcossebre - Playa Romana / Cargador',
+    zone: 'Costa Norte',
+    streamType: 'hls',
+    streamUrl: 'https://streaming.comunitatvalenciana.com/webcam/Alcossebre/playlist.m3u8',
+    snapshotUrl: 'https://streaming.comunitatvalenciana.com/static/Alcossebre/webcam_mini.png',
+    officialUrl: 'https://www.comunitatvalenciana.com/es/castello-castellon/alcala-de-xivert-alcossebre/webcams/alcala-de-xivert-alcossebre-1',
+    description: 'Playa de fina arena protegida por salientes rocosos con oleaje suave.'
   }
 ];
 
@@ -778,6 +794,18 @@ function initSpotlightSelector() {
   select.value = AppState.currentSpotId;
 }
 
+/**
+ * Muestra un toast o actualiza el badge de pie con enlace a la cámara oficial
+ * cuando el stream falla o no está disponible.
+ */
+function showOfficialLink(cam) {
+  const footnote = document.getElementById('spotlight-cam-footnote');
+  const descEl = document.getElementById('spotlight-cam-desc');
+  if (descEl) {
+    descEl.innerHTML = `${cam.description} <a href="${cam.officialUrl}" target="_blank" rel="noopener" class="underline text-sky-400 hover:text-sky-300">Abrir cámara oficial</a>`;
+  }
+}
+
 function loadSpotWebcam(spotId) {
   const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
   const cam = WEBCAMS_CATALOG.find(c => c.id === spot.webcamId) || WEBCAMS_CATALOG[0];
@@ -786,6 +814,7 @@ function loadSpotWebcam(spotId) {
   const imgPlayer = document.getElementById('spotlight-img');
   const loader = document.getElementById('spotlight-loader');
   const liveLabel = document.getElementById('spotlight-live-label');
+  const livePill = document.getElementById('spotlight-live-pill');
   const camTitleBadge = document.getElementById('spotlight-cam-title-badge');
   const camDescEl = document.getElementById('spotlight-cam-desc');
   const camTypeBadge = document.getElementById('spotlight-cam-type-badge');
@@ -799,13 +828,22 @@ function loadSpotWebcam(spotId) {
   if (camDescEl) camDescEl.textContent = cam.description;
   if (extBtn) extBtn.href = cam.officialUrl;
 
-  // Actualizar etiqueta de si es directa o de referencia
+  // Actualizar etiqueta de estado de cámara (honesta según streamType real)
   if (camTypeBadge) {
-    if (spot.webcamType === 'direct') {
+    if (cam.streamType === 'link_only') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Solo enlace oficial`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-slate-400 flex items-center gap-1';
+    } else if (cam.streamType === 'hls' && spot.webcamType === 'direct') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Stream HLS en directo`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-emerald-400 flex items-center gap-1';
+    } else if (cam.streamType === 'mjpeg') {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> MJPEG (puerto 445)`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-sky-400 flex items-center gap-1';
+    } else if (spot.webcamType === 'direct') {
       camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Cámara directa del spot`;
       camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-emerald-400 flex items-center gap-1';
     } else {
-      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Ref: ${cam.name} (${spot.referenceDist})`;
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Ref: ${cam.name.split('-')[0].trim()} (${spot.referenceDist || 'cercano'})`;
       camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-amber-400 flex items-center gap-1';
     }
   }
@@ -822,9 +860,16 @@ function loadSpotWebcam(spotId) {
   if (videoPlayer) {
     videoPlayer.pause();
     videoPlayer.classList.add('hidden');
+    // Limpiar listeners de error previos
+    videoPlayer.onerror = null;
   }
   if (imgPlayer) {
     imgPlayer.classList.add('hidden');
+    imgPlayer.onerror = null;
+    imgPlayer.onload = null;
+  }
+  if (livePill) {
+    livePill.classList.remove('opacity-50');
   }
   if (surfersOverlay) {
     surfersOverlay.classList.add('hidden');
@@ -861,18 +906,48 @@ function loadSpotWebcam(spotId) {
     });
   }
 
-  // Caso 1: Streaming HLS en directo (Burriana, Peñíscola, Oropesa, Vinaròs)
+  // Caso 1: Streaming HLS en directo (Burriana, Peñíscola, Oropesa, Vinaròs, Alcossebre)
   if (cam.streamType === 'hls') {
     if (videoPlayer) {
       videoPlayer.classList.remove('hidden');
       if (loader) loader.classList.remove('hidden');
       if (liveLabel) liveLabel.textContent = 'CONECTANDO...';
 
-      if (window.Hls && Hls.isSupported()) {
+      // iOS Safari: soporta HLS nativo (canPlayType devuelve truthy)
+      if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+        videoPlayer.src = cam.streamUrl;
+
+        // iOS necesita el evento 'canplay' para que play() no falle
+        const onCanPlay = () => {
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
+          videoPlayer.play().catch(() => {});
+          videoPlayer.removeEventListener('canplay', onCanPlay);
+        };
+        videoPlayer.addEventListener('canplay', onCanPlay);
+
+        // Listener 'error' además de onerror (más robusto en Safari)
+        const onError = () => {
+          videoPlayer.classList.add('hidden');
+          if (imgPlayer) {
+            imgPlayer.classList.remove('hidden');
+            imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+          }
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+          if (livePill) livePill.classList.add('opacity-50');
+          showOfficialLink(cam);
+        };
+        videoPlayer.addEventListener('error', onError);
+        videoPlayer.onerror = onError;
+
+      } else if (window.Hls && Hls.isSupported()) {
+        // Resto de navegadores: usar hls.js
         const hls = new Hls({
           enableWorker: true,
-          lowLatencyMode: true,
-          manifestLoadingTimeOut: 8000
+          lowLatencyMode: false,   // Los streams de CV no son LL-HLS
+          manifestLoadingTimeOut: 8000,
+          manifestLoadingMaxRetry: 2
         });
         AppState.hlsInstance = hls;
         hls.loadSource(cam.streamUrl);
@@ -880,13 +955,13 @@ function loadSpotWebcam(spotId) {
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           if (loader) loader.classList.add('hidden');
-          if (liveLabel) liveLabel.textContent = 'STREAM HD';
+          if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
           videoPlayer.play().catch(() => {});
         });
 
         hls.on(Hls.Events.ERROR, (event, data) => {
           if (data.fatal) {
-            console.warn('[HLS] Error de stream en directo. Conmutando a snapshot costero:', data);
+            console.warn('[HLS] Error fatal de stream. Conmutando a snapshot:', data);
             hls.destroy();
             AppState.hlsInstance = null;
             videoPlayer.classList.add('hidden');
@@ -895,65 +970,78 @@ function loadSpotWebcam(spotId) {
               imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
             }
             if (loader) loader.classList.add('hidden');
-            if (liveLabel) liveLabel.textContent = 'FOTO EN DIRECTO';
+            if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+            if (livePill) livePill.classList.add('opacity-50');
+            showOfficialLink(cam);
           }
         });
-      } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-        videoPlayer.src = cam.streamUrl;
-        videoPlayer.addEventListener('loadedmetadata', () => {
-          if (loader) loader.classList.add('hidden');
-          if (liveLabel) liveLabel.textContent = 'STREAM HD (iOS)';
-          videoPlayer.play().catch(() => {});
-        });
-        videoPlayer.onerror = () => {
-          videoPlayer.classList.add('hidden');
-          if (imgPlayer) {
-            imgPlayer.classList.remove('hidden');
-            imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
-          }
-          if (loader) loader.classList.add('hidden');
-          if (liveLabel) liveLabel.textContent = 'FOTO EN DIRECTO';
-        };
       }
     }
   }
 
-  // Caso 2: Cámara oficial Surfers Castellón / Grao (Planetario)
-  else if (cam.streamType === 'surfers') {
+  // Caso 2: MJPEG (Voramar) con timeout de 8 s y fallback a snapshot + enlace oficial
+  else if (cam.streamType === 'mjpeg') {
     if (imgPlayer) {
       imgPlayer.classList.remove('hidden');
-      const reloadSnap = () => {
-        imgPlayer.src = `${cam.snapshotUrl}?t=${Date.now()}`;
+      if (loader) loader.classList.remove('hidden');
+      if (liveLabel) liveLabel.textContent = 'CONECTANDO...';
+
+      let mjpegLoaded = false;
+      const mjpegTimeout = setTimeout(() => {
+        if (!mjpegLoaded) {
+          // Puerto 445 bloqueado o timeout: pasar a snapshot + enlace oficial
+          imgPlayer.src = cam.snapshotUrl ? `${cam.snapshotUrl}?t=${Date.now()}` : '';
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+          if (livePill) livePill.classList.add('opacity-50');
+          showOfficialLink(cam);
+        }
+      }, 8000);
+
+      imgPlayer.onload = () => {
+        mjpegLoaded = true;
+        clearTimeout(mjpegTimeout);
+        if (loader) loader.classList.add('hidden');
+        if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
       };
-      reloadSnap();
-      AppState.snapshotRefreshTimer = setInterval(reloadSnap, 12000);
+      imgPlayer.onerror = () => {
+        clearTimeout(mjpegTimeout);
+        imgPlayer.src = cam.snapshotUrl ? `${cam.snapshotUrl}?t=${Date.now()}` : '';
+        if (loader) loader.classList.add('hidden');
+        if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+        if (livePill) livePill.classList.add('opacity-50');
+        showOfficialLink(cam);
+      };
+
+      // Iniciar el stream MJPEG
+      imgPlayer.src = `${cam.streamUrl}?t=${Date.now()}`;
     }
+  }
+
+  // Caso 3: Solo enlace oficial (Planetario, Gurugú, Heliópolis)
+  //   No hay stream embebible verificado: mostrar tarjeta informativa honesta
+  else if (cam.streamType === 'link_only') {
     if (surfersOverlay) {
-      surfersOverlay.classList.remove('hidden');
-      if (surfersToggleBtn && !surfersToggleBtn.dataset.bound) {
-        surfersToggleBtn.dataset.bound = 'true';
-        surfersToggleBtn.addEventListener('click', () => {
-          if (!surfersIframe) return;
-          const isHidden = surfersIframe.classList.contains('hidden');
-          if (isHidden) {
-            surfersIframe.src = 'https://www.surferscastellon.com/live-webcam/';
-            surfersIframe.classList.remove('hidden');
-            if (surfersToggleText) surfersToggleText.textContent = 'Cerrar Visor Club';
-          } else {
-            surfersIframe.classList.add('hidden');
-            surfersIframe.src = 'about:blank';
-            if (surfersToggleText) surfersToggleText.textContent = 'Incrustar Visor Club';
-          }
-        });
+      // Reutilizamos el overlay de surfers con texto actualizado
+      const h4 = surfersOverlay.querySelector('h4');
+      const p  = surfersOverlay.querySelector('p');
+      const aBtn = surfersOverlay.querySelector('a');
+      if (h4) h4.textContent = cam.name;
+      if (p)  p.textContent  = cam.description;
+      if (aBtn) {
+        aBtn.href = cam.officialUrl;
+        aBtn.querySelector('span:first-child') && (aBtn.querySelector('span:first-child').textContent = 'Abrir cámara oficial');
       }
+      surfersOverlay.classList.remove('hidden');
     }
-    if (liveLabel) liveLabel.textContent = 'CLUB SURFERS CS';
+    if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+    if (livePill) livePill.classList.add('opacity-50');
     if (loader) loader.classList.add('hidden');
   }
 
-  // Caso 3: Snapshots periódicos de alta resolución (Gurugú, Voramar, Heliópolis)
+  // Caso 4: Snapshots periódicos estáticos (fallback genérico)
   else {
-    if (imgPlayer) {
+    if (imgPlayer && cam.snapshotUrl) {
       imgPlayer.classList.remove('hidden');
       if (loader) loader.classList.remove('hidden');
       const reloadSnap = () => {
@@ -964,13 +1052,16 @@ function loadSpotWebcam(spotId) {
       };
       imgPlayer.onerror = () => {
         if (loader) loader.classList.add('hidden');
+        if (liveLabel) liveLabel.textContent = 'SIN SEÑAL';
+        showOfficialLink(cam);
       };
       reloadSnap();
       AppState.snapshotRefreshTimer = setInterval(reloadSnap, 10000);
+      if (liveLabel) liveLabel.textContent = 'FOTO (sin stream)';
     }
-    if (liveLabel) liveLabel.textContent = 'EN DIRECTO (FOTO)';
   }
 }
+
 
 function renderSpotSpotlight(spotId) {
   const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
@@ -1106,6 +1197,8 @@ function renderSpotCards(data, filter = 'all') {
   filteredSpots.forEach(spot => {
     const cam = WEBCAMS_CATALOG.find(c => c.id === spot.webcamId) || WEBCAMS_CATALOG[0];
     const isDirect = spot.webcamType === 'direct';
+    const isLinkOnly = cam.streamType === 'link_only';
+    const hasLiveStream = cam.streamType === 'hls' || cam.streamType === 'mjpeg';
 
     const hLocal = calcularFisica(spot.name, h, p, sDir);
     const quality = calcularCalidad(hLocal, p, ws, wd, spot.name, pres, 10);
@@ -1118,6 +1211,34 @@ function renderSpotCards(data, filter = 'all') {
     const minH = Math.max(0.1, (hLocal * 0.8)).toFixed(1);
     const maxH = (hLocal * 1.25).toFixed(1);
     const isSelected = spot.id === AppState.currentSpotId;
+
+    // Badge de cámara: honesto según el tipo real
+    let camBadgeColor, camBadgeLabel;
+    if (hasLiveStream && isDirect) {
+      camBadgeColor = 'bg-emerald-400 animate-pulse';
+      camBadgeLabel = 'DIRECTO';
+    } else if (hasLiveStream) {
+      camBadgeColor = 'bg-amber-400';
+      camBadgeLabel = 'DIRECTO REF.';
+    } else if (isLinkOnly) {
+      camBadgeColor = 'bg-slate-500';
+      camBadgeLabel = 'SOLO ENLACE';
+    } else {
+      camBadgeColor = 'bg-amber-400';
+      camBadgeLabel = 'CAM REF.';
+    }
+
+    // Thumbnail: si no hay snapshotUrl (link_only), mostrar placeholder con ícono
+    const thumbnailHtml = cam.snapshotUrl
+      ? `<img src="${cam.snapshotUrl}" alt="${spot.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />`
+      : `<div class="w-full h-full flex flex-col items-center justify-center gap-2 text-slate-500 bg-surf-950">
+           <span class="material-symbols-outlined text-3xl">videocam_off</span>
+           <span class="text-[10px] font-bold uppercase tracking-wider">Sin stream verificado</span>
+           <a href="${cam.officialUrl}" target="_blank" rel="noopener noreferrer" class="mt-1 px-3 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/30 text-[10px] font-bold transition-colors flex items-center gap-1" onclick="event.stopPropagation()">
+             <span class="material-symbols-outlined text-xs">open_in_new</span>
+             Abrir cámara oficial
+           </a>
+         </div>`;
 
     html += `
       <div data-spot-id="${spot.id}" class="spot-card relative bg-surf-900 border ${isSelected ? 'border-sky-500 ring-2 ring-sky-500/20' : 'border-surf-800 hover:border-surf-700'} rounded-2xl p-4 sm:p-5 shadow-lg transition-all hover:shadow-xl hover:shadow-black/30 cursor-pointer flex flex-col justify-between group">
@@ -1150,18 +1271,18 @@ function renderSpotCards(data, filter = 'all') {
 
           <!-- REPRODUCTOR / MINIATURA DE LA WEBCAM INTEGRADA EN EL SPOT -->
           <div class="relative aspect-video rounded-xl overflow-hidden mb-3 border border-surf-800 bg-surf-950">
-            <img src="${cam.snapshotUrl}" alt="${spot.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div class="absolute inset-0 bg-gradient-to-t from-surf-950/80 via-transparent to-transparent opacity-80"></div>
+            ${thumbnailHtml}
+            <div class="absolute inset-0 bg-gradient-to-t from-surf-950/80 via-transparent to-transparent opacity-80 pointer-events-none"></div>
 
             <div class="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-surf-950/90 backdrop-blur-md border border-surf-800 text-[10px] font-bold text-white shadow-sm">
-              <span class="w-1.5 h-1.5 rounded-full ${isDirect ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}"></span>
-              <span>${isDirect ? 'DIRECTO' : 'CAM REF.'}</span>
+              <span class="w-1.5 h-1.5 rounded-full ${camBadgeColor}"></span>
+              <span>${camBadgeLabel}</span>
             </div>
 
-            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surf-950/90 backdrop-blur-md border border-surf-800 text-[10px] font-bold text-sky-400 flex items-center gap-1">
+            ${cam.snapshotUrl ? `<div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-surf-950/90 backdrop-blur-md border border-surf-800 text-[10px] font-bold text-sky-400 flex items-center gap-1">
               <span class="material-symbols-outlined text-xs">play_circle</span>
               <span>Ver rompiente</span>
-            </div>
+            </div>` : ''}
           </div>
 
           <!-- Altura Rompiente y Escala Corporal -->
