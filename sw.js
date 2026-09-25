@@ -1,6 +1,6 @@
 // sw.js — Surfline Castellón Service Worker
 // CACHE_NAME incrementado a v5 para forzar actualización en móviles con cache vieja
-const CACHE_NAME = 'surfline-cs-v5';
+const CACHE_NAME = 'surfline-cs-v6';
 const STATIC_ASSETS = [
   './',
   './index.html',

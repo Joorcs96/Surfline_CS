@@ -15,8 +15,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Planetario',
-    lat: 39.98,
-    lon: 0.03,
+    lat: 39.986,
+    lon: 0.026,
     azimut: 26,
     thetaCrit: 45,
     sBase: 0.15,
@@ -34,8 +34,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao de Castellón',
     label: 'Grao - Gurugú',
-    lat: 39.99,
-    lon: 0.04,
+    lat: 39.999,
+    lon: 0.03,
     azimut: 26,
     thetaCrit: 45,
     sBase: 0.15,
@@ -53,16 +53,14 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Grao / Almassora',
     label: 'Grao - Pirámides',
-    lat: 40.05,
-    lon: 0.07,
+    lat: 39.96,
+    lon: 0.015,
+    webcamId: null,
     azimut: 38,
     thetaCrit: 50,
     sBase: 0.10,
     offshoreMin: 285,
     offshoreMax: 330,
-    webcamId: 'planetario',
-    webcamType: 'reference',
-    referenceDist: '2 km al norte',
     bottom: 'Arena y bloques sumergidos',
     bestTide: 'Baja a media',
     desc: 'Estructuras piramidales en el límite sur del Grao. Bancos estables protegidos con W y NW.'
@@ -70,19 +68,17 @@ const SPOTS = [
   {
     id: 'Palaciet',
     name: 'El Palaciet',
-    zone: 'grao',
-    zoneName: 'Benicàssim',
-    label: 'Benicàssim - El Palaciet',
-    lat: 40.05,
-    lon: 0.07,
+    zone: 'sur',
+    zoneName: 'Burriana',
+    label: 'Burriana - El Palaciet',
+    lat: 39.912,
+    lon: -0.022,
+    webcamId: null,
     azimut: 45,
     thetaCrit: 55,
     sBase: 0.10,
     offshoreMin: 290,
     offshoreMax: 340,
-    webcamId: 'voramar',
-    webcamType: 'reference',
-    referenceDist: '1.5 km al norte',
     bottom: 'Arena fina',
     bestTide: 'Media marea',
     desc: 'Playa abrigada junto a la antigua vía de Benicàssim con rompiente suave ideal para tablones.'
@@ -93,8 +89,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Benicàssim',
     label: 'Benicàssim - Voramar',
-    lat: 40.06,
-    lon: 0.08,
+    lat: 40.056,
+    lon: 0.082,
     azimut: 54,
     thetaCrit: 65,
     sBase: 0.05,
@@ -112,8 +108,8 @@ const SPOTS = [
     zone: 'grao',
     zoneName: 'Benicàssim',
     label: 'Benicàssim - Heliópolis',
-    lat: 40.03,
-    lon: 0.06,
+    lat: 40.026,
+    lon: 0.044,
     azimut: 35,
     thetaCrit: 45,
     sBase: 0.15,
@@ -131,8 +127,8 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Oropesa del Mar',
     label: 'Oropesa - Morro de Gos',
-    lat: 40.098,
-    lon: 0.147,
+    lat: 40.095,
+    lon: 0.148,
     azimut: 60,
     thetaCrit: 65,
     sBase: 0.05,
@@ -150,16 +146,14 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Oropesa del Mar',
     label: 'Oropesa - La Renegà',
-    lat: 40.03,
-    lon: 0.09,
+    lat: 40.062,
+    lon: 0.12,
+    webcamId: null,
     azimut: 172,
     thetaCrit: 10,
     sBase: 0.90,
     offshoreMin: 260,
     offshoreMax: 310,
-    webcamId: 'oropesa',
-    webcamType: 'reference',
-    referenceDist: '3 km al norte',
     bottom: 'Roca y lajas planas',
     bestTide: 'Alta marea',
     desc: 'Calas rocosas vírgenes protegidas del viento del norte. Requiere oleaje potente del Este.'
@@ -170,8 +164,8 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Burriana',
     label: 'Burriana - Arenal / Escollera',
-    lat: 39.88,
-    lon: -0.05,
+    lat: 39.87,
+    lon: -0.061,
     azimut: 26,
     thetaCrit: 45,
     sBase: 0.20,
@@ -189,16 +183,14 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Nules',
     label: 'Nules - Espigones',
-    lat: 39.85,
-    lon: 0.08,
+    lat: 39.825,
+    lon: -0.111,
+    webcamId: null,
     azimut: 26,
     thetaCrit: 40,
     sBase: 0.25,
     offshoreMin: 275,
     offshoreMax: 315,
-    webcamId: 'burriana',
-    webcamType: 'reference',
-    referenceDist: '5 km al norte',
     bottom: 'Grava y arena entre espigones',
     bestTide: 'Media marea',
     desc: 'Zona de espigones cortos con picos rápidos de derecha e izquierda en temporales invernales.'
@@ -209,16 +201,14 @@ const SPOTS = [
     zone: 'sur',
     zoneName: 'Almenara',
     label: 'Almenara - Casablanca',
-    lat: 39.75,
-    lon: 0.05,
+    lat: 39.734,
+    lon: -0.183,
+    webcamId: null,
     azimut: 26,
     thetaCrit: 35,
     sBase: 0.30,
     offshoreMin: 275,
     offshoreMax: 315,
-    webcamId: 'burriana',
-    webcamType: 'reference',
-    referenceDist: '12 km al norte',
     bottom: 'Guijarros y arena gruesa',
     bestTide: 'Media marea',
     desc: 'Orillera contundente en playa mixta de grava y arena. Picos muy rápidos, huecos y tuberos.'
@@ -229,8 +219,8 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Peñíscola',
     label: 'Peñíscola - Playa Norte',
-    lat: 40.37,
-    lon: 0.40,
+    lat: 40.381,
+    lon: 0.409,
     azimut: 10,
     thetaCrit: 10,
     sBase: 0.80,
@@ -248,8 +238,8 @@ const SPOTS = [
     zone: 'norte',
     zoneName: 'Vinaròs',
     label: 'Vinaròs - El Fortí',
-    lat: 40.47,
-    lon: 0.48,
+    lat: 40.469,
+    lon: 0.478,
     azimut: 10,
     thetaCrit: 10,
     sBase: 0.85,
@@ -806,10 +796,37 @@ function showOfficialLink(cam) {
   }
 }
 
-function loadSpotWebcam(spotId) {
-  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
-  const cam = WEBCAMS_CATALOG.find(c => c.id === spot.webcamId) || WEBCAMS_CATALOG[0];
 
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+function getClosestCamera(lat, lon) {
+  let closestCam = null;
+  let minDist = Infinity;
+  SPOTS.forEach(s => {
+    if (s.webcamId && s.webcamType === 'direct') {
+      const dist = getDistance(lat, lon, s.lat, s.lon);
+      if (dist < minDist) {
+        minDist = dist;
+        closestCam = { spot: s, dist: dist };
+      }
+    }
+  });
+  return closestCam;
+}
+
+function loadSpotWebcam(spotId) {
+
+  const spot = SPOTS.find(s => s.id === spotId) || SPOTS[0];
+  
   const videoPlayer = document.getElementById('spotlight-video');
   const imgPlayer = document.getElementById('spotlight-img');
   const loader = document.getElementById('spotlight-loader');
@@ -821,7 +838,42 @@ function loadSpotWebcam(spotId) {
   const extBtn = document.getElementById('spotlight-external-cam-btn');
   const surfersOverlay = document.getElementById('spotlight-surfers-overlay');
   const surfersIframe = document.getElementById('spotlight-surfers-iframe');
-  const surfersToggleBtn = document.getElementById('spotlight-surfers-toggle-btn');
+  
+  if (!spot.webcamId) {
+    if (camTitleBadge) camTitleBadge.textContent = "Sin cámara en este spot";
+    if (camTypeBadge) {
+      camTypeBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span> Sin cámara`;
+      camTypeBadge.className = 'shrink-0 text-[11px] font-bold text-slate-400 flex items-center gap-1';
+    }
+    
+    if (AppState.hlsInstance) {
+      AppState.hlsInstance.destroy();
+      AppState.hlsInstance = null;
+    }
+    if (videoPlayer) {
+      videoPlayer.pause();
+      videoPlayer.classList.add('hidden');
+    }
+    if (imgPlayer) {
+      imgPlayer.classList.add('hidden');
+    }
+    if (loader) loader.classList.add('hidden');
+    if (liveLabel) liveLabel.textContent = 'OFFLINE';
+    if (livePill) livePill.classList.add('opacity-50');
+    
+    const closest = getClosestCamera(spot.lat, spot.lon);
+    if (closest && camDescEl) {
+      camDescEl.innerHTML = `No hay cámara instalada en ${spot.label}.<br><br><button onclick="selectSpot('${closest.spot.id}')" class="mt-2 px-3 py-1.5 bg-sky-500/20 text-sky-400 rounded-md text-sm border border-sky-500/30 hover:bg-sky-500/30 transition-colors">Ver cámara más cercana: ${closest.spot.label} (${closest.dist.toFixed(1)} km)</button>`;
+    } else if (camDescEl) {
+      camDescEl.textContent = `No hay cámara instalada en ${spot.label}.`;
+    }
+    if (extBtn) extBtn.classList.add('hidden');
+    return;
+  }
+  if (extBtn) extBtn.classList.remove('hidden');
+
+  const cam = WEBCAMS_CATALOG.find(c => c.id === spot.webcamId) || WEBCAMS_CATALOG[0];
+
   const surfersToggleText = document.getElementById('spotlight-surfers-toggle-text');
 
   if (camTitleBadge) camTitleBadge.textContent = cam.name;
@@ -916,18 +968,27 @@ function loadSpotWebcam(spotId) {
       // iOS Safari: soporta HLS nativo (canPlayType devuelve truthy)
       if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
         videoPlayer.src = cam.streamUrl;
+        videoPlayer.muted = true;
+        videoPlayer.playsInline = true;
+        videoPlayer.setAttribute('playsinline', '');
+        videoPlayer.setAttribute('webkit-playsinline', '');
+        videoPlayer.autoplay = true;
 
-        // iOS necesita el evento 'canplay' para que play() no falle
-        const onCanPlay = () => {
+        let hlsTimeout = setTimeout(() => {
+          onError();
+        }, 12000);
+
+        const onLoadedMetadata = () => {
+          clearTimeout(hlsTimeout);
           if (loader) loader.classList.add('hidden');
           if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
           videoPlayer.play().catch(() => {});
-          videoPlayer.removeEventListener('canplay', onCanPlay);
+          videoPlayer.removeEventListener('loadedmetadata', onLoadedMetadata);
         };
-        videoPlayer.addEventListener('canplay', onCanPlay);
+        videoPlayer.addEventListener('loadedmetadata', onLoadedMetadata);
 
-        // Listener 'error' además de onerror (más robusto en Safari)
         const onError = () => {
+          clearTimeout(hlsTimeout);
           videoPlayer.classList.add('hidden');
           if (imgPlayer) {
             imgPlayer.classList.remove('hidden');
@@ -939,6 +1000,7 @@ function loadSpotWebcam(spotId) {
           showOfficialLink(cam);
         };
         videoPlayer.addEventListener('error', onError);
+        videoPlayer.addEventListener('stalled', onError);
         videoPlayer.onerror = onError;
 
       } else if (window.Hls && Hls.isSupported()) {
