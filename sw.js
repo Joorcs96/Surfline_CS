@@ -1,6 +1,6 @@
 // sw.js — Surfline Castellón Service Worker
-// CACHE_NAME incrementado a v5 para forzar actualización en móviles con cache vieja
-const CACHE_NAME = 'surfline-cs-v6';
+// Subir CACHE_NAME en cada cambio del service worker para forzar actualización en móviles con cache vieja
+const CACHE_NAME = 'surfline-cs-v7';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -30,7 +30,7 @@ function isStreamRequest(url) {
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      return cache.addAll(STATIC_ASSETS.map((u) => new Request(u, { cache: 'no-cache' })));
     }).then(() => self.skipWaiting())
   );
 });
@@ -120,10 +120,11 @@ self.addEventListener('fetch', (event) => {
   }
 
   // 4. App Shell local (index.html, app.js, sw.js, manifest.json, votar.html)
-  //    → Network-First: el móvil siempre recibe la versión más nueva
+  //    → Network-First: el móvil siempre recibe la versión más nueva.
+  //    cache: 'no-cache' revalida con GitHub Pages; sin ello la caché HTTP (10 min) servía versiones viejas.
   if (url.origin === self.location.origin) {
     event.respondWith(
-      fetch(event.request)
+      fetch(event.request, { cache: 'no-cache' })
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
             const responseClone = networkResponse.clone();

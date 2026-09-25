@@ -2000,14 +2000,35 @@ function setupFilterButtons() {
 // 13. REGISTRO PWA Y SERVICE WORKER
 // ==========================================
 
+// Versión visible en el pie: fecha de publicación del app.js que se está ejecutando (cabecera Last-Modified de GitHub Pages)
+async function mostrarVersion() {
+  const el = document.getElementById('app-version');
+  if (!el) return;
+  try {
+    const r = await fetch('app.js', { method: 'HEAD', cache: 'no-store' });
+    const lm = r.headers.get('last-modified');
+    const f = lm ? new Date(lm) : null;
+    if (f && !isNaN(f)) el.textContent = 'v' + f.toLocaleString('es-ES', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+  } catch { /* sin red: se queda el texto por defecto */ }
+}
+
 function initPWA() {
   if ('serviceWorker' in navigator) {
+    // Si ya había un SW controlando la página, al activarse uno nuevo se recarga una vez con la versión nueva
+    const teniaControlador = !!navigator.serviceWorker.controller;
+    let recargado = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!teniaControlador || recargado) return;
+      recargado = true;
+      window.location.reload();
+    });
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('[SW] Service Worker registrado:', reg.scope))
+      navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
+        .then(reg => { console.log('[SW] Service Worker registrado:', reg.scope); reg.update(); })
         .catch(err => console.warn('[SW] Error en registro:', err));
     });
   }
+  mostrarVersion();
 
   let deferredPrompt;
   const installBtn = document.getElementById('pwa-install-btn');
