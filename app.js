@@ -629,6 +629,8 @@ const AppState = {
   currentDayIndex: 0,
   currentFilter: 'all',
   hlsInstance: null,
+  camAbort: null,
+  camTimeout: null,
   snapshotRefreshTimer: null
 };
 
@@ -935,12 +937,18 @@ function loadSpotWebcam(spotId) {
     clearInterval(AppState.snapshotRefreshTimer);
     AppState.snapshotRefreshTimer = null;
   }
+  // Cancelar listeners y temporizador de la cámara anterior
+  if (AppState.camAbort) AppState.camAbort.abort();
+  AppState.camAbort = new AbortController();
+  clearTimeout(AppState.camTimeout);
   if (AppState.hlsInstance) {
     AppState.hlsInstance.destroy();
     AppState.hlsInstance = null;
   }
   if (videoPlayer) {
     videoPlayer.pause();
+    videoPlayer.removeAttribute('src');
+    videoPlayer.load();
     videoPlayer.classList.add('hidden');
     // Limpiar listeners de error previos
     videoPlayer.onerror = null;
@@ -995,30 +1003,25 @@ function loadSpotWebcam(spotId) {
       if (loader) loader.classList.remove('hidden');
       if (liveLabel) liveLabel.textContent = 'CONECTANDO...';
 
-      // iOS Safari: soporta HLS nativo (canPlayType devuelve truthy)
-      if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-        videoPlayer.src = cam.streamUrl;
+      // iPhone/iPad/Safari: HLS nativo (lo más fiable ahí). Resto: hls.js. ?hls=nativo fuerza el nativo para probar.
+      const ua = navigator.userAgent;
+      const esApple = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+        (/Safari/.test(ua) && !/Chrome|Chromium|Edg|CriOS|FxiOS/.test(ua));
+      const forzarNativo = new URLSearchParams(location.search).get('hls') === 'nativo';
+      const hlsNativo = videoPlayer.canPlayType('application/vnd.apple.mpegurl');
+      if (hlsNativo && (esApple || forzarNativo || !(window.Hls && Hls.isSupported()))) {
+        // Los listeners y el temporizador se cancelan al cambiar de cámara (AppState.camAbort)
+        const senal = AppState.camAbort.signal;
         videoPlayer.muted = true;
         videoPlayer.playsInline = true;
         videoPlayer.setAttribute('playsinline', '');
         videoPlayer.setAttribute('webkit-playsinline', '');
         videoPlayer.autoplay = true;
-
-        let hlsTimeout = setTimeout(() => {
-          onError();
-        }, 12000);
-
-        const onLoadedMetadata = () => {
-          clearTimeout(hlsTimeout);
-          if (loader) loader.classList.add('hidden');
-          if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
-          videoPlayer.play().catch(() => {});
-          videoPlayer.removeEventListener('loadedmetadata', onLoadedMetadata);
-        };
-        videoPlayer.addEventListener('loadedmetadata', onLoadedMetadata);
+        videoPlayer.src = cam.streamUrl;
 
         const onError = () => {
-          clearTimeout(hlsTimeout);
+          if (senal.aborted) return;
+          clearTimeout(AppState.camTimeout);
           videoPlayer.classList.add('hidden');
           if (imgPlayer) {
             imgPlayer.classList.remove('hidden');
@@ -1029,9 +1032,15 @@ function loadSpotWebcam(spotId) {
           if (livePill) livePill.classList.add('opacity-50');
           showOfficialLink(cam);
         };
-        videoPlayer.addEventListener('error', onError);
-        videoPlayer.addEventListener('stalled', onError);
-        videoPlayer.onerror = onError;
+        // Sin imagen en 15 s = sin señal. 'stalled' NO es un error: salta en cargas normales.
+        AppState.camTimeout = setTimeout(onError, 15000);
+        videoPlayer.addEventListener('loadedmetadata', () => {
+          clearTimeout(AppState.camTimeout);
+          if (loader) loader.classList.add('hidden');
+          if (liveLabel) liveLabel.textContent = 'EN DIRECTO';
+          videoPlayer.play().catch(() => {});
+        }, { signal: senal });
+        videoPlayer.addEventListener('error', onError, { signal: senal });
 
       } else if (window.Hls && Hls.isSupported()) {
         // Resto de navegadores: usar hls.js
