@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-25T09:50:00.000000+00:00",
+  "updatedAt": "2026-09-26T06:20:56.787864+00:00",
   "webcams": [
     {
       "id": "planetario",
@@ -14,8 +14,10 @@
       "liveStatus": false,
       "reason": "La web del club (surferscastellon.com/live-webcam/) redirige a una página web, no emite stream embebible directamente. Sin fuente HLS/MJPEG verificada.",
       "description": "Rompiente del Planetario en el Grao de Castellón. Cámara del club Surfers Castellón accesible en su web oficial.",
-      "spots": ["Planetario"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Planetario"
+      ],
+      "lastChecked": "2026-09-26T06:20:51.795040+00:00"
     },
     {
       "id": "gurugu",
@@ -30,8 +32,10 @@
       "liveStatus": false,
       "reason": "La URL de aeroclubcastellon.com/wp-content/.../webcam-aeroclub-cs.jpg es una foto estática de 2016, no un stream en directo.",
       "description": "Línea de costa y rompiente de las playas del Gurugú y del Pinar. Accede al visor oficial para ver la imagen actual.",
-      "spots": ["Gurugu"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Gurugu"
+      ],
+      "lastChecked": "2026-09-26T06:20:51.795076+00:00"
     },
     {
       "id": "voramar",
@@ -45,8 +49,10 @@
       "liveStatus": true,
       "reason": "MJPEG en puerto 445 (puede estar bloqueado en redes móviles). Snapshot de fallback disponible.",
       "description": "Cámara en directo del Hotel Voramar sobre la bahía norte y la rompiente de Benicàssim. Si no carga, accede al enlace oficial.",
-      "spots": ["Voramar"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Voramar"
+      ],
+      "lastChecked": "2026-09-26T06:20:52.791982+00:00"
     },
     {
       "id": "burriana",
@@ -60,8 +66,10 @@
       "liveStatus": true,
       "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Rompiente y escollera del puerto de Burriana frente a la playa del Arenal.",
-      "spots": ["Burriana"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Burriana"
+      ],
+      "lastChecked": "2026-09-26T06:20:53.661137+00:00"
     },
     {
       "id": "peniscola",
@@ -76,8 +84,10 @@
       "liveStatus": true,
       "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Rompiente de Playa Norte con fondo de arena y vistas al emblemático Castillo del Papa Luna.",
-      "spots": ["Peniscola N"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Peniscola N"
+      ],
+      "lastChecked": "2026-09-26T06:20:54.340375+00:00"
     },
     {
       "id": "oropesa",
@@ -91,8 +101,10 @@
       "liveStatus": true,
       "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Playa abierta de Morro de Gos expuesta a mar de fondo mediterráneo.",
-      "spots": ["MorroGos"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "MorroGos"
+      ],
+      "lastChecked": "2026-09-26T06:20:55.051206+00:00"
     },
     {
       "id": "vinaros",
@@ -106,8 +118,10 @@
       "liveStatus": true,
       "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Paseo marítimo y rompiente urbana del Fortí en el norte de Castellón.",
-      "spots": ["Vinaros"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Vinaros"
+      ],
+      "lastChecked": "2026-09-26T06:20:55.899035+00:00"
     },
     {
       "id": "heliopolis",
@@ -121,8 +135,10 @@
       "liveStatus": false,
       "reason": "skylinewebcams.com envía X-Frame-Options: SAMEORIGIN, no se puede incrustar en iframe. Sin HLS/MJPEG embebible verificado.",
       "description": "Panorámica sur de Benicàssim en SkylineWebcams. Accede al enlace oficial para verla en directo.",
-      "spots": ["Heliopolis"],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "spots": [
+        "Heliopolis"
+      ],
+      "lastChecked": "2026-09-26T06:20:55.899096+00:00"
     },
     {
       "id": "alcossebre",
@@ -137,7 +153,7 @@
       "reason": "HLS verificado: playlist → chunklist → segmentos .ts 1080p, CORS OK.",
       "description": "Playa de fina arena protegida por salientes rocosos con oleaje suave.",
       "spots": [],
-      "lastChecked": "2026-09-25T09:50:00.000000+00:00"
+      "lastChecked": "2026-09-26T06:20:56.787837+00:00"
     }
   ],
   "totalActive": 6,
